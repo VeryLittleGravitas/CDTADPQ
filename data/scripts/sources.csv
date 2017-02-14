@@ -1,4 +1,4 @@
-,name,url
+group,name,url
 Active Fire Boundaries (USGS GeoMAC),Fire Perimeters,https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_fires/MapServer/2
 River Gauge - Current and Forecast (NOAA),Observed River Stages,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer/0
 River Gauge - Current and Forecast (NOAA),Flood Outlook,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/sig_riv_fld_outlk/MapServer/0
