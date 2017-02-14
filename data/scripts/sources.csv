@@ -1,0 +1,12 @@
+,name,url
+Active Fire Boundaries (USGS GeoMAC),Fire Perimeters,https://wildfire.cr.usgs.gov/arcgis/rest/services/geomac_fires/MapServer/2
+River Gauge - Current and Forecast (NOAA),Observed River Stages,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Observations/ahps_riv_gauges/MapServer/0
+River Gauge - Current and Forecast (NOAA),Flood Outlook,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/sig_riv_fld_outlk/MapServer/0
+River Gauge - Current and Forecast (NOAA),QPF 168 Hour Day 1-7,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/wpc_qpf/MapServer/11
+River Gauge - Current and Forecast (NOAA),QPF 48 Hour Day 1-2,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/wpc_qpf/MapServer/8
+Weather Hazards (NOAA),3-7 Day Temperature Outlook,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer/1
+Weather Hazards (NOAA),3-7 Day Precipitation Outlook,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer/4
+Weather Hazards (NOAA),3-7 Day WildFire/Drought,https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Climate_Outlooks/cpc_weather_hazards/MapServer/7
+Earthquakes (USGS),Earthquakes from last 7 days,http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Earthquakes/EarthquakesFromLastSevenDays/MapServer/0
+Tsunami (NOAA),Tsunami Events [green squares],https://maps.ngdc.noaa.gov/arcgis/rest/services/web_mercator/hazards/MapServer/0
+Interior Geospatial Emergency Management System (DOI IGEMS),U.S. Volcanoes,https://igems.doi.gov/arcgis/rest/services/igems_haz/MapServer/1
