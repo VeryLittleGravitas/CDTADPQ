@@ -1,6 +1,7 @@
 {
   "name": "vlg-cdtadpq",
   "scripts": {
+    "postdeploy": "cat app.pgsql | psql $DATABASE_URL"
   },
   "env": {
     "FLASK_SECRET_KEY": {
