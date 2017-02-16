@@ -11,21 +11,31 @@ The working prototype will be an application that will allow California resident
 
 ## Procurement requirements
 
-a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted; *the lead for the quality of the prototype submitted is @danhon*
+a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted;
 
-b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; *see  [multidisciplinary team](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Multidisciplinary-team) on the project wiki*
+**The leader responsible for the quality of the prototype submitted is @danhon**.
 
-c. Understood what people needed, by including people in the prototype development and design process; *see the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki*
+b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; 
+
+**See the [multidisciplinary team](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Multidisciplinary-team) page on the project wiki**.
+
+c. Understood what people needed, by including people in the prototype development and design process; 
+
+**See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki**.
 
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools;
 
 e. Used GitHub to document code commits; 
+
+**See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master)**.
 
 f. Used Swagger to document the RESTful API, and provided a link to the Swagger API;
 
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0;
 
 h. Created or used a design style guide and/or a pattern library;
+
+**This project will use the [Draft U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library**.
 
 i. Performed usability tests with people;
 
@@ -36,6 +46,10 @@ k. Created a prototype that works on multiple devices, and presents a responsive
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.);
 
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used;
+
+**This project is using [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.**
+
+**We are currently automatically deploying the master branch to [https://vlg-ctdadpq.herokuapp.com]().**
 
 n. Developed automated unit tests for their code;
 
