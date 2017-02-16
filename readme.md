@@ -72,7 +72,7 @@ n. Developed automated unit tests for their code;
 
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider;
 
-**We are currently automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.**
+**We are using [Travis CI](https://travis-ci.org) for continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.**
 
 p. Setup or used configuration management;
 
