@@ -21,9 +21,16 @@ b. Assembled a multidisciplinary and collaborative team that includes, at a mini
 
 c. Understood what people needed, by including people in the prototype development and design process; 
 
-**See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki**.
+**See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki for evidence of how we are including people to understand what they need in making the prototype.**
 
 d. Used at least a minimum of three (3) “user-centric design” techniques and/or tools;
+
+**We are using the following "user-centric design" techniques and/or tools to make this prototype:**
+
+	1.
+	2.
+	3.
+
 
 e. Used GitHub to document code commits; 
 
@@ -45,6 +52,14 @@ k. Created a prototype that works on multiple devices, and presents a responsive
 
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.);
 
+**We are using the following modern, open-source technologies for this prototype:**
+
+	1.
+	2.
+	3.
+	4.
+	5.
+
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used;
 
 **This project is using [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.**
@@ -54,6 +69,8 @@ m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform a
 n. Developed automated unit tests for their code;
 
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider;
+
+**We are currently automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.**
 
 p. Setup or used configuration management;
 
