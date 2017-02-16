@@ -2,4 +2,12 @@ language: python
 python:
   - '3.6'
 dist: trusty
-script: 'echo true'
+addons:
+  postgresql: '9.6'
+env: DATABASE_URL=postgres://cdtadpq:cdtadpq@localhost/cdtadpq
+install:
+  - psql -h localhost -c "CREATE USER cdtadpq WITH SUPERUSER PASSWORD 'cdtadpq'";
+  - psql -h localhost -c "CREATE DATABASE cdtadpq WITH OWNER cdtadpq";
+  - pip install -r requirements.txt
+script:
+  - python test.py
