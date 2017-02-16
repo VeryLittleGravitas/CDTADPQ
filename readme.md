@@ -44,6 +44,8 @@ h. Created or used a design style guide and/or a pattern library;
 
 **This project will use the [Draft U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library**.
 
+**See [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) for the initial implementation of the pattern library.**
+
 i. Performed usability tests with people;
 
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype;
