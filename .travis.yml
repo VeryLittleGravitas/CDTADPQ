@@ -1,0 +1,15 @@
+language: python
+python:
+  - '3.6'
+cache:
+  pip: true
+dist: trusty
+addons:
+  postgresql: '9.6'
+env: DATABASE_URL=postgres://adpqun:adpqpw@localhost/adpqdb
+install:
+  - psql -h localhost -c "CREATE USER adpqun WITH SUPERUSER PASSWORD 'adpqpw'";
+  - psql -h localhost -c "CREATE DATABASE adpqdb WITH OWNER adpqun";
+  - pip install -r requirements.txt
+script:
+  - python test.py
