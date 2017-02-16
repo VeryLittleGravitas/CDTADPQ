@@ -64,13 +64,13 @@ m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform a
 
 **This project is using [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.**
 
-**We are currently automatically deploying the master branch to [https://vlg-ctdadpq.herokuapp.com]().**
+**We are currently automatically deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).**
 
 n. Developed automated unit tests for their code;
 
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider;
 
-**We are currently automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.**
+**We are currently automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.**
 
 p. Setup or used configuration management;
 
