@@ -1,1 +1,1 @@
-web: gunicorn --workers 8 app:app
+web: gunicorn --workers 8 CDTADPQ.web:app

@@ -13,6 +13,3 @@ def get_index():
     geojson = dict(type='FeatureCollection', features=[feature])
     
     return flask.jsonify(geojson)
-
-if __name__ == '__main__':
-    app.run(debug=True)
