@@ -32,9 +32,9 @@ def convert_fire_point(feature):
 
 def main():
     for feature in sources.load_esri_source(urls['GeoMAC Large Fire Points']):
+        fire = convert_fire_point(feature)
         print(feature)
-        print(convert_fire_point(feature))
-        break
+        print(fire)
 
 if __name__ == '__main__':
     exit(main())
