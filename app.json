@@ -11,7 +11,9 @@
   "formation": {
   },
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "blowerio:try",
+    "till:test"
   ],
   "buildpacks": [
 
