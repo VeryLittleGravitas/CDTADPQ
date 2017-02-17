@@ -8,8 +8,8 @@ urls = {
     }
 
 class FirePoint:
-    def __init__(self, geometry, unique_id, fire_name, contained, discovered, cause, acres):
-        self.geometry = geometry
+    def __init__(self, location, unique_id, fire_name, contained, discovered, cause, acres):
+        self.location = location
         self.unique_id = unique_id
         self.fire_name = fire_name
         self.contained = contained
