@@ -6,6 +6,18 @@
   "env": {
     "FLASK_SECRET_KEY": {
       "generator": "secret"
+    },
+    "TWILIO_NUMBER": {
+      "value": "+15107579518"
+    },
+    "TWILIO_ACCOUNT": {
+      "value": "NP81n6s45245q2s853s7rpo00s14155q9s"
+    },
+    "TWILIO_SID": {
+      "value": "FXo2o6s9o9o03p8s6sq8q999688839ss56"
+    },
+    "TWILIO_SECRET": {
+      "value": "ZYJZpNqQOea84FEunVZY9NBX3FnldNSX"
     }
   },
   "formation": {
