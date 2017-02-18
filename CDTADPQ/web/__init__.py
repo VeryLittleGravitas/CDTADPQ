@@ -2,7 +2,7 @@ import flask, codecs, psycopg2, os, json
 
 app = flask.Flask(__name__)
 
-enc = 'rot13' if os.environ['TWILIO_SID'].startswith('FX') else 'ascii'
+enc = 'ascii' if os.environ['TWILIO_ACCOUNT'].startswith('AC') else 'rot13'
 app.config['twilio_sid'] = codecs.decode(os.environ.get('TWILIO_SID', ''), enc)
 app.config['twilio_secret'] = codecs.decode(os.environ.get('TWILIO_SECRET', ''), enc)
 app.config['twilio_account'] = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), enc)
