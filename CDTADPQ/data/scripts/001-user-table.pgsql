@@ -9,6 +9,7 @@ CREATE TABLE users
 
 CREATE TABLE unverified_signups
 (
+    signup_id       VARCHAR(36) PRIMARY KEY,
     phone_number    TEXT,
     pin_number      TEXT,
     created         TIMESTAMP WITH TIME ZONE DEFAULT NOW()

@@ -1,4 +1,4 @@
-import requests, logging, uritemplate, random
+import requests, logging, uritemplate, random, uuid
 
 TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages'
 
@@ -14,12 +14,14 @@ def add_verified_signup(db, account, to_number):
     logging.info('add_verified_signup: {}'.format(to_number))
     
     pin_number = '{:04d}'.format(random.randint(0, 9999))
+    signup_id = str(uuid.uuid4())
     
     db.execute('''INSERT INTO unverified_signups
-                  (phone_number, pin_number) VALUES (%s, %s)''',
-               (to_number, pin_number))
+                  (signup_id, phone_number, pin_number) VALUES (%s, %s, %s)''',
+               (signup_id, to_number, pin_number))
     
     send_verification_code(account, to_number, pin_number)
+    return signup_id
 
 def send_verification_code(account, to_number, code):
     '''

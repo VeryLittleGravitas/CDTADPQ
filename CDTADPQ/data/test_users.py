@@ -7,16 +7,18 @@ class UsersTests (unittest.TestCase):
         '''
         '''
         db, account = unittest.mock.Mock(), unittest.mock.Mock()
-        to_number, pin_number = '+1 (510) 555-1212', 1234
+        to_number, signup_id, pin_number = '+1 (510) 555-1212', 'xxx-yy-zzz', 1234
         
         with unittest.mock.patch('CDTADPQ.data.users.send_verification_code') as send_verification_code, \
-             unittest.mock.patch('random.randint') as randint:
+             unittest.mock.patch('random.randint') as randint, \
+             unittest.mock.patch('uuid.uuid4') as uuid4:
             randint.return_value = pin_number
+            uuid4.return_value = signup_id
             users.add_verified_signup(db, account, to_number)
         
         db.execute.assert_called_once_with(
             '''INSERT INTO unverified_signups
-                  (phone_number, pin_number) VALUES (%s, %s)''',
-               (to_number, str(pin_number)))
+                  (signup_id, phone_number, pin_number) VALUES (%s, %s, %s)''',
+               (signup_id, to_number, str(pin_number)))
         
         send_verification_code.assert_called_once_with(account, to_number, str(pin_number))

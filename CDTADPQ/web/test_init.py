@@ -38,10 +38,10 @@ class AppTests (unittest.TestCase):
         self.assertIn('phone-number', data)
         data['phone-number'] = '+1 (510) 555-1212'
 
-        with unittest.mock.patch('CDTADPQ.data.users.add_verified_signup') as add_verified_signup:
+        with unittest.mock.patch('CDTADPQ.data.users.send_verification_code') as send_verification_code:
             posted = self.client.open(method=form['method'], path=form['action'], data=data)
             self.assertEqual(posted.status_code, 200)
         
-        self.assertEqual(len(add_verified_signup.mock_calls), 1)
-        self.assertEqual(add_verified_signup.mock_calls[0][1][1:],
+        self.assertEqual(len(send_verification_code.mock_calls), 1)
+        self.assertEqual(send_verification_code.mock_calls[0][1][:2],
                          (self.config['twilio_account'], '+1 (510) 555-1212'))
