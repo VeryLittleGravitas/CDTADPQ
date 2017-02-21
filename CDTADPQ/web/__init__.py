@@ -33,6 +33,10 @@ def get_confirmation():
 def get_admin():
     return flask.render_template('admin.html')
 
+@app.route('/send-alert')
+def get_sendalert():
+    return flask.render_template('send-alert.html')
+
 @app.route('/earth.geojson')
 def get_earth():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
