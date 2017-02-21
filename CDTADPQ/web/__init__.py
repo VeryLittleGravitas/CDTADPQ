@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json
-from .. import data
+from ..data import users
 
 app = flask.Flask(__name__)
 
@@ -30,7 +30,7 @@ def get_register():
 def post_register():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            data.add_verified_signup(db, flask.request.form['phone-number'])
+            users.add_verified_signup(db, flask.request.form['phone-number'])
             return flask.render_template('signed-up.html')
 
 @app.route('/confirmation')
