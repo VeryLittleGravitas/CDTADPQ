@@ -14,7 +14,9 @@ class UsersTests (unittest.TestCase):
              unittest.mock.patch('uuid.uuid4') as uuid4:
             randint.return_value = pin_number
             uuid4.return_value = signup_id
-            users.add_verified_signup(db, account, to_number)
+            output_id = users.add_verified_signup(db, account, to_number)
+        
+        self.assertEqual(output_id, signup_id)
         
         db.execute.assert_called_once_with(
             '''INSERT INTO unverified_signups

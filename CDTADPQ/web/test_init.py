@@ -40,8 +40,23 @@ class AppTests (unittest.TestCase):
 
         with unittest.mock.patch('CDTADPQ.data.users.send_verification_code') as send_verification_code:
             posted = self.client.open(method=form['method'], path=form['action'], data=data)
-            self.assertEqual(posted.status_code, 200)
+            self.assertEqual(posted.status_code, 303)
         
         self.assertEqual(len(send_verification_code.mock_calls), 1)
         self.assertEqual(send_verification_code.mock_calls[0][1][:2],
                          (self.config['twilio_account'], '+1 (510) 555-1212'))
+        
+        (pin_number, ) = send_verification_code.mock_calls[0][1][2:]
+        redirected = self.client.get(posted.headers.get('Location'))
+        self.assertEqual(redirected.status_code, 200)
+
+        soup2 = bs4.BeautifulSoup(redirected.data, 'html.parser')
+        form2 = soup2.find('form', id='register')
+        data2 = {input['name']: None for input in form2.find_all('input')}
+        self.assertIn('pin-number', data2)
+        data2['pin-number'] = pin_number
+
+        return
+        
+        confirmed = self.client.open(method=form2['method'], path=form2['action'], data=data2)
+        self.assertEqual(confirmed.status_code, 303)
