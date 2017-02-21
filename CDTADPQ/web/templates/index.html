@@ -6,20 +6,7 @@
 {% block main_content %}
   <h1>California Overview</h1>
   <p class="usa-font-lead">The page heading communicates the main focus of the page. Make your page heading descriptive and keep it succinct.</p>
-  <div style="height:500px; width:100%; background-color:#eee">map placeholder</div>
-  <ul class="usa-accordion-bordered">
-    <li>
-        <button class="usa-accordion-button"
-          aria-controls="amendment-b-5">
-          Map options
-        </button>
-        <div id="amendment-b-5" class="usa-accordion-content">
-          <p>
-          Types of things to show
-          </p>
-        </div>
-    </li>
-  </ul>
+  {% include 'includes/map.html' %}
  
   <h2 id="section-heading-h2"></h2>
   <p>If you'd like to receive notifications of emergency events happening in your local area.</p>
