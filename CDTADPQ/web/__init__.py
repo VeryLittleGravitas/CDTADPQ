@@ -37,7 +37,7 @@ def post_register():
             twilio_account = flask.current_app.config['twilio_account']
             to_number = flask.request.form['phone-number']
             users.add_verified_signup(db, twilio_account, to_number)
-            return flask.render_template('signed-up.html')
+            return flask.render_template('registered.html')
 
 @app.route('/confirmation')
 def get_confirmation():
