@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}California Emergency Alerts{% endblock %}
+
+
+{% block main_content %}
+  <h1>Admin - Current emergencies</h1>
+  
+  {% include 'includes/map.html' %}
+
+  <p></p>
+  <div class="button_wrapper">
+    <button>Setup and send an alert about an emergency</button>
+  </div>
+   
+  
+{% endblock %}

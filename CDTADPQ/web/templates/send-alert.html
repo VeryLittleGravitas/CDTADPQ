@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}California Emergency Alerts{% endblock %}
+
+
+{% block main_content %}
+  <h1>Admin - Current emergencies</h1>
+  
+  <fieldset>
+  <legend>This is the message that will be sent to anyone who has registered to be notified about this type of event.</legend>
+  	<label for="input-type-textarea">SMS Message</label>
+  	<textarea id="input-type-textarea" name="input-type-textarea">[pre-fill this with generated information about alert]</textarea>
+  	<p>Maximum 140 characters</p>
+  </fieldset>
+
+  <div class="button_wrapper">
+    <button>Send alert</button>
+  </div>
+   
+  
+{% endblock %}

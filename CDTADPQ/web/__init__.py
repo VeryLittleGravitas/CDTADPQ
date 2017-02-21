@@ -29,6 +29,22 @@ def get_register():
 def get_confirmation():
     return flask.render_template('confirmation.html')
 
+@app.route('/admin')
+def get_admin():
+    return flask.render_template('admin.html')
+
+@app.route('/send-alert')
+def get_sendalert():
+    return flask.render_template('send-alert.html')
+
+@app.route('/sent')
+def get_sent():
+    return flask.render_template('sent.html')
+
+@app.route('/stats')
+def get_stats():
+    return flask.render_template('stats.html')
+
 @app.route('/earth.geojson')
 def get_earth():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
