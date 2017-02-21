@@ -18,9 +18,6 @@ class AppTests (unittest.TestCase):
         '''
         got = self.client.get('/')
         html = got.data.decode('utf8')
-        self.assertIn('Very Little Gravitas', html)
-        self.assertIn('Yo, A Page', html)
-        self.assertIn('Yo, Page Title', html)
         self.assertIn('<link rel="stylesheet" href="/static/uswds-0.14.0/css/uswds.min.css">', html)
         self.assertIn('<script src="/static/uswds-0.14.0/js/uswds.min.js">', html)
     
