@@ -7,7 +7,14 @@ def main(database_url):
     
     with psycopg2.connect(database_url) as conn:
         with conn.cursor() as db:
+            db.execute('SELECT last FROM migrations')
+            (last_migration, ) = db.fetchone()
+
             for filename in sorted(glob.glob(pattern)):
+                if os.path.basename(filename) <= last_migration:
+                    logging.info('Skipping {}'.format(filename))
+                    continue
+                
                 with open(filename) as file:
                     logging.info('Applying {}'.format(file.name))
 
