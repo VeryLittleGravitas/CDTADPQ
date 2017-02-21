@@ -8,6 +8,7 @@ class AppTests (unittest.TestCase):
         '''
         '''
         recreate.main(os.environ['DATABASE_URL'])
+        self.config = web.app.config
         self.client = web.app.test_client()
     
     def test_index(self):
@@ -25,7 +26,7 @@ class AppTests (unittest.TestCase):
         geojson = json.loads(got.data.decode('utf8'))
         self.assertEqual({"type": "FeatureCollection", "features": [{"geometry": {"coordinates": [[[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]]], "type": "Polygon"}, "properties": {}, "type": "Feature"}]}, geojson)
     
-    def test_signup(self):
+    def test_register(self):
         '''
         '''
         got = self.client.get('/register')
@@ -42,4 +43,5 @@ class AppTests (unittest.TestCase):
             self.assertEqual(posted.status_code, 200)
         
         self.assertEqual(len(add_verified_signup.mock_calls), 1)
-        self.assertEqual(add_verified_signup.mock_calls[0][1][1:], ('+1 (510) 555-1212', ))
+        self.assertEqual(add_verified_signup.mock_calls[0][1][1:],
+                         (self.config['twilio_account'], '+1 (510) 555-1212'))

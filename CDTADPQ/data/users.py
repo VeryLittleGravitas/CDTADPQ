@@ -1,4 +1,35 @@
-import logging
+import requests, logging, uritemplate, random
 
-def add_verified_signup(db, phone_number):
-    logging.info('add_verified_signup: {}'.format(phone_number))
+TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages'
+
+class TwilioAccount:
+
+    def __init__(self, sid, secret, account, number):
+        self.sid = sid
+        self.secret = secret
+        self.account = account
+        self.number = number
+
+def add_verified_signup(db, account, to_number):
+    logging.info('add_verified_signup: {}'.format(to_number))
+    
+    pin_number = '{:04d}'.format(random.randint(0, 9999))
+    
+    db.execute('''INSERT INTO unverified_signups
+                  (phone_number, pin_number) VALUES (%s, %s)''',
+               (to_number, pin_number))
+    
+    send_verification_code(account, to_number, pin_number)
+
+def send_verification_code(account, to_number, code):
+    '''
+    '''
+    url = uritemplate.expand(TwilioURL, dict(account=account.account))
+    data = dict(From=account.number, To=to_number, Body='Yo {}'.format(code))
+    auth = account.sid, account.secret
+    posted = requests.post(url, auth=auth, data=data)
+    
+    if posted.status_code not in range(200, 299):
+        raise Exception('Bad response from Twilio')
+    
+    return True

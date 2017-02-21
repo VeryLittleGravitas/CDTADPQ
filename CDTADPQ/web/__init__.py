@@ -4,15 +4,19 @@ from ..data import users
 app = flask.Flask(__name__)
 
 if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
-    app.config['twilio_sid'] = os.environ.get('TWILIO_SID', '')
-    app.config['twilio_secret'] = os.environ.get('TWILIO_SECRET', '')
-    app.config['twilio_account'] = os.environ.get('TWILIO_ACCOUNT', '')
-    app.config['twilio_number'] = os.environ.get('TWILIO_NUMBER', '')
+    app.config['twilio_account'] = users.TwilioAccount(
+        sid = os.environ.get('TWILIO_SID', ''),
+        secret = os.environ.get('TWILIO_SECRET', ''),
+        account = os.environ.get('TWILIO_ACCOUNT', ''),
+        number = os.environ.get('TWILIO_NUMBER', '')
+        )
 else:
-    app.config['twilio_sid'] = codecs.decode(os.environ.get('TWILIO_SID', ''), 'rot13')
-    app.config['twilio_secret'] = codecs.decode(os.environ.get('TWILIO_SECRET', ''), 'rot13')
-    app.config['twilio_account'] = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), 'rot13')
-    app.config['twilio_number'] = os.environ.get('TWILIO_NUMBER', '')
+    app.config['twilio_account'] = users.TwilioAccount(
+        sid = codecs.decode(os.environ.get('TWILIO_SID', ''), 'rot13'),
+        secret = codecs.decode(os.environ.get('TWILIO_SECRET', ''), 'rot13'),
+        account = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), 'rot13'),
+        number = os.environ.get('TWILIO_NUMBER', '')
+        )
 
 @app.route('/')
 def get_index():
@@ -30,7 +34,9 @@ def get_register():
 def post_register():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            users.add_verified_signup(db, flask.request.form['phone-number'])
+            twilio_account = flask.current_app.config['twilio_account']
+            to_number = flask.request.form['phone-number']
+            users.add_verified_signup(db, twilio_account, to_number)
             return flask.render_template('signed-up.html')
 
 @app.route('/confirmation')
