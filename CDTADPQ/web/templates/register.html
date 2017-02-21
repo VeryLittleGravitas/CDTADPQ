@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}California Emergency Alerts{% endblock %}
+
+
+{% block main_content %}
+  <h1>Register for alerts</h1>
+  
+  
+
+   <form class="usa-form">
+    <fieldset>
+      <legend>Register</legend>
+
+      <label for="phone-number" class="usa-input-required">Phone number</label>
+      <input id="phone-number" name="phone-number" type="phone-number" required="" aria-required="true">
+
+      <label for="zipcode" class="usa-input-required">Zip code</label>
+      <input id="zipcode" name="zipcode" type="text" required="" aria-required="true">
+
+      <div class="button_wrapper">
+		<button>Send confirmation message</button>
+		</div>
+    </fieldset>
+  </form>
+  
+{% endblock %}

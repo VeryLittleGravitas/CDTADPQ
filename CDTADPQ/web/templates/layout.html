@@ -15,7 +15,7 @@
         <button class="usa-menu-btn">Menu</button>
         <div class="usa-logo" id="logo">
           <em class="usa-logo-text">
-            <a href="#" accesskey="1" title="Home" aria-label="Home">Very Little <br>Gravitas</a>
+            <a href="#" accesskey="1" title="Home" aria-label="Home">California Emergency Alerts</a>
           </em>
         </div>
       </div>
@@ -63,7 +63,7 @@
             </a>
           </li>
         </ul>
-        <form class="usa-search usa-search-small">
+        <!--form class="usa-search usa-search-small">
           <div role="search">
             <label class="usa-sr-only" for="search-field-small">Search small</label>
             <input id="search-field-small" type="search" name="search">
@@ -71,39 +71,14 @@
               <span class="usa-sr-only">Search</span>
             </button>
           </div>
-        </form>
+        </form-->
       </nav>
     </div>
   </header>
   <div class="usa-overlay"></div>
   <main class="usa-grid usa-section usa-content usa-layout-docs" id="main-content">
-    <aside class="usa-width-one-fourth usa-layout-docs-sidenav">
-      {% block sidenav %}
-      <ul class="usa-sidenav-list">
-        <li>
-          <a href="javascript:void(0);">Page title</a>
-        </li>
-        <li>
-          <a class="usa-current" href="javascript:void(0);">Page heading (h1)</a>
-          <ul class="usa-sidenav-sub_list">
-            <li>
-              <a href="#section-heading-h2">Section heading (h2)</a>
-            </li>
-            <li>
-              <a href="#section-heading-h3">Subsection heading (h3)</a>
-            </li>
-            <li>
-              <a href="#section-heading-h4">Subsection heading (h4)</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="javascript:void(0);">Page title</a>
-        </li>
-      </ul>
-      {% endblock %}
-    </aside>
-    <div class="usa-width-three-fourths usa-layout-docs-main_content">
+    
+    <div class="usa-layout-docs-main_content">
       {% block main_content %}
       <h1>Page heading (h1)</h1>
       <p class="usa-font-lead">The page heading communicates the main focus of the page. Make your page heading descriptive and keep it succinct.</p>
@@ -123,7 +98,7 @@
       <a href="#">Return to top</a>
     </div>
     <div class="usa-footer-primary-section">
-      <div class="usa-grid-full">
+      <!--div class="usa-grid-full">
         <nav class="usa-footer-nav">
           <ul class="usa-unstyled-list">
             <li class="usa-width-one-fourth usa-footer-primary-content">
@@ -140,17 +115,17 @@
             </li>
           </ul>
         </nav>
-      </div>
+      </div-->
     </div>
 
     <div class="usa-footer-secondary_section">
       <div class="usa-grid">
         <div class="usa-footer-logo usa-width-one-half">
-          <img class="usa-footer-logo-img" src="{{ url_for('static', filename='vlg-logo.jpg') }}" alt="Logo image">
-          <h3 class="usa-footer-logo-heading">Very Little Gravitas</h3>
+          <!--img class="usa-footer-logo-img" src="{{ url_for('static', filename='vlg-logo.jpg') }}" alt="Logo image"-->
+          <p>made with <a href="">very little gravitas</a></p>
         </div>
         <div class="usa-footer-contact-links usa-width-one-half">
-          <a class="usa-link-facebook" href="javascript:void(0);">
+          <!--a class="usa-link-facebook" href="javascript:void(0);">
             <span>Facebook</span>
           </a>
           <a class="usa-link-twitter" href="javascript:void(0);">
@@ -161,12 +136,13 @@
           </a>
           <a class="usa-link-rss" href="javascript:void(0);">
             <span>RSS</span>
-          </a>
+          </a-->
           <address>
             <h3 class="usa-footer-contact-heading">Agency Contact Center</h3>
             <p>(800) CALL-GOVT</p>
             <a href="mailto:info@agency.gov">info@agency.gov</a>
           </address>
+          <p><a href="">What is this website?</a></p>
         </div>
       </div>
     </div>
