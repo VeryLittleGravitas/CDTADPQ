@@ -1,4 +1,5 @@
 import flask, codecs, psycopg2, os, json
+from .. import data
 
 app = flask.Flask(__name__)
 
@@ -21,9 +22,16 @@ def get_index():
 def get_about():
     return flask.render_template('about.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET'])
 def get_register():
     return flask.render_template('register.html')
+
+@app.route('/register', methods=['POST'])
+def post_register():
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            data.add_verified_signup(db, flask.request.form['phone-number'])
+            return flask.render_template('signed-up.html')
 
 @app.route('/confirmation')
 def get_confirmation():
