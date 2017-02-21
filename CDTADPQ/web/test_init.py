@@ -1,16 +1,13 @@
-import unittest, os, psycopg2, json
+import unittest, os, json
 from .. import web
+from ..data import recreate
 
 class AppTests (unittest.TestCase):
 
     def setUp(self):
         '''
         '''
-        with open(os.path.join(os.path.dirname(__file__), '..', '..', 'app.pgsql')) as file:
-            with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
-                with conn.cursor() as db:
-                    db.execute(file.read())
-
+        recreate.main(os.environ['DATABASE_URL'])
         self.client = web.app.test_client()
     
     def test_index(self):

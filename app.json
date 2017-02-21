@@ -1,7 +1,7 @@
 {
   "name": "vlg-cdtadpq",
   "scripts": {
-    "postdeploy": "cat app.pgsql | psql $DATABASE_URL"
+    "postdeploy": "python -m CDTADPQ.data.recreate"
   },
   "env": {
     "FLASK_SECRET_KEY": {
