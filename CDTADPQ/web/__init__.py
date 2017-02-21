@@ -6,6 +6,18 @@ app = flask.Flask(__name__)
 def get_index():
     return flask.render_template('index.html')
 
+@app.route('/about')
+def get_about():
+    return flask.render_template('about.html')
+
+@app.route('/register')
+def get_register():
+    return flask.render_template('register.html')
+
+@app.route('/confirmation')
+def get_confirmation():
+    return flask.render_template('confirmation.html')
+
 @app.route('/earth.geojson')
 def get_earth():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
