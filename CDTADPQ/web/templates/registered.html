@@ -7,7 +7,7 @@
 
 {% block main_content %}
    <h1>Good Job</h1>
-   <form id="register" class="usa-form" action="{{ url_for('post_register') }}" method="post">
+   <form id="register" class="usa-form" action="{{ url_for('post_confirm') }}" method="post">
     <fieldset>
       <legend>PIN Number</legend>
       
@@ -16,7 +16,8 @@
       <p>Enter the number here:</p>
 
       <label for="pin-number" class="usa-input-required">PIN number</label>
-      <input id="pin-number" name="pin-number" type="tel" required="" aria-required="true">
+      <input id="pin-number" name="pin-number" type="text" required="" aria-required="true">
+      <input id="signup-id" name="signup-id" type="hidden" value="{{signup_id}}">
 
       <div class="button_wrapper">
 		<button>Submit</button>

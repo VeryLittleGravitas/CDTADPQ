@@ -52,11 +52,9 @@ class AppTests (unittest.TestCase):
 
         soup2 = bs4.BeautifulSoup(redirected.data, 'html.parser')
         form2 = soup2.find('form', id='register')
-        data2 = {input['name']: None for input in form2.find_all('input')}
+        data2 = {input['name']: input.get('value') for input in form2.find_all('input')}
         self.assertIn('pin-number', data2)
         data2['pin-number'] = pin_number
-
-        return
         
         confirmed = self.client.open(method=form2['method'], path=form2['action'], data=data2)
         self.assertEqual(confirmed.status_code, 303)

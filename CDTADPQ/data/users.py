@@ -10,8 +10,8 @@ class TwilioAccount:
         self.account = account
         self.number = number
 
-def add_verified_signup(db, account, to_number):
-    logging.info('add_verified_signup: {}'.format(to_number))
+def add_unverified_signup(db, account, to_number):
+    logging.info('add_unverified_signup: {}'.format(to_number))
     
     pin_number = '{:04d}'.format(random.randint(0, 9999))
     signup_id = str(uuid.uuid4())
@@ -34,4 +34,23 @@ def send_verification_code(account, to_number, code):
     if posted.status_code not in range(200, 299):
         raise Exception('Bad response from Twilio')
     
+    return True
+
+def verify_user_signup(db, given_pin_number, signup_id):
+    '''
+    '''
+    db.execute('''SELECT pin_number, phone_number FROM unverified_signups WHERE signup_id = %s''',
+               (signup_id, ))
+    
+    try:
+        (expected_pin_number, phone_number) = db.fetchone()
+    except TypeError:
+        return False
+    
+    if given_pin_number != expected_pin_number:
+        return False
+
+    db.execute('INSERT INTO users (phone_number) VALUES (%s)',
+               (phone_number, ))
+
     return True
