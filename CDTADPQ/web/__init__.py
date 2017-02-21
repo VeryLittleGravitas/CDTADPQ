@@ -41,6 +41,10 @@ def get_sendalert():
 def get_sent():
     return flask.render_template('sent.html')
 
+@app.route('/stats')
+def get_stats():
+    return flask.render_template('stats.html')
+
 @app.route('/earth.geojson')
 def get_earth():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
