@@ -1,6 +1,6 @@
 import requests, logging, uritemplate, random, uuid
 
-TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages'
+TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
 
 class TwilioAccount:
 
@@ -32,7 +32,10 @@ def send_verification_code(account, to_number, code):
     posted = requests.post(url, auth=auth, data=data)
     
     if posted.status_code not in range(200, 299):
-        raise Exception('Bad response from Twilio')
+        if 'message' in posted.json():
+            raise RuntimeError(posted.json()['message'])
+        else:
+            raise RuntimeError('Bad response from Twilio')
     
     return True
 
