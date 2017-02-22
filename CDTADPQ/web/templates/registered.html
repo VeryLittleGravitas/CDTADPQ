@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block sidenav %}
+{% endblock %}
+
+{% block main_content %}
+   <h1>Good Job</h1>
+   <form id="register" class="usa-form" action="{{ url_for('post_confirm') }}" method="post">
+    <fieldset>
+      <legend>PIN Number</legend>
+      
+      <p>In a few minutes, you should receive a text message to the phone number you gave us.</p>
+      
+      <p>Enter the number here:</p>
+
+      <label for="pin-number" class="usa-input-required">PIN number</label>
+      <input id="pin-number" name="pin-number" type="text" required="" aria-required="true">
+      <input id="signup-id" name="signup-id" type="hidden" value="{{signup_id}}">
+
+      <div class="button_wrapper">
+		<button>Submit</button>
+		</div>
+
+      <p>If you’ve waited more than 5 minutes, <a href="{{ url_for('get_register') }}">go back and try again</a>.</p>
+
+    </fieldset>
+  </form>
+{% endblock %}
