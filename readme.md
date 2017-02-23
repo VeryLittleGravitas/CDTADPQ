@@ -29,7 +29,7 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 
 	1. Questionnaires (quantitative feedback)
 	2. In-person user testing (qualitative, hands-on usability testing)
-	3. 
+	3. Remote user testing (qualitative, individuals providing feedback on experience)
 
 
 e. Used GitHub to document code commits; 
