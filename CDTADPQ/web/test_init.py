@@ -33,7 +33,7 @@ class AppTests (unittest.TestCase):
         self.assertEqual(got1.status_code, 200)
         
         soup1 = bs4.BeautifulSoup(got1.data, 'html.parser')
-        link1 = soup1.find(text='Register').find_parent('a')
+        link1 = soup1.find(text='Login').find_parent('a')
         
         got2 = self.client.get(link1['href'])
         self.assertEqual(got2.status_code, 200)
