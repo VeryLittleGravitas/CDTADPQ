@@ -11,6 +11,8 @@ def user_is_logged_in(untouched_route):
             print('Phone number exists:', flask.session['phone_number'], file=sys.stderr)
         else:
             print('No phone number exists.', file=sys.stderr)
+            return flask.Response(flask.render_template('error-auth.html', **template_kwargs()),
+                                  status=401)
 
         return untouched_route(*args, **kwargs)
     
@@ -48,6 +50,12 @@ def get_index():
 @app.route('/about')
 def get_about():
     return flask.render_template('about.html', **template_kwargs())
+
+@app.route('/logout', methods=['POST'])
+def post_logout():
+    if 'phone_number' in flask.session:
+        flask.session.pop('phone_number')
+    return flask.redirect(flask.url_for('get_index'), code=303)
 
 @app.route('/register', methods=['GET'])
 def get_register():
