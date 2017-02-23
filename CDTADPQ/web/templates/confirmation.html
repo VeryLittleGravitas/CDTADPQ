@@ -10,35 +10,6 @@
   <p>You can make changes to the alerts you'll receive here. By default, you're signed up to receive all alerts.</p>
   <!-- end confirmation only block -->
   
-  <fieldset class="usa-fieldset-inputs usa-sans">
-
-    <legend class="usa-sr-only">Alert options</legend>
-
-    <label for="input-type-text">Phone number</label>
-  	<input id="input-type-text" name="input-type-text" type="text" value="123-4567-342">
-
-  	<label for="input-type-text">Zip code</label>
-  	<input id="input-type-text" name="input-type-text" type="text" value="94103">
-
-    <ul class="usa-unstyled-list">
-      <li>
-        <input id="fire" type="checkbox" name="alert-type" value="truth" checked>
-        <label for="fire">Fire</label>
-      </li>
-      <li>
-        <input id="flood" type="checkbox" name="alert-type" value="truth" checked>
-        <label for="flood">Flood</label>
-      </li>
-      <li>
-        <input id="tsunami" type="checkbox" name="alert-type" value="truth" checked>
-        <label for="tsunami">Tsunami</label>
-      </li>
-      <li>
-        <input id="earthquake" type="checkbox" name="alert-type" value="truth" checked>
-        <label for="earthquake">Earthquake</label>
-      </li>
-    </ul>
-
-  </fieldset>
+ {% include 'includes/settings.html' %}
   
 {% endblock %}
