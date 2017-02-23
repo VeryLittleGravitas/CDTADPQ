@@ -1,7 +1,23 @@
-import flask, codecs, psycopg2, os, json
+import flask, codecs, psycopg2, os, json, functools, sys
 from ..data import users
 
-app = flask.Flask(__name__)
+def user_is_logged_in(untouched_route):
+    '''
+    '''
+    @functools.wraps(untouched_route)
+    def wrapper(*args, **kwargs):
+        print('flask.session:', flask.session, file=sys.stderr)
+        if 'phone_number' in flask.session:
+            print('Phone number exists:', flask.session['phone_number'], file=sys.stderr)
+        else:
+            print('No phone number exists.', file=sys.stderr)
+
+        return untouched_route(*args, **kwargs)
+    
+    return wrapper
+
+app = flask.Flask(__name__) 
+app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
     app.config['twilio_account'] = users.TwilioAccount(
@@ -49,10 +65,13 @@ def post_confirm():
         with conn.cursor() as db:
             pin_number = flask.request.form['pin-number']
             signup_id = flask.request.form['signup-id']
-            users.verify_user_signup(db, pin_number, signup_id)
+            phone_number = users.verify_user_signup(db, pin_number, signup_id)
+            print('Added phone number:', phone_number, file=sys.stderr)
+            flask.session['phone_number'] = phone_number
             return flask.redirect(flask.url_for('get_confirmation'), code=303)
 
 @app.route('/confirmation')
+@user_is_logged_in
 def get_confirmation():
     return flask.render_template('confirmation.html')
 

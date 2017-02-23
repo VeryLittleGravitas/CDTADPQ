@@ -64,3 +64,6 @@ class AppTests (unittest.TestCase):
         
         posted2 = self.client.open(method=form3['method'], path=form3['action'], data=data3)
         self.assertEqual(posted2.status_code, 303)
+
+        got4 = self.client.get(posted2.headers.get('Location'))
+        self.assertEqual(got4.status_code, 200)
