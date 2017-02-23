@@ -28,11 +28,11 @@
           <li>
             {% if user_is_logged_in %}
               <a class="usa-nav-link" href="{{ url_for('get_confirmation') }}">
-                <span>Profile</span>
+                <span>Your Profile</span>
               </a>
             {% else %}
               <a class="usa-nav-link" href="{{ url_for('get_register') }}">
-                <span>Register</span>
+                <span>Login</span>
               </a>
             {% endif %}
           </li>

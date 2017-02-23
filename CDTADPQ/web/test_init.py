@@ -35,7 +35,7 @@ class AppTests (unittest.TestCase):
         self.assertEqual(got1.status_code, 200)
         
         soup1 = bs4.BeautifulSoup(got1.data, 'html.parser')
-        link1 = soup1.find(text='Register').find_parent('a')
+        link1 = soup1.find(text='Login').find_parent('a')
         
         # Get the registration form
 
@@ -82,7 +82,7 @@ class AppTests (unittest.TestCase):
         self.assertEqual(got4.status_code, 200)
         
         soup4 = bs4.BeautifulSoup(got4.data, 'html.parser')
-        text4 = soup4.find(text='Profile')
+        text4 = soup4.find(text='Your Profile')
         self.assertIsNotNone(text4)
 
         link4 = text4.find_parent('a')

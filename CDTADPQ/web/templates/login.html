@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}California Emergency Alerts{% endblock %}
+
+
+{% block main_content %}
+  <h1>Login</h1>
+  
+  
+
+   <form id="sign-up" class="usa-form" action="{{ url_for('post_register') }}" method="post">
+   
+      <label for="phone-number" class="usa-input-required">Phone number</label>
+      <input id="phone-number" name="phone-number" type="tel" required="" aria-required="true">
+      <div class="button_wrapper">
+		<button>Send confirmation message</button>
+	
+  </form>
+  
+{% endblock %}

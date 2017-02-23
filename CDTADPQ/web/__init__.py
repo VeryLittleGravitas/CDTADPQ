@@ -57,6 +57,10 @@ def post_logout():
 def get_register():
     return flask.render_template('register.html', **template_kwargs())
 
+@app.route('/login', methods=['GET'])
+def get_login():
+    return flask.render_template('login.html')
+
 @app.route('/register', methods=['POST'])
 def post_register():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
