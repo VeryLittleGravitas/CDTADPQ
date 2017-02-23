@@ -69,10 +69,17 @@ class AppTests (unittest.TestCase):
         form3 = soup3.find('form', id='register')
         data3 = {input['name']: input.get('value') for input in form3.find_all('input')}
         self.assertIn('pin-number', data3)
-        data3['pin-number'] = pin_number
+        data3['pin-number'] = 'wrong-number'
+        
+        # Enter the wrong PIN number
+
+        posted4 = self.client.open(method=form3['method'], path=form3['action'], data=data3)
+        self.assertTrue(bs4.BeautifulSoup(posted4.data, 'html.parser').find(text='Wrong PIN'))
+        self.assertEqual(posted4.status_code, 400)
         
         # Enter the PIN number to confirm
 
+        data3['pin-number'] = pin_number
         posted2 = self.client.open(method=form3['method'], path=form3['action'], data=data3)
         self.assertEqual(posted2.status_code, 303)
 

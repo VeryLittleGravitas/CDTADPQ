@@ -7,8 +7,8 @@ def user_is_logged_in(untouched_route):
     @functools.wraps(untouched_route)
     def wrapper(*args, **kwargs):
         if 'phone_number' not in flask.session:
-            return flask.Response(flask.render_template('error-auth.html', **template_kwargs()),
-                                  status=401)
+            body = flask.render_template('error-auth.html', **template_kwargs())
+            return flask.Response(body, status=401)
 
         return untouched_route(*args, **kwargs)
     
@@ -81,6 +81,12 @@ def post_confirm():
             pin_number = flask.request.form['pin-number']
             signup_id = flask.request.form['signup-id']
             phone_number = users.verify_user_signup(db, pin_number, signup_id)
+            
+            if phone_number is False:
+                body = flask.render_template('registered.html', signup_id=signup_id,
+                                             error_wrong_pin_number=True)
+                return flask.Response(body, status=400)
+            
             flask.session['phone_number'] = phone_number
             return flask.redirect(flask.url_for('get_confirmation'), code=303)
 
