@@ -6,7 +6,7 @@ cache:
 dist: trusty
 addons:
   postgresql: '9.6'
-env: DATABASE_URL=postgres://adpqun:adpqpw@localhost/adpqdb TWILIO_ACCOUNT=Nothing
+env: DATABASE_URL=postgres://adpqun:adpqpw@localhost/adpqdb TWILIO_ACCOUNT=Nothing FLASK_SECRET_KEY=Yo
 install:
   - psql -h localhost -c "CREATE USER adpqun WITH SUPERUSER PASSWORD 'adpqpw'";
   - psql -h localhost -c "CREATE DATABASE adpqdb WITH OWNER adpqun";
