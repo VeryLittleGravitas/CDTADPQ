@@ -16,6 +16,13 @@ def user_is_logged_in(untouched_route):
     
     return wrapper
 
+def template_kwargs():
+    '''
+    '''
+    return dict(
+        user_is_logged_in = bool('phone_number' in flask.session)
+        )
+
 app = flask.Flask(__name__) 
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
@@ -36,15 +43,15 @@ else:
 
 @app.route('/')
 def get_index():
-    return flask.render_template('index.html')
+    return flask.render_template('index.html', **template_kwargs())
 
 @app.route('/about')
 def get_about():
-    return flask.render_template('about.html')
+    return flask.render_template('about.html', **template_kwargs())
 
 @app.route('/register', methods=['GET'])
 def get_register():
-    return flask.render_template('register.html')
+    return flask.render_template('register.html', **template_kwargs())
 
 @app.route('/register', methods=['POST'])
 def post_register():
@@ -73,23 +80,23 @@ def post_confirm():
 @app.route('/confirmation')
 @user_is_logged_in
 def get_confirmation():
-    return flask.render_template('confirmation.html')
+    return flask.render_template('confirmation.html', **template_kwargs())
 
 @app.route('/admin')
 def get_admin():
-    return flask.render_template('admin.html')
+    return flask.render_template('admin.html', **template_kwargs())
 
 @app.route('/send-alert')
 def get_sendalert():
-    return flask.render_template('send-alert.html')
+    return flask.render_template('send-alert.html', **template_kwargs())
 
 @app.route('/sent')
 def get_sent():
-    return flask.render_template('sent.html')
+    return flask.render_template('sent.html', **template_kwargs())
 
 @app.route('/stats')
 def get_stats():
-    return flask.render_template('stats.html')
+    return flask.render_template('stats.html', **template_kwargs())
 
 @app.route('/earth.geojson')
 def get_earth():
