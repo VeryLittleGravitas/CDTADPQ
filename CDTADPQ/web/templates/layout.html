@@ -26,9 +26,15 @@
         <ul class="usa-nav-primary usa-accordion">
           
           <li>
-            <a class="usa-nav-link" href="/login">
-              <span>Login</span>
-            </a>
+            {% if user_is_logged_in %}
+              <a class="usa-nav-link" href="{{ url_for('get_confirmation') }}">
+                <span>Your Profile</span>
+              </a>
+            {% else %}
+              <a class="usa-nav-link" href="{{ url_for('get_register') }}">
+                <span>Login</span>
+              </a>
+            {% endif %}
           </li>
           <li>
             <a class="usa-nav-link" href="/stats">

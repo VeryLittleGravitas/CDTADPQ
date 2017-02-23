@@ -1,7 +1,28 @@
-import flask, codecs, psycopg2, os, json
+import flask, codecs, psycopg2, os, json, functools, sys
 from ..data import users
 
-app = flask.Flask(__name__)
+def user_is_logged_in(untouched_route):
+    '''
+    '''
+    @functools.wraps(untouched_route)
+    def wrapper(*args, **kwargs):
+        if 'phone_number' not in flask.session:
+            return flask.Response(flask.render_template('error-auth.html', **template_kwargs()),
+                                  status=401)
+
+        return untouched_route(*args, **kwargs)
+    
+    return wrapper
+
+def template_kwargs():
+    '''
+    '''
+    return dict(
+        user_is_logged_in = bool('phone_number' in flask.session)
+        )
+
+app = flask.Flask(__name__) 
+app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
     app.config['twilio_account'] = users.TwilioAccount(
@@ -20,15 +41,21 @@ else:
 
 @app.route('/')
 def get_index():
-    return flask.render_template('index.html')
+    return flask.render_template('index.html', **template_kwargs())
 
 @app.route('/about')
 def get_about():
-    return flask.render_template('about.html')
+    return flask.render_template('about.html', **template_kwargs())
+
+@app.route('/logout', methods=['POST'])
+def post_logout():
+    if 'phone_number' in flask.session:
+        flask.session.pop('phone_number')
+    return flask.redirect(flask.url_for('get_index'), code=303)
 
 @app.route('/register', methods=['GET'])
 def get_register():
-    return flask.render_template('register.html')
+    return flask.render_template('register.html', **template_kwargs())
 
 @app.route('/login', methods=['GET'])
 def get_login():
@@ -53,28 +80,30 @@ def post_confirm():
         with conn.cursor() as db:
             pin_number = flask.request.form['pin-number']
             signup_id = flask.request.form['signup-id']
-            users.verify_user_signup(db, pin_number, signup_id)
+            phone_number = users.verify_user_signup(db, pin_number, signup_id)
+            flask.session['phone_number'] = phone_number
             return flask.redirect(flask.url_for('get_confirmation'), code=303)
 
 @app.route('/confirmation')
+@user_is_logged_in
 def get_confirmation():
-    return flask.render_template('confirmation.html')
+    return flask.render_template('confirmation.html', **template_kwargs())
 
 @app.route('/admin')
 def get_admin():
-    return flask.render_template('admin.html')
+    return flask.render_template('admin.html', **template_kwargs())
 
 @app.route('/send-alert')
 def get_sendalert():
-    return flask.render_template('send-alert.html')
+    return flask.render_template('send-alert.html', **template_kwargs())
 
 @app.route('/sent')
 def get_sent():
-    return flask.render_template('sent.html')
+    return flask.render_template('sent.html', **template_kwargs())
 
 @app.route('/stats')
 def get_stats():
-    return flask.render_template('stats.html')
+    return flask.render_template('stats.html', **template_kwargs())
 
 @app.route('/earth.geojson')
 def get_earth():

@@ -29,12 +29,16 @@ class AppTests (unittest.TestCase):
     def test_register(self):
         '''
         '''
+        # Start at the front page and look for a registration link
+
         got1 = self.client.get('/')
         self.assertEqual(got1.status_code, 200)
         
         soup1 = bs4.BeautifulSoup(got1.data, 'html.parser')
         link1 = soup1.find(text='Login').find_parent('a')
         
+        # Get the registration form
+
         got2 = self.client.get(link1['href'])
         self.assertEqual(got2.status_code, 200)
 
@@ -43,6 +47,8 @@ class AppTests (unittest.TestCase):
         data2 = {input['name']: None for input in form2.find_all('input')}
         self.assertIn('phone-number', data2)
         data2['phone-number'] = '+1 (510) 555-1212'
+
+        # Enter phone number to register
 
         with unittest.mock.patch('CDTADPQ.data.users.send_verification_code') as send_verification_code:
             posted1 = self.client.open(method=form2['method'], path=form2['action'], data=data2)
@@ -53,6 +59,9 @@ class AppTests (unittest.TestCase):
                          (self.config['twilio_account'], '+1 (510) 555-1212'))
         
         (pin_number, ) = send_verification_code.mock_calls[0][1][2:]
+
+        # Follow redirect for PIN confirmation
+
         got3 = self.client.get(posted1.headers.get('Location'))
         self.assertEqual(got3.status_code, 200)
 
@@ -62,5 +71,37 @@ class AppTests (unittest.TestCase):
         self.assertIn('pin-number', data3)
         data3['pin-number'] = pin_number
         
+        # Enter the PIN number to confirm
+
         posted2 = self.client.open(method=form3['method'], path=form3['action'], data=data3)
         self.assertEqual(posted2.status_code, 303)
+
+        # Follow redirect after PIN confirmation
+
+        got4 = self.client.get(posted2.headers.get('Location'))
+        self.assertEqual(got4.status_code, 200)
+        
+        soup4 = bs4.BeautifulSoup(got4.data, 'html.parser')
+        text4 = soup4.find(text='Your Profile')
+        self.assertIsNotNone(text4)
+
+        link4 = text4.find_parent('a')
+        self.assertIn(link4['href'], posted2.headers.get('Location'))
+
+        form4 = soup4.find('form', id='log-out')
+        data4 = {input['name']: input.get('value') for input in form4.find_all('input')}
+
+        # Log out using the form
+
+        posted3 = self.client.open(method=form4['method'], path=form4['action'], data=data4)
+        self.assertEqual(posted3.status_code, 303)
+
+        # Follow the redirect to the front page
+
+        got5 = self.client.get(posted3.headers.get('Location'))
+        self.assertEqual(got5.status_code, 200)
+
+        # Try that post-confirmation profile page again - are we logged out?
+
+        got6 = self.client.get(posted2.headers.get('Location'))
+        self.assertEqual(got6.status_code, 401)

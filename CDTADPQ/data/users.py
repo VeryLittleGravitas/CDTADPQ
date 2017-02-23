@@ -56,4 +56,4 @@ def verify_user_signup(db, given_pin_number, signup_id):
     db.execute('INSERT INTO users (phone_number) VALUES (%s)',
                (phone_number, ))
 
-    return True
+    return phone_number
