@@ -27,9 +27,9 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 
 **We are using the following "user-centric design" techniques and/or tools to make this prototype:**
 
-	1.
-	2.
-	3.
+	1. Questinnaires (quantitative feedback)
+	2. In-person user testing (qualitative, hands-on usability testing)
+	3. 
 
 
 e. Used GitHub to document code commits; 
