@@ -37,12 +37,12 @@
             {% endif %}
           </li>
           <li>
-            <a class="usa-nav-link" href="/stats">
+            <a class="usa-nav-link" href="{{ url_for('get_stats') }}">
               <span>Statistics</span>
             </a>
           </li>
           <li>
-            <a class="usa-nav-link" href="/admin">
+            <a class="usa-nav-link" href="{{ url_for('get_admin') }}">
               <span>Admin</span>
             </a>
           </li>
