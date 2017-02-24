@@ -4,25 +4,25 @@
 
 {% block head_elements %}
 <script>
-    
+
     function on_geolocation(position)
     {
         var input = document.getElementById('zipcode'),
             lat = position.coords.latitude,
             lon = position.coords.longitude;
-        
+
         input.value = '';
         input.placeholder = 'Finding zip code...';
 
         var xhr = new XMLHttpRequest(),
             url = "{{ url_for('get_zipcode') }}?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
-        
+
         xhr.onreadystatechange = function()
         {
             var DONE = this.DONE || 4;
             if (this.readyState === DONE){
                 var response = JSON.parse(this.responseText);
-                
+
                 if('zipcode' in response) {
                     input.value = response['zipcode'];
                 } else {
@@ -31,22 +31,22 @@
                 }
             }
         }
-        
+
         xhr.open('GET', url, true);
         xhr.send(null);
     }
-    
+
 </script>
 {% endblock %}
 
 {% block main_content %}
-  <h1>Register for alerts</h1>
-  
-  
+  <h1>Get emergency alerts with just your phone number</h1>
+
+
 
    <form id="sign-up" class="usa-form" action="{{ url_for('post_register') }}" method="post">
     <fieldset>
-      <legend>Register for emergency alerts</legend>
+      <legend>Use your phone number and zip code to get fire, flood, earthquake and tsunami emergency alerts from the State of California.</legend>
 
       <label for="phone-number" class="usa-input-required">Phone number</label>
       <input id="phone-number" name="phone-number" type="tel" required="" aria-required="true">
@@ -59,7 +59,7 @@
 		</div>
     </fieldset>
   </form>
-  
+
   <script>
       if('geolocation' in navigator)
       {
