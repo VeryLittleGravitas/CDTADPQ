@@ -10,5 +10,14 @@
 
   
  {% include 'includes/settings.html' %}
+
+ <form id="log-out" class="usa-form" action="{{ url_for('post_logout') }}" method="post">
+ <fieldset>
+   <div class="button_wrapper">
+     <button>Log out</button>
+     </div>
+ </fieldset>
+ </form>
+
   
 {% endblock %}
