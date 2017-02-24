@@ -7,9 +7,13 @@
     
     function on_geolocation(position)
     {
-        var lat = position.coords.latitude,
+        var input = document.getElementById('zipcode'),
+            lat = position.coords.latitude,
             lon = position.coords.longitude;
         
+        input.value = '';
+        input.placeholder = 'Finding zip code...';
+
         var xhr = new XMLHttpRequest(),
             url = "{{ url_for('get_zipcode') }}?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
         
@@ -19,16 +23,15 @@
             if (this.readyState === DONE){
                 var response = JSON.parse(this.responseText);
                 
-                if('zipcode' in response)
-                {
-                    document.getElementById('zipcode').value = response['zipcode'];
+                if('zipcode' in response) {
+                    input.value = response['zipcode'];
+                } else {
+                    input.value = '';
+                    input.placeholder = '';
                 }
             }
         }
         
-        document.getElementById('zipcode').value = '';
-        document.getElementById('zipcode').placeholder = 'Finding zip code...';
-
         xhr.open('GET', url, true);
         xhr.send(null);
     }
