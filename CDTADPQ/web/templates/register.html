@@ -26,23 +26,13 @@
             }
         }
         
+        document.getElementById('zipcode').value = '';
+        document.getElementById('zipcode').placeholder = 'Finding zip code...';
+
         xhr.open('GET', url, true);
         xhr.send(null);
     }
     
-    /*
-    var pos = {coords: {latitude: 37.8043, longitude: -122.2712}};
-    
-    function go()
-    {
-        on_geolocation(pos);
-    }
-    */
-
-    if('geolocation' in navigator)
-    {
-        navigator.geolocation.getCurrentPosition(on_geolocation);
-    }
 </script>
 {% endblock %}
 
@@ -67,4 +57,13 @@
     </fieldset>
   </form>
   
+  <script>
+      if('geolocation' in navigator)
+      {
+          document.getElementById('zipcode').value = '';
+          document.getElementById('zipcode').placeholder = 'Locating you...';
+          navigator.geolocation.getCurrentPosition(on_geolocation);
+      }
+  </script>
+
 {% endblock %}
