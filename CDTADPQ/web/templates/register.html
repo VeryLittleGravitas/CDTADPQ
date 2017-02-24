@@ -10,12 +10,37 @@
         var lat = position.coords.latitude,
             lon = position.coords.longitude;
         
-        alert([lat, lon]);
+        var xhr = new XMLHttpRequest(),
+            url = "{{ url_for('get_zipcode') }}?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
+        
+        xhr.onreadystatechange = function()
+        {
+            var DONE = this.DONE || 4;
+            if (this.readyState === DONE){
+                var response = JSON.parse(this.responseText);
+                
+                if('zipcode' in response)
+                {
+                    document.getElementById('zipcode').value = response['zipcode'];
+                }
+            }
+        }
+        
+        xhr.open('GET', url, true);
+        xhr.send(null);
     }
-
-    if ("geolocation" in navigator)
+    
+    /*
+    var pos = {coords: {latitude: 37.8043, longitude: -122.2712}};
+    
+    function go()
     {
-        /* geolocation is available */
+        on_geolocation(pos);
+    }
+    */
+
+    if('geolocation' in navigator)
+    {
         navigator.geolocation.getCurrentPosition(on_geolocation);
     }
 </script>

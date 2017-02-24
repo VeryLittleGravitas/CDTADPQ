@@ -90,6 +90,28 @@ def post_confirm():
             flask.session['phone_number'] = phone_number
             return flask.redirect(flask.url_for('get_confirmation'), code=303)
 
+@app.route('/api/zipcode')
+def get_zipcode():
+    args = {k: float(flask.request.args[k]) for k in ('lon', 'lat')}
+    point_wkt = 'POINT ({lon} {lat})'.format(**args)
+    print('Zip code:', point_wkt, file=sys.stderr)
+
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            db.execute('''SELECT "ZCTA5CE10"
+                          FROM tl_2016_us_zcta510
+                          WHERE ST_Intersects(geog, ST_Buffer(ST_GeogFromText(%s), 500))
+                          ORDER BY ST_Distance(geog, %s) ASC
+                          LIMIT 1
+                          ''',
+                       (point_wkt, point_wkt))
+            
+            (zipcode, ) = db.fetchone()
+            
+            print('Got:', zipcode, file=sys.stderr)
+    
+    return flask.jsonify({'zipcode': zipcode})
+
 @app.route('/confirmation')
 @user_is_logged_in
 def get_confirmation():
