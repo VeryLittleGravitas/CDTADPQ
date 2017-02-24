@@ -19,12 +19,18 @@ class AppTests (unittest.TestCase):
         self.assertIn('<link rel="stylesheet" href="/static/uswds-0.14.0/css/uswds.min.css">', html)
         self.assertIn('<script src="/static/uswds-0.14.0/js/uswds.min.js">', html)
     
-    def test_earth(self):
+    def test_zipcode_lookup(self):
         '''
         '''
-        got = self.client.get('/earth.geojson')
-        geojson = json.loads(got.data.decode('utf8'))
-        self.assertEqual({"type": "FeatureCollection", "features": [{"geometry": {"coordinates": [[[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]]], "type": "Polygon"}, "properties": {}, "type": "Feature"}]}, geojson)
+        # Downtown Oakland
+        got1 = self.client.get('/api/zipcode?lat=37.8043&lon=-122.2712')
+        data1 = json.loads(got1.data.decode('utf8'))
+        self.assertEqual(data1, {'zipcode': '94612'})
+
+        # Middle of the Bay
+        got2 = self.client.get('/api/zipcode?lat=37.8652&lon=-122.3758')
+        data2 = json.loads(got2.data.decode('utf8'))
+        self.assertEqual(data2, {})
     
     def test_register(self):
         '''

@@ -6,6 +6,9 @@
     <title>{% block title %}Page Title{% endblock %}</title>
     <!-- Update the link path to where your stylesheet file is located. For example: /path/to/your/assets/css/lib/uswds.min.css -->
     <link rel="stylesheet" href="{{ url_for('static', filename='uswds-0.14.0/css/uswds.min.css') }}">
+    {% block head_elements %}
+    <!-- additional script and style -->
+    {% endblock %}
   </head>
   <body class="layout-demo">
   <a class="usa-skipnav" href="#main-content">Skip to main content</a>

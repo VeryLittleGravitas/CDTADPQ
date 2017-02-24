@@ -2,6 +2,42 @@
 
 {% block title %}California Emergency Alerts{% endblock %}
 
+{% block head_elements %}
+<script>
+    
+    function on_geolocation(position)
+    {
+        var input = document.getElementById('zipcode'),
+            lat = position.coords.latitude,
+            lon = position.coords.longitude;
+        
+        input.value = '';
+        input.placeholder = 'Finding zip code...';
+
+        var xhr = new XMLHttpRequest(),
+            url = "{{ url_for('get_zipcode') }}?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon);
+        
+        xhr.onreadystatechange = function()
+        {
+            var DONE = this.DONE || 4;
+            if (this.readyState === DONE){
+                var response = JSON.parse(this.responseText);
+                
+                if('zipcode' in response) {
+                    input.value = response['zipcode'];
+                } else {
+                    input.value = '';
+                    input.placeholder = '';
+                }
+            }
+        }
+        
+        xhr.open('GET', url, true);
+        xhr.send(null);
+    }
+    
+</script>
+{% endblock %}
 
 {% block main_content %}
   <h1>Register for alerts</h1>
@@ -24,4 +60,13 @@
     </fieldset>
   </form>
   
+  <script>
+      if('geolocation' in navigator)
+      {
+          document.getElementById('zipcode').value = '';
+          document.getElementById('zipcode').placeholder = 'Locating you...';
+          navigator.geolocation.getCurrentPosition(on_geolocation);
+      }
+  </script>
+
 {% endblock %}

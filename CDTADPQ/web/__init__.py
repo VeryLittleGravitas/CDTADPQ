@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys
-from ..data import users
+from ..data import users, zipcodes
 
 def user_is_logged_in(untouched_route):
     '''
@@ -90,6 +90,18 @@ def post_confirm():
             flask.session['phone_number'] = phone_number
             return flask.redirect(flask.url_for('get_confirmation'), code=303)
 
+@app.route('/api/zipcode')
+def get_zipcode():
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            lat, lon = [float(flask.request.args[k]) for k in ('lat', 'lon')]
+            zipcode = zipcodes.lookup_zipcode(db, lat, lon)
+            
+    if zipcode is None:
+        return flask.jsonify({})
+    else:
+        return flask.jsonify({'zipcode': zipcode})
+
 @app.route('/confirmation')
 @user_is_logged_in
 def get_confirmation():
@@ -110,15 +122,3 @@ def get_sent():
 @app.route('/stats')
 def get_stats():
     return flask.render_template('stats.html', **template_kwargs())
-
-@app.route('/earth.geojson')
-def get_earth():
-    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
-        with conn.cursor() as db:
-            db.execute('SELECT ST_AsGeoJSON(geom) FROM world LIMIT 1')
-            (geometry, ) = db.fetchone()
-    
-    feature = dict(geometry=json.loads(geometry), type='Feature', properties={})
-    geojson = dict(type='FeatureCollection', features=[feature])
-    
-    return flask.jsonify(geojson)
