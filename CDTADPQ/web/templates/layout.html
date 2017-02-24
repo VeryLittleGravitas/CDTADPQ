@@ -28,17 +28,24 @@
         </button>
         <ul class="usa-nav-primary usa-accordion">
           
-          <li>
             {% if user_is_logged_in %}
-              <a class="usa-nav-link" href="{{ url_for('get_confirmation') }}">
-                <span>Your Profile</span>
-              </a>
+              <li>
+                <a class="usa-nav-link" href="{{ url_for('get_profile') }}">
+                  <span>Your Profile</span>
+                </a>
+              </li>
             {% else %}
-              <a class="usa-nav-link" href="{{ url_for('get_register') }}">
-                <span>Login</span>
-              </a>
+              <li>
+                <a class="usa-nav-link" href="{{ url_for('get_register') }}">
+                  <span>Register</span>
+                </a>
+              </li>
+              <li>
+                <a class="usa-nav-link" href="{{ url_for('get_login') }}">
+                  <span>Login</span>
+                </a>
+              </li>
             {% endif %}
-          </li>
           <li>
             <a class="usa-nav-link" href="{{ url_for('get_stats') }}">
               <span>Statistics</span>

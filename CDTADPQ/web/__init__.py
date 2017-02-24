@@ -51,10 +51,13 @@ def get_about():
 def post_logout():
     if 'phone_number' in flask.session:
         flask.session.pop('phone_number')
+    if 'is_registering' in flask.session:
+        flask.session.pop('is_registering')
     return flask.redirect(flask.url_for('get_index'), code=303)
 
 @app.route('/register', methods=['GET'])
 def get_register():
+    flask.session['is_registering'] = 1
     return flask.render_template('register.html', **template_kwargs())
 
 @app.route('/login', methods=['GET'])
@@ -88,7 +91,11 @@ def post_confirm():
                 return flask.Response(body, status=400)
             
             flask.session['phone_number'] = phone_number
-            return flask.redirect(flask.url_for('get_confirmation'), code=303)
+
+            if 'is_registering' in flask.session:
+                return flask.redirect(flask.url_for('get_confirmation'), code=303)
+            else:
+                return flask.redirect(flask.url_for('get_profile'), code=303)
 
 @app.route('/api/zipcode')
 def get_zipcode():
@@ -106,6 +113,11 @@ def get_zipcode():
 @user_is_logged_in
 def get_confirmation():
     return flask.render_template('confirmation.html', **template_kwargs())
+
+@app.route('/profile')
+@user_is_logged_in
+def get_profile():
+    return flask.render_template('profile.html', **template_kwargs())
 
 @app.route('/admin')
 def get_admin():
