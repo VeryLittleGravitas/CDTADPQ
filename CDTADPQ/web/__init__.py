@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys
-from ..data import users
+from ..data import users, zipcodes
 
 def user_is_logged_in(untouched_route):
     '''
@@ -92,25 +92,15 @@ def post_confirm():
 
 @app.route('/api/zipcode')
 def get_zipcode():
-    args = {k: float(flask.request.args[k]) for k in ('lon', 'lat')}
-    point_wkt = 'POINT ({lon} {lat})'.format(**args)
-    print('Zip code:', point_wkt, file=sys.stderr)
-
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            db.execute('''SELECT "ZCTA5CE10"
-                          FROM tl_2016_us_zcta510
-                          WHERE ST_Intersects(geog, ST_Buffer(ST_GeogFromText(%s), 500))
-                          ORDER BY ST_Distance(geog, %s) ASC
-                          LIMIT 1
-                          ''',
-                       (point_wkt, point_wkt))
+            lat, lon = [float(flask.request.args[k]) for k in ('lat', 'lon')]
+            zipcode = zipcodes.lookup_zipcode(db, lat, lon)
             
-            (zipcode, ) = db.fetchone()
-            
-            print('Got:', zipcode, file=sys.stderr)
-    
-    return flask.jsonify({'zipcode': zipcode})
+    if zipcode is None:
+        return flask.jsonify({})
+    else:
+        return flask.jsonify({'zipcode': zipcode})
 
 @app.route('/confirmation')
 @user_is_logged_in
@@ -132,15 +122,3 @@ def get_sent():
 @app.route('/stats')
 def get_stats():
     return flask.render_template('stats.html', **template_kwargs())
-
-@app.route('/earth.geojson')
-def get_earth():
-    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
-        with conn.cursor() as db:
-            db.execute('SELECT ST_AsGeoJSON(geom) FROM world LIMIT 1')
-            (geometry, ) = db.fetchone()
-    
-    feature = dict(geometry=json.loads(geometry), type='Feature', properties={})
-    geojson = dict(type='FeatureCollection', features=[feature])
-    
-    return flask.jsonify(geojson)
