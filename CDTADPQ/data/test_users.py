@@ -79,3 +79,22 @@ class UsersTests (unittest.TestCase):
                 users.send_verification_code(account, '+1212BADCODE', '1234')
 
         self.assertEqual(str(error.exception), "The 'To' number is not a valid phone number.")
+    
+    def test_get_user_info(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+        
+        db.fetchone.return_value = ('+1 (510) 555-1212', ['94612'])
+        user_info = users.get_user_info(db, '+1 (510) 555-1212')
+
+        self.assertEqual(user_info, db.fetchone.return_value)
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+        
+        db.fetchone.return_value = None
+        user_info = users.get_user_info(db, '+1 (510) 555-1212')
+
+        self.assertEqual(user_info, db.fetchone.return_value)
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))

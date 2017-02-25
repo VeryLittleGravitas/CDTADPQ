@@ -58,3 +58,16 @@ def verify_user_signup(db, given_pin_number, signup_id):
                (phone_number, ))
 
     return phone_number
+
+def get_user_info(db, phone_number):
+    '''
+    '''
+    db.execute('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s',
+               (phone_number, ))
+    
+    try:
+        (phone_number, zip_codes) = db.fetchone()
+    except TypeError:
+        return None
+    
+    return phone_number, zip_codes
