@@ -70,7 +70,8 @@ def post_register():
         with conn.cursor() as db:
             twilio_account = flask.current_app.config['twilio_account']
             to_number = flask.request.form['phone-number']
-            signup_id = users.add_unverified_signup(db, twilio_account, to_number)
+            zipcode = flask.request.form.get('zipcode', None)
+            signup_id = users.add_unverified_signup(db, twilio_account, to_number, zipcode)
             return flask.redirect(flask.url_for('get_registered', signup_id=signup_id), code=303)
 
 @app.route('/registered/<signup_id>')

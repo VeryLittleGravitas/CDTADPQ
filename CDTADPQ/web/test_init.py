@@ -53,6 +53,7 @@ class AppTests (unittest.TestCase):
         data2 = {input['name']: None for input in form2.find_all('input')}
         self.assertIn('phone-number', data2)
         data2['phone-number'] = '+1 (510) 555-1212'
+        data2['zipcode'] = '94612'
 
         # Enter phone number to register
 

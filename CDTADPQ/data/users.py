@@ -10,15 +10,16 @@ class TwilioAccount:
         self.account = account
         self.number = number
 
-def add_unverified_signup(db, account, to_number):
+def add_unverified_signup(db, account, to_number, zipcode):
     logging.info('add_unverified_signup: {}'.format(to_number))
     
     pin_number = '{:04d}'.format(random.randint(0, 9999))
     signup_id = str(uuid.uuid4())
     
     db.execute('''INSERT INTO unverified_signups
-                  (signup_id, phone_number, pin_number) VALUES (%s, %s, %s)''',
-               (signup_id, to_number, pin_number))
+                  (signup_id, phone_number, pin_number, zipcode)
+                  VALUES (%s, %s, %s, %s)''',
+               (signup_id, to_number, pin_number, zipcode))
     
     send_verification_code(account, to_number, pin_number)
     return signup_id
