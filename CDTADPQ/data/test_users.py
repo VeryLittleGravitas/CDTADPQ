@@ -32,18 +32,18 @@ class UsersTests (unittest.TestCase):
         '''
         db = unittest.mock.Mock()
         
-        db.fetchone.return_value = ('1234', '+15105551212')
+        db.fetchone.return_value = ('1234', '+15105551212', '94612')
         verified = users.verify_user_signup(db, '1234', 'xxx-yy-zzz')
         
         self.assertEqual(verified, '+15105551212')
-        self.assertEqual(db.execute.mock_calls[-2][1], ('SELECT pin_number, phone_number FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
-        self.assertEqual(db.execute.mock_calls[-1][1], ('INSERT INTO users (phone_number) VALUES (%s)', ('+15105551212',)))
+        self.assertEqual(db.execute.mock_calls[-2][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
+        self.assertEqual(db.execute.mock_calls[-1][1], ('INSERT INTO users (phone_number, zip_codes) VALUES (%s, %s)', ('+15105551212', ['94612'])))
         
         db.fetchone.return_value = None
         verified = users.verify_user_signup(db, '1234', 'xxx-yy-zzz')
         
         self.assertFalse(verified)
-        self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT pin_number, phone_number FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
+        self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
     
     def test_send_verification_code(self):
         '''

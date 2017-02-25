@@ -43,19 +43,20 @@ def send_verification_code(account, to_number, code):
 def verify_user_signup(db, given_pin_number, signup_id):
     '''
     '''
-    db.execute('''SELECT pin_number, phone_number FROM unverified_signups WHERE signup_id = %s''',
+    db.execute('''SELECT pin_number, phone_number, zipcode
+                  FROM unverified_signups WHERE signup_id = %s''',
                (signup_id, ))
     
     try:
-        (expected_pin_number, phone_number) = db.fetchone()
+        (expected_pin_number, phone_number, zipcode) = db.fetchone()
     except TypeError:
         return False
     
     if given_pin_number != expected_pin_number:
         return False
 
-    db.execute('INSERT INTO users (phone_number) VALUES (%s)',
-               (phone_number, ))
+    db.execute('INSERT INTO users (phone_number, zip_codes) VALUES (%s, %s)',
+               (phone_number, [zipcode]))
 
     return phone_number
 
