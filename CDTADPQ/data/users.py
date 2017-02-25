@@ -28,7 +28,8 @@ def send_verification_code(account, to_number, code):
     '''
     '''
     url = uritemplate.expand(TwilioURL, dict(account=account.account))
-    data = dict(From=account.number, To=to_number, Body='Yo {}'.format(code))
+    body = 'Your CA Emergency Alert PIN number is {}.\n\nIf you did not ask for this, please ignore this message.'.format(code)
+    data = dict(From=account.number, To=to_number, Body=body)
     auth = account.sid, account.secret
     posted = requests.post(url, auth=auth, data=data)
     
