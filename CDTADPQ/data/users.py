@@ -58,13 +58,14 @@ def verify_user_signup(db, given_pin_number, signup_id):
     
     db.execute('SELECT true FROM users WHERE phone_number = %s', (phone_number, ))
     existing_user = db.fetchone()
+    zip_codes = [zipcode] if zipcode else []
     
     if existing_user is None:
         db.execute('INSERT INTO users (phone_number, zip_codes) VALUES (%s, %s)',
-                   (phone_number, [zipcode]))
+                   (phone_number, zip_codes))
     else:
-        db.execute('UPDATE users SET zip_codes = %s WHERE phone_number = %s',
-                   ([zipcode], phone_number))
+        # Login screen does not offer a zip code input field
+        pass
 
     return phone_number
 

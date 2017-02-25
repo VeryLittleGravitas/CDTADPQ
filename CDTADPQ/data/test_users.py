@@ -63,9 +63,8 @@ class UsersTests (unittest.TestCase):
         verified = users.verify_user_signup(db, '1234', 'xxx-yy-zzz')
         
         self.assertEqual(verified, '+15105551212')
-        self.assertEqual(db.execute.mock_calls[-3][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
-        self.assertEqual(db.execute.mock_calls[-2][1], ('SELECT true FROM users WHERE phone_number = %s', ('+15105551212', )))
-        self.assertEqual(db.execute.mock_calls[-1][1], ('UPDATE users SET zip_codes = %s WHERE phone_number = %s', (['94612'], '+15105551212')))
+        self.assertEqual(db.execute.mock_calls[-2][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
+        self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT true FROM users WHERE phone_number = %s', ('+15105551212', )))
         
     def test_verify_user_signup_no_match(self):
         '''
