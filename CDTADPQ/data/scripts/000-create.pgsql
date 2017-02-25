@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS world;
 DROP TABLE IF EXISTS migrations;
 
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 CREATE TABLE world
 (
 );
