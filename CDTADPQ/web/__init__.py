@@ -121,7 +121,7 @@ def get_confirmation():
     return flask.render_template('confirmation.html', phone_number=phone_number,
                                  zip_codes=zip_code_str, **template_kwargs())
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET'])
 @user_is_logged_in
 def get_profile():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
@@ -131,6 +131,12 @@ def get_profile():
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
     return flask.render_template('profile.html', phone_number=phone_number,
                                  zip_codes=zip_code_str, **template_kwargs())
+
+@app.route('/profile', methods=['POST'])
+@user_is_logged_in
+def post_profile():
+    print('FORM', flask.request.form)
+    return 'UNDER CONSTRUCTION'
 
 @app.route('/admin')
 def get_admin():
