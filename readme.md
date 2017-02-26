@@ -49,7 +49,7 @@ h. Created or used a design style guide and/or a pattern library;
 
 i. Performed usability tests with people;
 
-**See [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for evidence of usability testing videos, as well as notes from interviews.
+**See [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for evidence of usability testing videos, as well as notes from interviews.**
 
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype;
 
