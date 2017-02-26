@@ -39,6 +39,12 @@ else:
         number = os.environ.get('TWILIO_NUMBER', '')
         )
 
+app.config['mailgun_account'] = users.MailgunAccount(
+    api_key = os.environ.get('MAILGUN_API_KEY', ''),
+    domain = os.environ.get('MAILGUN_DOMAIN', ''),
+    sender = os.environ.get('MAILGUN_SENDER', 'alerts@verylittlegravitas.com')
+    )
+
 @app.route('/')
 def get_index():
     return flask.render_template('index.html', **template_kwargs())
@@ -141,9 +147,13 @@ def post_profile():
 @app.route('/profile/email-address', methods=['POST'])
 @user_is_logged_in
 def post_email_address():
+    email_address = flask.request.form['email-address']
+    users.send_email_verification_code(app.config['mailgun_account'], email_address, 1234)
+
     signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
     address_encoded = signer.dumps(email_address)
     redirect_url = flask.url_for('get_email_addressed', address_encoded=address_encoded)
+
     return flask.redirect(redirect_url, code=303)
 
 @app.route('/profile/email-addressed/<address_encoded>', methods=['GET'])
