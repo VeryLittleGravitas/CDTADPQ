@@ -113,21 +113,58 @@ class UsersTests (unittest.TestCase):
 
         self.assertEqual(str(error.exception), "The 'To' number is not a valid phone number.")
     
+    def test_send_email_verification_code(self):
+        '''
+        '''
+        def response_content_error(url, request):
+            if (request.method, url.hostname, url.path) != ('POST', 'api.mailgun.net', '/v2/sandbox.mailgun.org/messages'):
+                raise Exception('Nope')
+
+            if request.headers['Authorization'] != 'Basic YXBpOnNlY3JldA==':
+                return httmock.response(401, b'Go away')
+            
+            subj = 'Your CA Emergency Alert PIN number'
+            body = 'Your CA Emergency Alert PIN number is 1234.\n\nIf you did not ask for this, please ignore this message.'
+            form = dict(urllib.parse.parse_qsl(request.body))
+            
+            if form['from'] != 'disaster-sender':
+                return httmock.response(404, b'Not the right sender')
+
+            if form == {'from': 'disaster-sender', 'to': 'disaster-recipient', 'subject': subj, 'text': body}:
+                body = '''{"id": "...", "message": "Queued. Thank you."}}'''
+                return httmock.response(201, body.encode('utf8'), {'Content-Type': 'application/json'})
+
+            if form == {'from': 'disaster-sender', 'to': 'nobody-special', 'subject': subj, 'text': body}:
+                body = '''{"message": "Sandbox subdomains are for test purposes only. Please add your own domain or add the address to authorized recipients in Account Settings."}'''
+                return httmock.response(400, body.encode('utf8'), {'Content-Type': 'application/json'})
+
+            raise Exception('Nope')
+        
+        account = users.MailgunAccount('secret', 'sandbox.mailgun.org', 'disaster-sender')
+        
+        with httmock.HTTMock(response_content_error):
+            users.send_email_verification_code(account, 'disaster-recipient', '1234')
+
+            with self.assertRaises(RuntimeError) as error:
+                users.send_email_verification_code(account, 'nobody-special', '1234')
+
+        self.assertEqual(str(error.exception), "Sandbox subdomains are for test purposes only. Please add your own domain or add the address to authorized recipients in Account Settings.")
+    
     def test_get_user_info(self):
         '''
         '''
         db = unittest.mock.Mock()
         
-        db.fetchone.return_value = ('+1 (510) 555-1212', ['94612'])
+        db.fetchone.return_value = ('+1 (510) 555-1212', ['94612'], 'user@example.com')
         user_info = users.get_user_info(db, '+1 (510) 555-1212')
 
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+                         ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
         
         db.fetchone.return_value = None
         user_info = users.get_user_info(db, '+1 (510) 555-1212')
 
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+                         ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))

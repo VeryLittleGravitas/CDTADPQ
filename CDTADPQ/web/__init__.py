@@ -1,4 +1,4 @@
-import flask, codecs, psycopg2, os, json, functools, sys
+import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous
 from ..data import users, zipcodes
 
 def user_is_logged_in(untouched_route):
@@ -38,6 +38,12 @@ else:
         account = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), 'rot13'),
         number = os.environ.get('TWILIO_NUMBER', '')
         )
+
+app.config['mailgun_account'] = users.MailgunAccount(
+    api_key = os.environ.get('MAILGUN_API_KEY', ''),
+    domain = os.environ.get('MAILGUN_DOMAIN', ''),
+    sender = os.environ.get('MAILGUN_SENDER', 'alerts@verylittlegravitas.com')
+    )
 
 @app.route('/')
 def get_index():
@@ -115,22 +121,72 @@ def get_zipcode():
 def get_confirmation():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number, zip_codes = users.get_user_info(db, flask.session['phone_number'])
+            phone_number, zip_codes, email_address \
+                = users.get_user_info(db, flask.session['phone_number'])
         
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
+    email_addr_str = email_address or ''
     return flask.render_template('confirmation.html', phone_number=phone_number,
-                                 zip_codes=zip_code_str, **template_kwargs())
+                                 zip_codes=zip_code_str, email_address=email_addr_str,
+                                 **template_kwargs())
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET'])
 @user_is_logged_in
 def get_profile():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number, zip_codes = users.get_user_info(db, flask.session['phone_number'])
+            phone_number, zip_codes, email_address \
+                = users.get_user_info(db, flask.session['phone_number'])
         
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
+    email_addr_str = email_address or ''
     return flask.render_template('profile.html', phone_number=phone_number,
-                                 zip_codes=zip_code_str, **template_kwargs())
+                                 zip_codes=zip_code_str, email_address=email_addr_str,
+                                 **template_kwargs())
+
+@app.route('/profile', methods=['POST'])
+@user_is_logged_in
+def post_profile():
+    print('FORM', flask.request.form)
+    return 'UNDER CONSTRUCTION'
+
+@app.route('/profile/email-address', methods=['POST'])
+@user_is_logged_in
+def post_email_address():
+    email_address = flask.request.form['email-address']
+    users.send_email_verification_code(app.config['mailgun_account'], email_address, 1234)
+
+    signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
+    address_encoded = signer.dumps(email_address)
+    redirect_url = flask.url_for('get_email_addressed', address_encoded=address_encoded)
+
+    return flask.redirect(redirect_url, code=303)
+
+@app.route('/profile/email-addressed/<address_encoded>', methods=['GET'])
+@user_is_logged_in
+def get_email_addressed(address_encoded):
+    signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
+    email_address = signer.loads(address_encoded)
+    print('POOP', email_address, 'from', address_encoded)
+    return flask.render_template('email-registered.html', email_address=email_address)
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            phone_number = flask.session['phone_number']
+            users.update_email_address(db, phone_number, email_address)
+
+@app.route('/profile/email-confirm', methods=['POST'])
+@user_is_logged_in
+def post_email_confirm():
+    print(flask.request.form)
+    pin_number = flask.request.form['pin-number']
+    if pin_number != '1234':
+        return 'WRONG NUMBER'
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            phone_number = flask.session['phone_number']
+            email_address = flask.request.form['email-address']
+            users.update_email_address(db, phone_number, email_address)
+    return flask.redirect(flask.url_for('get_profile'), code=303)
 
 @app.route('/admin')
 def get_admin():
