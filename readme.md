@@ -31,7 +31,6 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 	2. In-person interviews (qualitative, hands-on usability testing)
 	3. Remote user testing (qualitative, individuals providing feedback on experience)
 
-
 e. Used GitHub to document code commits; 
 
 **See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master)**.
@@ -40,6 +39,8 @@ f. Used Swagger to document the RESTful API, and provided a link to the Swagger 
 
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0;
 
+**See the code repository for specifics of implementation. [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) The pattern library utilised conforms to ADA and WCAG 2.0, see [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).**
+
 h. Created or used a design style guide and/or a pattern library;
 
 **This project will use the [Draft U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library**.
@@ -47,6 +48,8 @@ h. Created or used a design style guide and/or a pattern library;
 **See [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) for the initial implementation of the pattern library.**
 
 i. Performed usability tests with people;
+
+**See [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for evidence of usability testing videos, as well as notes from interviews.
 
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype;
 
