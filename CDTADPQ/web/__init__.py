@@ -70,7 +70,8 @@ def post_register():
         with conn.cursor() as db:
             twilio_account = flask.current_app.config['twilio_account']
             to_number = flask.request.form['phone-number']
-            signup_id = users.add_unverified_signup(db, twilio_account, to_number)
+            zipcode = flask.request.form.get('zipcode', None)
+            signup_id = users.add_unverified_signup(db, twilio_account, to_number, zipcode)
             return flask.redirect(flask.url_for('get_registered', signup_id=signup_id), code=303)
 
 @app.route('/registered/<signup_id>')
@@ -112,12 +113,24 @@ def get_zipcode():
 @app.route('/confirmation')
 @user_is_logged_in
 def get_confirmation():
-    return flask.render_template('confirmation.html', **template_kwargs())
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            phone_number, zip_codes = users.get_user_info(db, flask.session['phone_number'])
+        
+    zip_code_str = ', '.join(zip_codes) if zip_codes else ''
+    return flask.render_template('confirmation.html', phone_number=phone_number,
+                                 zip_codes=zip_code_str, **template_kwargs())
 
 @app.route('/profile')
 @user_is_logged_in
 def get_profile():
-    return flask.render_template('profile.html', **template_kwargs())
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            phone_number, zip_codes = users.get_user_info(db, flask.session['phone_number'])
+        
+    zip_code_str = ', '.join(zip_codes) if zip_codes else ''
+    return flask.render_template('profile.html', phone_number=phone_number,
+                                 zip_codes=zip_code_str, **template_kwargs())
 
 @app.route('/admin')
 def get_admin():

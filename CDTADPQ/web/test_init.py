@@ -53,6 +53,7 @@ class AppTests (unittest.TestCase):
         data2 = {input['name']: None for input in form2.find_all('input')}
         self.assertIn('phone-number', data2)
         data2['phone-number'] = '+1 (510) 555-1212'
+        data2['zipcode'] = '94612'
 
         # Enter phone number to register
 
@@ -97,6 +98,8 @@ class AppTests (unittest.TestCase):
         soup4 = bs4.BeautifulSoup(got4.data, 'html.parser')
         text4 = soup4.find(text='Your Profile')
         self.assertIsNotNone(text4)
+        self.assertIn(data2['phone-number'].encode('utf8'), got4.data)
+        self.assertIn(data2['zipcode'].encode('utf8'), got4.data)
 
         # Ensure we're on the confirmation page
 
