@@ -82,4 +82,6 @@ r. Deployed their software in an open source container, such as Docker (i.e., ut
 
 s. Provided sufficient documentation to install and run their prototype on another machine; and
 
+**Instructions on installation and running of the prototype can be found here: [https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype).**
+
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge.
