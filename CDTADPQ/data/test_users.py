@@ -155,16 +155,16 @@ class UsersTests (unittest.TestCase):
         '''
         db = unittest.mock.Mock()
         
-        db.fetchone.return_value = ('+1 (510) 555-1212', ['94612'])
+        db.fetchone.return_value = ('+1 (510) 555-1212', ['94612'], 'user@example.com')
         user_info = users.get_user_info(db, '+1 (510) 555-1212')
 
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+                         ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
         
         db.fetchone.return_value = None
         user_info = users.get_user_info(db, '+1 (510) 555-1212')
 
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('SELECT phone_number, zip_codes FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+                         ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))

@@ -121,22 +121,28 @@ def get_zipcode():
 def get_confirmation():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number, zip_codes = users.get_user_info(db, flask.session['phone_number'])
+            phone_number, zip_codes, email_address \
+                = users.get_user_info(db, flask.session['phone_number'])
         
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
+    email_addr_str = email_address or ''
     return flask.render_template('confirmation.html', phone_number=phone_number,
-                                 zip_codes=zip_code_str, **template_kwargs())
+                                 zip_codes=zip_code_str, email_address=email_addr_str,
+                                 **template_kwargs())
 
 @app.route('/profile', methods=['GET'])
 @user_is_logged_in
 def get_profile():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number, zip_codes = users.get_user_info(db, flask.session['phone_number'])
+            phone_number, zip_codes, email_address \
+                = users.get_user_info(db, flask.session['phone_number'])
         
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
+    email_addr_str = email_address or ''
     return flask.render_template('profile.html', phone_number=phone_number,
-                                 zip_codes=zip_code_str, **template_kwargs())
+                                 zip_codes=zip_code_str, email_address=email_addr_str,
+                                 **template_kwargs())
 
 @app.route('/profile', methods=['POST'])
 @user_is_logged_in
@@ -162,11 +168,25 @@ def get_email_addressed(address_encoded):
     signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
     email_address = signer.loads(address_encoded)
     print('POOP', email_address, 'from', address_encoded)
-    return 'UNDER CONSTRUCTION'
+    return flask.render_template('email-registered.html', email_address=email_address)
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
             phone_number = flask.session['phone_number']
             users.update_email_address(db, phone_number, email_address)
+
+@app.route('/profile/email-confirm', methods=['POST'])
+@user_is_logged_in
+def post_email_confirm():
+    print(flask.request.form)
+    pin_number = flask.request.form['pin-number']
+    if pin_number != '1234':
+        return 'WRONG NUMBER'
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            phone_number = flask.session['phone_number']
+            email_address = flask.request.form['email-address']
+            users.update_email_address(db, phone_number, email_address)
+    return flask.redirect(flask.url_for('get_profile'), code=303)
 
 @app.route('/admin')
 def get_admin():
