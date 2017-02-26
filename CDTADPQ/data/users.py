@@ -81,3 +81,9 @@ def get_user_info(db, phone_number):
         return None
     
     return phone_number, zip_codes
+
+def update_email_address(db, phone_number, email_address):
+    '''
+    '''
+    db.execute('UPDATE users SET email_address = %s WHERE phone_number = %s',
+               (email_address, phone_number))

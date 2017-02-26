@@ -1,4 +1,4 @@
-import flask, codecs, psycopg2, os, json, functools, sys
+import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous
 from ..data import users, zipcodes
 
 def user_is_logged_in(untouched_route):
@@ -137,6 +137,26 @@ def get_profile():
 def post_profile():
     print('FORM', flask.request.form)
     return 'UNDER CONSTRUCTION'
+
+@app.route('/profile/email-address', methods=['POST'])
+@user_is_logged_in
+def post_email_address():
+    signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
+    address_encoded = signer.dumps(email_address)
+    redirect_url = flask.url_for('get_email_addressed', address_encoded=address_encoded)
+    return flask.redirect(redirect_url, code=303)
+
+@app.route('/profile/email-addressed/<address_encoded>', methods=['GET'])
+@user_is_logged_in
+def get_email_addressed(address_encoded):
+    signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
+    email_address = signer.loads(address_encoded)
+    print('POOP', email_address, 'from', address_encoded)
+    return 'UNDER CONSTRUCTION'
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            phone_number = flask.session['phone_number']
+            users.update_email_address(db, phone_number, email_address)
 
 @app.route('/admin')
 def get_admin():

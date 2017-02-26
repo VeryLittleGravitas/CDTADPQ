@@ -9,9 +9,6 @@
     <label for="zip-codes">Zip code</label>
     <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
 
-    <label for="email-address">Email address (optional)</label>
-    <input id="email-address" name="email-address" type="email" value="{{ email_address }}">
-
     <ul class="usa-unstyled-list">
       <li>
         <input id="fire" type="checkbox" name="fire" value="truth" checked>
@@ -30,7 +27,20 @@
         <label for="earthquake">Earthquake</label>
       </li>
     </ul>
-    
+
+  </fieldset>
+</form>
+
+<h2>Email alerts</h2>
+
+<form id="email-settings" class="usa-form" action="{{ url_for('post_email_address') }}" method="post">
+ <fieldset class="usa-fieldset-inputs usa-sans">
+
+    <legend class="usa-sr-only">Email address (optional)</legend>
+
+    <label for="email-address">Email address (optional)</label>
+    <input id="email-address" name="email-address" type="email" value="{{ email_address }}">
+
     <input type="submit">
 
   </fieldset>
