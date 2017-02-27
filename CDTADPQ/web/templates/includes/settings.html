@@ -8,7 +8,7 @@
 
     <label for="zip-codes">Zip code</label>
     <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
-    <button id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+    <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
 
     <script>
         function geolocate_me()
@@ -49,6 +49,8 @@
       </li>
     </ul>
 
+    <input type="submit" value="Update Profile">
+
   </fieldset>
 </form>
 
@@ -62,7 +64,7 @@
     <label for="email-address">Email address (optional)</label>
     <input id="email-address" name="email-address" type="email" value="{{ email_address }}">
 
-    <input type="submit">
+    <input type="submit" value="Update Email">
 
   </fieldset>
 </form>
