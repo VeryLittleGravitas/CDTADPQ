@@ -8,6 +8,27 @@
 
     <label for="zip-codes">Zip code</label>
     <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
+    <button id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+
+    <script>
+        function geolocate_me()
+        {
+            document.getElementById('zip-codes').value = '';
+            document.getElementById('zip-codes').placeholder = 'Locating you...';
+            // navigator.geolocation.getCurrentPosition(on_geolocation);
+            on_geolocation({coords: {latitude: 37.8043, longitude: -122.2712}},
+                           "{{ zip_codes }}", "{{ url_for('get_zipcode') }}");
+            return false;
+        }
+    
+        if('geolocation' in navigator)
+        {
+            var button = document.getElementById('zip-codes-update');
+            
+            button.className = 'usa-button-active';
+            button.disabled = false;
+        }
+    </script>
 
     <ul class="usa-unstyled-list">
       <li>
