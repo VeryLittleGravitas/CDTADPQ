@@ -167,7 +167,6 @@ def get_profile():
 @app.route('/profile', methods=['POST'])
 @user_is_logged_in
 def post_profile():
-    print('FORM', flask.request.form)
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
             phone_number = flask.session['phone_number']
