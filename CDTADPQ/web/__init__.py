@@ -208,17 +208,19 @@ def post_email_confirm():
             users.update_email_address(db, phone_number, email_address)
     return flask.redirect(flask.url_for('get_profile'), code=303)
 
-@app.route('/admin')
+@app.route('/admin/')
 @user_is_an_admin
 def get_admin():
     return flask.render_template('admin.html', **template_kwargs())
 
-@app.route('/send-alert')
-def get_sendalert():
+@app.route('/admin/send-alert')
+@user_is_an_admin
+def get_send_alert():
     return flask.render_template('send-alert.html', **template_kwargs())
 
-@app.route('/sent')
-def get_sent():
+@app.route('/admin/sent')
+@user_is_an_admin
+def get_sent_alert():
     return flask.render_template('sent.html', **template_kwargs())
 
 @app.route('/stats')
