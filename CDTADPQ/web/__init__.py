@@ -2,13 +2,28 @@ import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous
 from ..data import users, zipcodes
 
 def user_is_logged_in(untouched_route):
-    '''
+    ''' Checks for presence of "phone_number" session variable.
     '''
     @functools.wraps(untouched_route)
     def wrapper(*args, **kwargs):
         if 'phone_number' not in flask.session:
             body = flask.render_template('error-auth.html', **template_kwargs())
             return flask.Response(body, status=401)
+
+        return untouched_route(*args, **kwargs)
+    
+    return wrapper
+
+def user_is_an_admin(untouched_route):
+    ''' Checks for presence of admin username and password.
+    '''
+    @functools.wraps(untouched_route)
+    def wrapper(*args, **kwargs):
+        expected_auth = flask.current_app.config['admin_credentials']
+        if flask.request.authorization != expected_auth:
+            body = flask.render_template('error-auth.html', **template_kwargs())
+            head = {'WWW-Authenticate': 'Basic realm="California Emergency Alerts admin area"'}
+            return flask.Response(body, status=401, headers=head)
 
         return untouched_route(*args, **kwargs)
     
@@ -43,6 +58,11 @@ app.config['mailgun_account'] = users.MailgunAccount(
     api_key = os.environ.get('MAILGUN_API_KEY', ''),
     domain = os.environ.get('MAILGUN_DOMAIN', ''),
     sender = os.environ.get('MAILGUN_SENDER', 'alerts@verylittlegravitas.com')
+    )
+
+app.config['admin_credentials'] = dict(
+    username = os.environ.get('ADMIN_USERNAME', 'admin'),
+    password = os.environ.get('ADMIN_PASSWORD', 'admin'),
     )
 
 @app.route('/')
@@ -188,16 +208,19 @@ def post_email_confirm():
             users.update_email_address(db, phone_number, email_address)
     return flask.redirect(flask.url_for('get_profile'), code=303)
 
-@app.route('/admin')
+@app.route('/admin/')
+@user_is_an_admin
 def get_admin():
     return flask.render_template('admin.html', **template_kwargs())
 
-@app.route('/send-alert')
-def get_sendalert():
+@app.route('/admin/send-alert')
+@user_is_an_admin
+def get_send_alert():
     return flask.render_template('send-alert.html', **template_kwargs())
 
-@app.route('/sent')
-def get_sent():
+@app.route('/admin/sent')
+@user_is_an_admin
+def get_sent_alert():
     return flask.render_template('sent.html', **template_kwargs())
 
 @app.route('/stats')

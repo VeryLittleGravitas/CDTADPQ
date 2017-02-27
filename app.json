@@ -24,6 +24,12 @@
     },
     "MAILGUN_DOMAIN": {
       "required": true
+    },
+    "ADMIN_USERNAME": {
+      "required": true
+    },
+    "ADMIN_PASSWORD": {
+      "required": true
     }
   },
   "formation": {
