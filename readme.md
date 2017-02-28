@@ -14,18 +14,23 @@ The Product Manager, Dan Hon, also served as Product Owner in the agile delivery
 Composition of the multi-disciplinary team (based on GSA 18F Agile Labor Categories): 
 
 **Dan Hon, Product Manager**
+
 @danhon [LinkedIn Profile](https://www.linkedin.com/in/danhon/)
 
 **Michal Migurski, Technical Architect**
+
 @migurski [LinkedIn Profile](https://www.linkedin.com/in/michalmigurski/)
 
 **Frances Berriman, Interaction Designer / User Researcher / Usability Tester**
+
 @phae [LinkedIn Profile](https://www.linkedin.com/in/fberriman/)
 
 **Erica Kwan, Backend Web Developer**
+
 @pui [LinkedIn Profile](https://www.linkedin.com/in/ericakwan/)
 
 **Kay Chung, Delivery Manager**
+
 @kerrching [LinkedIn Profile](https://www.linkedin.com/in/kerrching/)
 
 
