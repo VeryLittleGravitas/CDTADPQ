@@ -53,7 +53,6 @@ def get_users_to_notify(db, fire_point):
                   ON zip_codes.zip_code = ANY (users.zip_codes)''',
                (geography_wkt, radius_meters))
 
-
     user_rows = db.fetchall()
     return user_rows
 

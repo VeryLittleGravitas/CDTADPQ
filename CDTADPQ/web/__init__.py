@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous, psycopg2.extras
-from ..data import users, zipcodes, wildfires
+from ..data import users, zipcodes, wildfires, notify
 
 def user_is_logged_in(untouched_route):
     ''' Checks for presence of "phone_number" session variable.
@@ -227,6 +227,22 @@ def get_send_alert(type, id):
                 emergency = wildfires.get_one_fire(db, id)
     return flask.render_template('send-alert.html', emergency=emergency,
                                  **template_kwargs())
+
+@app.route('/admin/send-alert', methods=['POST'])
+@user_is_an_admin
+def post_send_alert():
+    type = flask.request.form['emergency-type']
+    id = flask.request.form['emergency-id']
+    message = flask.request.form['emergency-message']
+    twilio_account = flask.current_app.config['twilio_account']
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            if type == 'fire':
+                emergency = wildfires.get_one_fire(db, id)
+                for user in notify.get_users_to_notify(db, emergency):
+                    print('notify.send_notification:', user['phone_number'], emergency)
+                    notify.send_notification(twilio_account, user['phone_number'], emergency)
+    return 'UNDER CONSTRUCTION'
 
 @app.route('/admin/sent')
 @user_is_an_admin
