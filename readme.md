@@ -108,12 +108,15 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 	1. Questionnaires (quantitative feedback)
 	2. In-person interviews (qualitative, hands-on usability testing)
 	3. Remote user testing (qualitative, individuals providing feedback on experience)
+	4. Personas
 
 e. Used GitHub to document code commits; 
 
 **See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master)**.
 
 f. Used Swagger to document the RESTful API, and provided a link to the Swagger API;
+
+We have created 1 API in this project that returns a zipcode for a given latitude and longitude. 
 
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0;
 
