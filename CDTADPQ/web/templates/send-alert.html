@@ -6,17 +6,19 @@
 {% block main_content %}
   <h1>Admin - Current emergencies</h1>
   
+  <form action="{{ url_for('post_send_alert') }}" method="post">
+  
   <fieldset>
   <legend>This is the message that will be sent to anyone who has registered to be notified about this type of event.</legend>
-  	<label for="input-type-textarea">SMS Message</label>
-  	<textarea id="input-type-textarea" name="input-type-textarea">[pre-fill this with generated information about alert]</textarea>
+  	<label for="emergency-message">SMS Message</label>
+  	<textarea id="emergency-message" name="emergency-message" maxlength="140">There is an emergency near you:&#13;&#10;{{ emergency.description }}&#13;&#10;&#13;&#10;Learn more at [URL].</textarea>
   	<p>Maximum 140 characters</p>
   </fieldset>
-
-  <div class="button_wrapper">
-    <!-- [ reinstate this button instead of anchor when form is working ] button>Send alert</button-->
-    <a href="{{ url_for('get_sent_alert') }}" class="usa-button">Send alert</a>
-  </div>
-   
+  
+  <input type="hidden" name="emergency-type" value="{{ emergency.type }}">
+  <input type="hidden" name="emergency-id" value="{{ emergency.id }}">
+  <button class="usa-button-secondary">Send Alerts</button>
+  
+  </form>
   
 {% endblock %}
