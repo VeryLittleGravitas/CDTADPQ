@@ -11,7 +11,6 @@ class EarthquakeTests (unittest.TestCase):
         '''
         self.database_url = os.environ['DATABASE_URL']
         recreate.main(self.database_url)
-
     
     def test_main(self):
         with mock.patch('CDTADPQ.data.sources.load_esri_source') as load_esri_source:
@@ -29,3 +28,20 @@ class EarthquakeTests (unittest.TestCase):
         self.assertEqual(quake.numstations, 17)
         self.assertEqual(quake.region, "5km NE of Rancho San Diego, California")
         self.assertEqual(quake.datetime, datetime(2015, 8, 27, 19, 3, 36))
+
+        quake2 = earthquakes.convert_quake_point({'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [-116.8933333, 32.77466670000007]},  'properties': {"objectid": 273461806, "datetime": None, "depth": None, "eqid": "ci37234359", "latitude": -116.8933333, "longitude": 32.7746667, "magnitude": 1.33, "numstations": 17, "region": "5km NE of Rancho San Diego, California", "source": ",ci,", "version": None}})
+        self.assertIsNone(quake2.datetime, None)
+
+    def test_store_quake_point(self):
+        quake = earthquakes.convert_quake_point({'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [-116.8933333, 32.77466670000007]},  'properties': {"objectid": 273461806, "datetime": 1440702216000, "depth": None, "eqid": "ci37234359", "latitude": -116.8933333, "longitude": 32.7746667, "magnitude": 1.33, "numstations": 17, "region": "5km NE of Rancho San Diego, California", "source": ",ci,", "version": None}})
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor() as db:
+                # Ensure quake has been added
+                earthquakes.store_quake_point(db, quake)
+                db.execute('SELECT * FROM quake_points WHERE quake_id = %s', ('ci37234359',))
+                self.assertEqual(db.rowcount, 1)
+
+                # Ensure quake has not been added again
+                earthquakes.store_quake_point(db, quake)
+                db.execute('SELECT * FROM quake_points WHERE quake_id = %s', ('ci37234359',))
+                self.assertEqual(db.rowcount, 1)

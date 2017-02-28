@@ -17,6 +17,19 @@ class EarthquakePoint:
         self.region = region
         self.datetime = datetime
 
+def store_quake_point(db, quake_point):
+    ''' Add quake point to the db if the quake point does not already exist in the db
+    '''
+    db.execute('SELECT * FROM quake_points WHERE quake_id = %s', (quake_point.quake_id,))
+    point_exists = db.rowcount
+    if not point_exists:
+        # Create point with location coordinates for insert
+        quake_coordinates = quake_point.location['coordinates']
+        coordinates = 'POINT(%s %s)' % (quake_coordinates[0], quake_coordinates[1])
+
+        db.execute('INSERT INTO quake_points (location, quake_id, magnitude, depth, numstations, region, datetime) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+         (coordinates, quake_point.quake_id, quake_point.magnitude, quake_point.depth, quake_point.numstations, quake_point.region, quake_point.datetime))
+
 def convert_quake_point(feature):
     '''
     '''
@@ -26,7 +39,11 @@ def convert_quake_point(feature):
     depth = properties['depth']
     numstations = properties['numstations']
     region = properties['region']
-    quaketime = datetime.utcfromtimestamp(properties['datetime'] / 1000)
+    
+    if properties['datetime']:
+        quaketime = datetime.utcfromtimestamp(properties['datetime'] / 1000)
+    else:
+        quaketime = None
 
     return EarthquakePoint(feature['geometry'], quake_id, magnitude, depth, numstations, region, quaketime)
 
