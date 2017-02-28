@@ -188,3 +188,13 @@ class UsersTests (unittest.TestCase):
 
         self.assertEqual(db.execute.mock_calls[-1][1],
                          ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', ([], '+1 (510) 555-1212')))
+
+    def test_delete_user(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+        
+        users.delete_user(db, '+1 (510) 555-1212')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('DELETE FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))

@@ -122,3 +122,9 @@ def update_email_address(db, phone_number, email_address):
     '''
     db.execute('UPDATE users SET email_address = %s WHERE phone_number = %s',
                (email_address, phone_number))
+
+def delete_user(db, phone_number):
+    '''
+    '''
+    db.execute('DELETE FROM users WHERE phone_number = %s',
+               (phone_number, ))
