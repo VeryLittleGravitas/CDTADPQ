@@ -2,7 +2,7 @@
 
 ## Prototype B
 
-[INSERT INTRO - WHAT DOES IT DO & WHAT VALUE DOES IT ADD?]
+[TODO: INSERT INTRO, WHAT DOES IT DO & WHAT VALUE DOES IT ADD]
 
 Our approach is consistent with both the [ADPQ RFI] (https://github.com/CDTProcurement/adpq/blob/master/RFI%20CDT-ADPQ-0117%20-%20PQVP%20DS-AD%20-%20Final%20%2002.06.17.pdf) requirements and the [US Digital Services Playbook] (https://playbook.cio.gov).
 
