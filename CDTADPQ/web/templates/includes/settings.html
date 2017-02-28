@@ -15,9 +15,9 @@
         {
             document.getElementById('zip-codes').value = '';
             document.getElementById('zip-codes').placeholder = 'Locating you...';
-            // navigator.geolocation.getCurrentPosition(on_geolocation);
-            on_geolocation({coords: {latitude: 37.8043, longitude: -122.2712}},
-                           "{{ zip_codes }}", "{{ url_for('get_zipcode') }}");
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                on_geolocation(pos, "{{ zip_codes }}", "{{ url_for('get_zipcode') }}");
+                });
             return false;
         }
     
