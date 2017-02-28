@@ -211,6 +211,9 @@ def post_email_confirm():
 @app.route('/admin/')
 @user_is_an_admin
 def get_admin():
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor() as db:
+            pass
     return flask.render_template('admin.html', **template_kwargs())
 
 @app.route('/admin/send-alert')

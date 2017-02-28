@@ -32,28 +32,20 @@ class NotifyTests (unittest.TestCase):
     def test_main(self):
         '''
         '''
-        with unittest.mock.patch('CDTADPQ.data.notify.get_all_wild_fires') as get_all_wild_fires, \
+        with unittest.mock.patch('CDTADPQ.data.wildfires.get_current_fires') as get_current_fires, \
              unittest.mock.patch('CDTADPQ.data.notify.get_users_to_notify') as get_users_to_notify, \
              unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification:
-            get_all_wild_fires.return_value = [wildfires.FirePoint({"type": "Point", "coordinates": [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)]
+            get_current_fires.return_value = [wildfires.FirePoint({"type": "Point", "coordinates": [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)]
             get_users_to_notify.return_value = [{'phone_number': '+15105551212'}]
             notify.main()
-        self.assertEqual(len(get_all_wild_fires.mock_calls), 1)
+        self.assertEqual(len(get_current_fires.mock_calls), 1)
         self.assertEqual(len(get_users_to_notify.mock_calls), 1)
         self.assertEqual(len(send_notification.mock_calls), 1)
-
-    def test_get_all_wild_fires(self):
-        '''
-        '''
-        with psycopg2.connect(self.database_url) as conn:
-            with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
-                fires = notify.get_all_wild_fires(db)
-                self.assertEqual(1, len(fires))
 
     def test_get_users_to_notify(self):
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
-                (fire, ) = notify.get_all_wild_fires(db)
+                (fire, ) = wildfires.get_current_fires(db)
 
                 # Look for users within a half-mile of the fire
                 os.environ['RADIUS_MILES'] = '0.5'

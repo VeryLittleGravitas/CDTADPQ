@@ -5,7 +5,6 @@ import psycopg2
 from . import recreate
 from . import wildfires
 
-
 class WildfireTests (unittest.TestCase):
     def setUp(self):
         '''
@@ -44,3 +43,22 @@ class WildfireTests (unittest.TestCase):
                 wildfires.store_fire_point(db, fire)
                 db.execute('SELECT * FROM fire_points WHERE usgs_id = %s', ('2017-OKNEU-170102',))
                 self.assertEqual(db.rowcount, 1)
+
+    def test_get_current_fires(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+        db.fetchall.return_value = []
+
+        fires0 = wildfires.get_current_fires(db)
+        self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT ST_AsGeoJSON(location) as coordinates_json, * FROM fire_points', ))
+        self.assertEqual(len(fires0), 0)
+
+        db.fetchall.return_value = [
+            dict(coordinates_json='{"type": "Point", "coordinates": [-122, 37]}', usgs_id='FIRE', name='Fire',
+                 contained=0, discovered=None, cause='Bambi', acres=9999)
+            ]
+
+        fires1 = wildfires.get_current_fires(db)
+        self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT ST_AsGeoJSON(location) as coordinates_json, * FROM fire_points', ))
+        self.assertEqual(len(fires1), 1)

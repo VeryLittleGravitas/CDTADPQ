@@ -27,26 +27,11 @@ def main():
 
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
-            fires = get_all_wild_fires(db)
+            fires = wildfires.get_current_fires(db)
             for fire in fires:
                 user_rows = get_users_to_notify(db, fire)
                 for user_row in user_rows:
                     send_notification(twilio_account, user_row['phone_number'], fire)
-
-def get_all_wild_fires(db):
-    ''' Return all fires that users should be notified of
-    '''
-    # Need to not get all fires, need to get all for today or something?
-    db.execute('SELECT ST_AsGeoJSON(location) as coordinates_json, * FROM fire_points')
-    fire_rows = db.fetchall()
-    fires = []
-    for fire_row in fire_rows:
-        fire_location = json.loads(fire_row['coordinates_json'])
-        fire_point = wildfires.FirePoint(fire_location, fire_row['usgs_id'], fire_row['name'],
-                                         fire_row['contained'], fire_row['discovered'], fire_row['cause'],
-                                         fire_row['acres'])
-        fires.append(fire_point)
-    return fires
 
 def get_users_to_notify(db, fire_point):
     ''' Return the users that should be notified of this fire

@@ -1,4 +1,4 @@
-import os, psycopg2
+import os, psycopg2, json
 from datetime import datetime
 from . import sources
 
@@ -43,6 +43,21 @@ def convert_fire_point(feature):
     acres = properties['acres']
 
     return FirePoint(feature['geometry'], usgs_id, name, contained, discovered, cause, acres)
+
+def get_current_fires(db):
+    ''' Return all fires that users should be notified of.
+    '''
+    # Need to not get all fires, need to get all for today or something?
+    db.execute('SELECT ST_AsGeoJSON(location) as coordinates_json, * FROM fire_points')
+    fire_rows = db.fetchall()
+    fires = []
+    for fire_row in fire_rows:
+        fire_location = json.loads(fire_row['coordinates_json'])
+        fire_point = FirePoint(fire_location, fire_row['usgs_id'], fire_row['name'],
+                               fire_row['contained'], fire_row['discovered'], fire_row['cause'],
+                               fire_row['acres'])
+        fires.append(fire_point)
+    return fires
 
 def main():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
