@@ -72,10 +72,6 @@ We used a number of different user-centered design techniques in developing the 
 
 [TODO: LIST TWO MORE]
 
-## Technical Approach
-
-[TODO]
-
 
 ## Deployment Instructions 
 
