@@ -79,7 +79,7 @@ See our documentation to [install and run the prototype](https://github.com/Very
 
 
 ## Additional Material
-* [Project Taskboard](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
+* [Product Backlog and Sprint Taskboard](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
 * [Project wiki](https://github.com/VeryLittleGravitas/CDTADPQ/wiki)
 
 
