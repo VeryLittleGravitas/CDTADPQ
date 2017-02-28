@@ -44,6 +44,19 @@ class WildfireTests (unittest.TestCase):
                 db.execute('SELECT * FROM fire_points WHERE usgs_id = %s', ('2017-OKNEU-170102',))
                 self.assertEqual(db.rowcount, 1)
 
+    def test_get_one_fire(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+
+        db.fetchone.return_value = dict(
+            coordinates_json='{"type": "Point", "coordinates": [-122, 37]}', usgs_id='FIRE', name='Fire',
+            contained=0, discovered=None, cause='Bambi', acres=9999
+            )
+
+        fire = wildfires.get_one_fire(db, 9999)
+        self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT ST_AsGeoJSON(location) as coordinates_json, *\n                  FROM fire_points WHERE usgs_id = %s', (9999, )))
+
     def test_get_current_fires(self):
         '''
         '''

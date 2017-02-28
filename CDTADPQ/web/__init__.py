@@ -218,10 +218,15 @@ def get_admin():
     return flask.render_template('admin.html', emergencies=emergencies,
                                  **template_kwargs())
 
-@app.route('/admin/send-alert')
+@app.route('/admin/send-alert/<type>/<id>')
 @user_is_an_admin
-def get_send_alert():
-    return flask.render_template('send-alert.html', **template_kwargs())
+def get_send_alert(type, id):
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            if type == 'fire':
+                emergency = wildfires.get_one_fire(db, id)
+    return flask.render_template('send-alert.html', emergency=emergency,
+                                 **template_kwargs())
 
 @app.route('/admin/sent')
 @user_is_an_admin
