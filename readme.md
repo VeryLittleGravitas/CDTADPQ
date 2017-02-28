@@ -134,6 +134,8 @@ i. Performed usability tests with people;
 
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype;
 
+**The lightweight scrum process we used enabled us to review work delivered at the end of each sprint with both the Product Owner and users, and loop feedback into the planning session of the following sprint. This enabled us to produce features that reflect real users' requirement.**
+
 k. Created a prototype that works on multiple devices, and presents a responsive design;
 
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.);
