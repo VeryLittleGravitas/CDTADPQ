@@ -53,10 +53,18 @@ class NotifyTests (unittest.TestCase):
     def test_get_users_to_notify(self):
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
-                fires = notify.get_all_wild_fires(db)
-                users = notify.get_users_to_notify(db, fires[0])
+                (fire, ) = notify.get_all_wild_fires(db)
+
+                # Look for users within a half-mile of the fire
+                os.environ['RADIUS_MILES'] = '0.5'
+                users = notify.get_users_to_notify(db, fire)
                 self.assertEqual(1, len(users))
                 self.assertEqual('+15105551212', users[0]['phone_number'])
+
+                # Now look again with a really big radius
+                os.environ['RADIUS_MILES'] = '500'
+                users = notify.get_users_to_notify(db, fire)
+                self.assertEqual(2, len(users))
 
     def test_send_notification(self):
         account = users.TwilioAccount('sid', 'secret', 'account', 'number')

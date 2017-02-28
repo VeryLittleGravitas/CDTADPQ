@@ -50,9 +50,19 @@ def get_all_wild_fires(db):
 def get_users_to_notify(db, fire_point):
     ''' Return the users that should be notified of this fire
     '''
-    fire_coordinates = json.loads(fire_point.location)['coordinates']
-    fire_zipcode = zipcodes.lookup_zipcode(db, fire_coordinates[1], fire_coordinates[0])
-    db.execute('SELECT * FROM users WHERE %s=ANY(zip_codes)', (fire_zipcode, ))
+    fire_lonlat = json.loads(fire_point.location)['coordinates']
+    radius_meters = float(os.environ.get('RADIUS_MILES', 50)) * 1609.34
+
+    db.execute('''SELECT DISTINCT users.*
+                  FROM users
+                  JOIN (
+                      SELECT "ZCTA5CE10" AS zip_code
+                      FROM tl_2016_us_zcta510
+                      WHERE ST_Intersects(geog, ST_Buffer(ST_GeographyFromText('POINT ({0:.6f} {1:.6f})'), {radius:.6f}))
+                  ) AS zip_codes
+                  ON zip_codes.zip_code = ANY (users.zip_codes)'''.format(radius=radius_meters, *fire_lonlat))
+
+
     user_rows = db.fetchall()
     return user_rows
 
