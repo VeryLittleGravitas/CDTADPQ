@@ -9,6 +9,7 @@ urls = {
 
 class FirePoint:
     def __init__(self, location, usgs_id, name, contained, discovered, cause, acres):
+        assert location['type'] and location['coordinates']
         self.location = location
         self.usgs_id = usgs_id
         self.name = name

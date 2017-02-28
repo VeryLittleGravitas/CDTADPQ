@@ -41,7 +41,8 @@ def get_all_wild_fires(db):
     fire_rows = db.fetchall()
     fires = []
     for fire_row in fire_rows:
-        fire_point = wildfires.FirePoint(fire_row['coordinates_json'], fire_row['usgs_id'], fire_row['name'],
+        fire_location = json.loads(fire_row['coordinates_json'])
+        fire_point = wildfires.FirePoint(fire_location, fire_row['usgs_id'], fire_row['name'],
                                          fire_row['contained'], fire_row['discovered'], fire_row['cause'],
                                          fire_row['acres'])
         fires.append(fire_point)
@@ -50,9 +51,24 @@ def get_all_wild_fires(db):
 def get_users_to_notify(db, fire_point):
     ''' Return the users that should be notified of this fire
     '''
-    fire_coordinates = json.loads(fire_point.location)['coordinates']
-    fire_zipcode = zipcodes.lookup_zipcode(db, fire_coordinates[1], fire_coordinates[0])
-    db.execute('SELECT * FROM users WHERE %s=ANY(zip_codes)', (fire_zipcode, ))
+    radius_meters = float(os.environ.get('RADIUS_MILES', 50)) * 1609.34
+
+    # Convert input GeoJSON to WKT
+    fire_json = json.dumps(fire_point.location)
+    db.execute('SELECT ST_AsText(ST_GeomFromGeoJSON(%s))', (fire_json, ))
+    (geography_wkt, ) = db.fetchone()
+    
+    db.execute('''SELECT DISTINCT users.*
+                  FROM users
+                  JOIN (
+                      SELECT "ZCTA5CE10" AS zip_code
+                      FROM tl_2016_us_zcta510
+                      WHERE ST_Intersects(geog, ST_Buffer(ST_GeographyFromText(%s), %s))
+                  ) AS zip_codes
+                  ON zip_codes.zip_code = ANY (users.zip_codes)''',
+               (geography_wkt, radius_meters))
+
+
     user_rows = db.fetchall()
     return user_rows
 

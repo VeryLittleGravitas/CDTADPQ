@@ -35,7 +35,7 @@ class NotifyTests (unittest.TestCase):
         with unittest.mock.patch('CDTADPQ.data.notify.get_all_wild_fires') as get_all_wild_fires, \
              unittest.mock.patch('CDTADPQ.data.notify.get_users_to_notify') as get_users_to_notify, \
              unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification:
-            get_all_wild_fires.return_value = [wildfires.FirePoint('location', '123', 'fire', 'True', 'now', 'people', 15)]
+            get_all_wild_fires.return_value = [wildfires.FirePoint({"type": "Point", "coordinates": [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)]
             get_users_to_notify.return_value = [{'phone_number': '+15105551212'}]
             notify.main()
         self.assertEqual(len(get_all_wild_fires.mock_calls), 1)
@@ -53,10 +53,18 @@ class NotifyTests (unittest.TestCase):
     def test_get_users_to_notify(self):
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
-                fires = notify.get_all_wild_fires(db)
-                users = notify.get_users_to_notify(db, fires[0])
+                (fire, ) = notify.get_all_wild_fires(db)
+
+                # Look for users within a half-mile of the fire
+                os.environ['RADIUS_MILES'] = '0.5'
+                users = notify.get_users_to_notify(db, fire)
                 self.assertEqual(1, len(users))
                 self.assertEqual('+15105551212', users[0]['phone_number'])
+
+                # Now look again with a really big radius
+                os.environ['RADIUS_MILES'] = '500'
+                users = notify.get_users_to_notify(db, fire)
+                self.assertEqual(2, len(users))
 
     def test_send_notification(self):
         account = users.TwilioAccount('sid', 'secret', 'account', 'number')
