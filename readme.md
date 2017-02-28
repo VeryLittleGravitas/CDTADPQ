@@ -1,15 +1,85 @@
 # Hello, world
 
-## Prototype description
+## Prototype B
 
-The working prototype will be an application that will allow California residents to establish and manage their profile and receive emergency and non-emergency notifications via email, Short Message Service (SMS), and/or push notification based on the location and contact information provided in their profile and/or the geo-location of their cellphone if they have opted in for this service. In addition, the working prototype will provide the authorized administrative users with the ability to publish notifications and track, and analyze and visualize related data. The working prototype does not need to implement any authentication or authorization against an external directory or authentication mechanism.
+[INSERT INTRO - WHAT DOES IT DO & WHAT VALUE DOES IT ADD?]
 
-## Documentation
+Our approach is consistent with both the [ADPQ RFI] (https://github.com/CDTProcurement/adpq/blob/master/RFI%20CDT-ADPQ-0117%20-%20PQVP%20DS-AD%20-%20Final%20%2002.06.17.pdf) requirements and the [US Digital Services Playbook] (https://playbook.cio.gov).
 
-* [Kanban board](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
+
+## The Team
+
+The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. He was the assigned leader of the project with responsibility and accountability for the quality of the prototype. 
+
+Composition of the multi-disciplinary team (based on GSA 18F Agile Labor Categories): 
+
+**Dan Hon, Product Manager**
+@danhon [LinkedIn Profile](https://www.linkedin.com/in/danhon/)
+
+**Michal Migurski, Technical Architect**
+@migurski [LinkedIn Profile](https://www.linkedin.com/in/michalmigurski/)
+
+**Frances Berriman, Interaction Designer / User Researcher / Usability Tester**
+@phae [LinkedIn Profile](https://www.linkedin.com/in/fberriman/)
+
+**Erica Kwan, Backend Web Developer**
+@pui [LinkedIn Profile](https://www.linkedin.com/in/ericakwan/)
+
+**Kay Chung, Delivery Manager**
+@kerrching [LinkedIn Profile](https://www.linkedin.com/in/kerrching/)
+
+
+## Agile Delivery Process
+
+The agile delivery process used at Very Little Gravitas is based on the open standards Scrum framework, with input and iterative feedback from user-centered design techniques. 
+
+Documentation on the [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process)
+
+For the purposes of the ADPQ submission, we implemented a simplified process, appropriate to the scope and available time. 
+The following describes the four 1 week sprints that were completed for the design and build of the prototype. 
+
+#### Sprint 1
+* [Design exploration](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Design-exploration) 
+* [User research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal)
+* [Technical exploration](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Technical-exploration)
+* Set up a Slack group for team communication
+* Set up a [kanban board](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1) in the team’s Github repo for use as a lightweight product backlog and sprint task board 
+
+#### Sprint 2
+
+[TODO: LIST OUT DELIVERED SCOPE, REFERENCE USER STORIES FROM KABAN]
+
+#### Sprint 3
+
+[TODO: LIST OUT DELIVERED SCOPE, REFERENCE USER STORIES FROM KABAN]
+
+#### Sprint 4
+
+[TODO: LIST OUT DELIVERED SCOPE, REFERENCE USER STORIES FROM KABAN]
+
+
+## User-Centered Design 
+We used a number of different user-centered design techniques in developing the prototype:
+
+* [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal)
+[TODO: LIST TWO MORE]
+
+## Technical Approach
+
+[TODO]
+
+
+## Deployment Instructions 
+
+See our documentation to [install and run the prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype)
+
+
+## Additional Material
+* [Project Taskboard](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
 * See the [wiki](https://github.com/VeryLittleGravitas/CDTADPQ/wiki) for documentation and technical approach
 
-## Procurement requirements
+
+## Procurement Requirements
 
 a. Assigned one (1) leader and gave that person authority and responsibility and held that person accountable for the quality of the prototype submitted;
 
