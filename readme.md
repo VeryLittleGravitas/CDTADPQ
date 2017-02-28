@@ -77,7 +77,7 @@ See our documentation to [install and run the prototype](https://github.com/Very
 
 ## Additional Material
 * [Project Taskboard](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
-* See the [wiki](https://github.com/VeryLittleGravitas/CDTADPQ/wiki) for documentation and technical approach
+* [Project wiki](https://github.com/VeryLittleGravitas/CDTADPQ/wiki)
 
 
 ## Procurement Requirements
