@@ -242,7 +242,7 @@ def post_send_alert():
                 for user in notify.get_users_to_notify(db, emergency):
                     print('notify.send_notification:', user['phone_number'], emergency)
                     notify.send_notification(twilio_account, user['phone_number'], emergency)
-    return 'UNDER CONSTRUCTION'
+    return flask.redirect(flask.url_for('get_sent_alert'), code=303)
 
 @app.route('/admin/sent')
 @user_is_an_admin
