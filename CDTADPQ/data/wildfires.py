@@ -17,6 +17,10 @@ class FirePoint:
         self.discovered = discovered
         self.cause = cause
         self.acres = acres
+    
+    def __str__(self):
+        x, y = self.location['coordinates']
+        return '{name} fire near {lat:.2f}, {lon:.2f}'.format(lon=x, lat=y, **self.__dict__)
 
 def store_fire_point(db, fire_point):
     ''' Add fire point to the db if the fire point does not already exist in the db

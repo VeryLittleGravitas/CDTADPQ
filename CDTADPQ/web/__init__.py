@@ -1,5 +1,5 @@
-import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous
-from ..data import users, zipcodes
+import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous, psycopg2.extras
+from ..data import users, zipcodes, wildfires
 
 def user_is_logged_in(untouched_route):
     ''' Checks for presence of "phone_number" session variable.
@@ -211,10 +211,12 @@ def post_email_confirm():
 @app.route('/admin/')
 @user_is_an_admin
 def get_admin():
+    emergencies = list()
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
-        with conn.cursor() as db:
-            pass
-    return flask.render_template('admin.html', **template_kwargs())
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            emergencies.extend(wildfires.get_current_fires(db))
+    return flask.render_template('admin.html', emergencies=emergencies,
+                                 **template_kwargs())
 
 @app.route('/admin/send-alert')
 @user_is_an_admin

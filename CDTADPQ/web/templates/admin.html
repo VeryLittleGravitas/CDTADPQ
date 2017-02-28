@@ -6,6 +6,12 @@
 {% block main_content %}
   <h1>Admin - Current emergencies</h1>
   
+  <ol>
+    {% for emergency in emergencies %}
+        <li>{{ emergency }}</li>
+    {% endfor %}
+  </ol>
+  
   {% include 'includes/map.html' %}
 
   <p></p>
