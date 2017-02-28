@@ -62,6 +62,7 @@ The following describes the four 1 week sprints that were completed for the desi
 We used a number of different user-centered design techniques in developing the prototype:
 
 * [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal)
+
 [TODO: LIST TWO MORE]
 
 ## Technical Approach
