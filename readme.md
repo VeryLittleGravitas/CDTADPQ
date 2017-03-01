@@ -92,7 +92,7 @@ a. Assigned one (1) leader and gave that person authority and responsibility and
 
 b. Assembled a multidisciplinary and collaborative team that includes, at a minimum, five (5) of the labor categories as identified in Attachment B: PQVP DS-AD Labor Category Descriptions; 
 
-**See the [multidisciplinary team](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Multidisciplinary-team) page on the project wiki**.
+**See team composition, above**.
 
 c. Understood what people needed, by including people in the prototype development and design process; 
 
@@ -131,7 +131,7 @@ i. Performed usability tests with people;
 
 j. Used an iterative approach, where feedback informed subsequent work or versions of the prototype;
 
-**The lightweight scrum process we used enabled us to review work delivered at the end of each sprint with users, and  then loop their feedback into the grooming and planning session of the following sprint. This has enabled us to produce features that reflect real users' requirements.**
+**The lightweight scrum process we used provided a review point at the end of each sprint, enabling us to reflect users' feedback into the grooming and planning session of the subsequent sprint. This has allowed us to produce features that reflect real users' requirements.**
 
 k. Created a prototype that works on multiple devices, and presents a responsive design;
 
