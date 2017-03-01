@@ -74,9 +74,9 @@ def get_about():
     return flask.render_template('about.html', **template_kwargs())
 
 @app.route('/logout', methods=['POST'])
+@user_is_logged_in
 def post_logout():
-    if 'phone_number' in flask.session:
-        flask.session.pop('phone_number')
+    flask.session.pop('phone_number')
     if 'is_registering' in flask.session:
         flask.session.pop('is_registering')
     return flask.redirect(flask.url_for('get_index'), code=303)
@@ -169,11 +169,19 @@ def get_profile():
 def post_profile():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number = flask.session['phone_number']
-            zip_codes_str = flask.request.form.get('zip-codes', '')
-            users.update_user_profile(db, phone_number, zip_codes_str)
-    redirect_url = flask.url_for('get_profile')
-    return flask.redirect(redirect_url, code=303)
+            if flask.request.form.get('action') == 'Delete Profile':
+                users.delete_user(db, flask.session['phone_number'])
+                flask.session.pop('phone_number')
+                if 'is_registering' in flask.session:
+                    flask.session.pop('is_registering')
+                return flask.redirect(flask.url_for('get_register'), code=303)
+
+            else:
+                phone_number = flask.session['phone_number']
+                zip_codes_str = flask.request.form.get('zip-codes', '')
+                users.update_user_profile(db, phone_number, zip_codes_str)
+                redirect_url = flask.url_for('get_profile')
+                return flask.redirect(redirect_url, code=303)
 
 @app.route('/profile/email-address', methods=['POST'])
 @user_is_logged_in
