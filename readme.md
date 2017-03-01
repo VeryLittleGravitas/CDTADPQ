@@ -134,16 +134,26 @@ j. Used an iterative approach, where feedback informed subsequent work or versio
 
 k. Created a prototype that works on multiple devices, and presents a responsive design;
 
+**We have chosen to use the Draft U.S. Web Design Standards with no custom HTML. This pattern library was chosen to ensure the delivery of a responsive design that works on multiple devices.**
+
 l. Used at least five (5) modern and open-source technologies, regardless of architectural layer (frontend, backend, etc.);
 
 **We are using the following modern, open-source technologies for this prototype:**
 
-	1.
-	2.
-	3.
-	4.
-	5.
+1. [Python 3](https://www.python.org/download/releases/3.0/)
+2. [Postgres 9](https://www.postgresql.org), an enterprise-grade database used by government agencies in the U.S. such as The National Weather Service, the Centers for Disease Control and Prevention and State Department. 
+3. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
+4. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
+5. [Flask](http://flask.pocoo.org), a microfreamework for Python based on [Werkzeug](http://werkzeug.pocoo.org/docs/0.11/), the WSGI toolkit, and [Jinja 2](http://jinja.pocoo.org/docs/2.9/), a templating language based on Django's templating approach. 
+6. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
+7. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
 
+	To be added: 
+	
+	8. AWS
+	9. Skyliner
+	10. Docker
+	
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used;
 
 **This project is using [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.**
@@ -152,18 +162,30 @@ m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform a
 
 n. Developed automated unit tests for their code;
 
+**Our Github respository includes a master list of unit tests at https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py**
+
+**Automated tests are run by Travis CI, and the results are available at https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds**
+
 o. Setup or used a continuous integration system to automate the running of tests and continuously deployed their code to their IaaS or PaaS provider;
 
 **We are using [Travis CI](https://travis-ci.org) for continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.**
 
 p. Setup or used configuration management;
 
+**In-progress, dependent upon [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95)**.
+
 q. Setup or used continuous monitoring;
 
+**In-progress, see [Issue 96](https://github.com/VeryLittleGravitas/CDTADPQ/issues/96)**.
+
 r. Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization);
+
+**In-progress, see [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95)**.
 
 s. Provided sufficient documentation to install and run their prototype on another machine; and
 
 **Instructions on installation and running of the prototype can be found here: [https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype).**
 
 t. Prototype and underlying platforms used to create and run the prototype are openly licensed and free of charge.
+
+**We have chosen the [MIT License](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/LICENSE) for this prototype.**
