@@ -69,8 +69,8 @@ The following describes the four 1 week sprints that were completed for the desi
 We used a number of different user-centered design techniques in developing the prototype:
 
 * [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal)
-
-[TODO: LIST TWO MORE]
+* [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary)
+* [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3)
 
 
 ## Deployment Instructions 
@@ -116,7 +116,7 @@ We have created 1 API in this project that returns a zipcode for a given latitud
 
 g. Complied with Section 508 of the Americans with Disabilities Act and WCAG 2.0;
 
-**See the code repository for specifics of implementation. [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) The pattern library utilised conforms to ADA and WCAG 2.0, see [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).**
+**See the code repository for specifics of implementation [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) to see the user-facing templates. They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).**
 
 h. Created or used a design style guide and/or a pattern library;
 
