@@ -70,7 +70,7 @@ We used a number of different user-centered design techniques in developing the 
 
 * [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
 * [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representations of our users
-* [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations
+* [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
 * [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
 
 
@@ -102,10 +102,10 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 
 **We are using the following "user-centric design" techniques and/or tools to make this prototype:**
 
-	1. Questionnaires (quantitative feedback)
-	2. In-person interviews (qualitative, hands-on usability testing)
-	3. Remote user testing (qualitative, individuals providing feedback on experience)
-	4. Personas
+	* [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
+	* [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representations of our users
+	* [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
+	* [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
 
 e. Used GitHub to document code commits; 
 
