@@ -138,13 +138,13 @@ l. Used at least five (5) modern and open-source technologies, regardless of arc
 
 **We are using the following modern, open-source technologies for this prototype:**
 
-	1. [Python 3](https://www.python.org/download/releases/3.0/)
-	2. [Postgres 9](https://www.postgresql.org)
-	3. [PostGIS](http://www.postgis.net)
-	4. The [U.S. Web Design Standards](https://standards.usa.gov)
-	5. [Flask](http://flask.pocoo.org)
-	6. [Heroku](https://www.heroku.com/home)
-	7. [Travis CI](https://travis-ci.org)
+1. [Python 3](https://www.python.org/download/releases/3.0/)
+2. [Postgres 9](https://www.postgresql.org)
+3. [PostGIS](http://www.postgis.net)
+4. The [U.S. Web Design Standards](https://standards.usa.gov)
+5. [Flask](http://flask.pocoo.org)
+6. [Heroku](https://www.heroku.com/home)
+7. [Travis CI](https://travis-ci.org)
 	
 m. Deployed the prototype on an Infrastructure as a Service (IaaS) or Platform as Service (PaaS) provider, and indicated which provider they used;
 
