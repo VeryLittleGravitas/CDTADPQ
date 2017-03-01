@@ -71,7 +71,7 @@ The following describes the four 1 week sprints that were completed for the desi
 We used a number of different user-centered design techniques in developing the prototype:
 
 * [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
-* [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representations of our users
+* [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representative archetypes of our users
 * [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
 * [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
 
