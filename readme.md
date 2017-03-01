@@ -102,10 +102,10 @@ d. Used at least a minimum of three (3) “user-centric design” techniques and
 
 **We are using the following "user-centric design" techniques and/or tools to make this prototype:**
 
-	* [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
-	* [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representations of our users
-	* [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
-	* [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
+1. [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
+2. [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representations of our users
+3. [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
+4. [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
 
 e. Used GitHub to document code commits; 
 
