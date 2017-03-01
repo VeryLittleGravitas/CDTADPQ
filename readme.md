@@ -139,7 +139,7 @@ l. Used at least five (5) modern and open-source technologies, regardless of arc
 **We are using the following modern, open-source technologies for this prototype:**
 
 1. [Python 3](https://www.python.org/download/releases/3.0/)
-2. [Postgres 9](https://www.postgresql.org)
+2. [Postgres 9](https://www.postgresql.org), an enterprise-grade database used by government agencies in the U.S. such as The National Weather Service, the Centers for Disease Control and Prevention and State Department. 
 3. [PostGIS](http://www.postgis.net)
 4. The [U.S. Web Design Standards](https://standards.usa.gov)
 5. [Flask](http://flask.pocoo.org)
