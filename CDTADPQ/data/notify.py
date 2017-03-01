@@ -29,9 +29,10 @@ def main():
         with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
             fires = wildfires.get_current_fires(db)
             for fire in fires:
-                user_rows = get_users_to_notify(db, fire)
-                for user_row in user_rows:
-                    send_notification(twilio_account, user_row['phone_number'], fire)
+                users_to_notify = get_users_to_notify(db, fire)
+                for user in users_to_notify:
+                    send_notification(twilio_account, user, fire)
+                    log_user_notification(db, user, fire)
 
 def get_users_to_notify(db, fire_point):
     ''' Return the users that should be notified of this fire
@@ -54,16 +55,26 @@ def get_users_to_notify(db, fire_point):
                (geography_wkt, radius_meters))
 
     user_rows = db.fetchall()
-    return user_rows
+
+    # Filter out users that shouldn't be notified
+    users_to_notify = []
+    for user_row in user_rows:
+        db.execute('SELECT * FROM user_emergencies_log WHERE user_id = %s AND emergency_external_id = %s AND emergency_type = %s LIMIT 1',
+                   (user_row['id'], fire_point.usgs_id, 'fire'))
+        user_has_been_notified = db.rowcount
+        if not user_has_been_notified:
+            users_to_notify.append(users.User(user_row['id'], user_row['phone_number'], user_row['zip_codes'],
+                                              user_row['email_address'], user_row['emergency_types']))
+    return users_to_notify
 
 TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
 
-def send_notification(account, to_number, fire):
+def send_notification(account, user, fire):
     ''' Send fire notification to phone number
     '''
     url = uritemplate.expand(TwilioURL, dict(account=account.account))
     body = 'Fire {}'.format(fire.name)
-    data = dict(From=account.number, To=to_number, Body=body)
+    data = dict(From=account.number, To=user.phone_number, Body=body)
     auth = account.sid, account.secret
     posted = requests.post(url, auth=auth, data=data)
     
@@ -72,9 +83,14 @@ def send_notification(account, to_number, fire):
             raise RuntimeError(posted.json()['message'])
         else:
             raise RuntimeError('Bad response from Twilio')
-    
     return True
 
+def log_user_notification(db, user, fire):
+    ''' Log that the user has been notified of this emergency
+    '''
+    db.execute('INSERT INTO user_emergencies_log (emergency_type, emergency_external_id, user_id) VALUES (%s, %s, %s)',
+                ('fire', fire.usgs_id, user.id))
+    return True
 
 if __name__ == '__main__':
     exit(main())
