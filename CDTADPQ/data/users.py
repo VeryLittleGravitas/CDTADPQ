@@ -1,4 +1,4 @@
-import requests, logging, uritemplate, random, uuid
+import requests, logging, uritemplate, random, uuid, re
 
 TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
 MailgunURL = 'https://api.mailgun.net/v2/{domain}/messages'
@@ -107,6 +107,15 @@ def get_user_info(db, phone_number):
         return None
     
     return phone_number, zip_codes, email_address
+
+def update_user_profile(db, phone_number, zip_codes_str):
+    '''
+    '''
+    zip_codes = re.findall(r'\b(\d{5})\b', zip_codes_str)
+    
+    db.execute('''UPDATE users SET zip_codes = %s
+                  WHERE phone_number = %s''',
+               (zip_codes, phone_number))
 
 def update_email_address(db, phone_number, email_address):
     '''

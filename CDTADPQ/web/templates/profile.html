@@ -2,6 +2,9 @@
 
 {% block title %}California Emergency Alerts{% endblock %}
 
+{% block head_elements %}
+<script src="{{ url_for('static', filename='settings-geolocation.js') }}"></script>
+{% endblock %}
 
 {% block main_content %}
   
