@@ -13,10 +13,10 @@
   	<label for="emergency-message">SMS Message</label>
   	<textarea id="emergency-message" name="emergency-message" maxlength="140">There is an emergency near you:&#13;&#10;{{ emergency.description }}&#13;&#10;&#13;&#10;Learn more at [URL].</textarea>
   	<p>Maximum 140 characters</p>
-  </fieldset>
+    <input type="hidden" name="emergency-type" value="{{ emergency.type }}">
+    <input type="hidden" name="emergency-id" value="{{ emergency.id }}">
+    </fieldset>
   
-  <input type="hidden" name="emergency-type" value="{{ emergency.type }}">
-  <input type="hidden" name="emergency-id" value="{{ emergency.id }}">
   <button class="usa-button-secondary">Send Alerts</button>
   
   </form>

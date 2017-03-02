@@ -198,3 +198,15 @@ class UsersTests (unittest.TestCase):
 
         self.assertEqual(db.execute.mock_calls[-1][1],
                          ('DELETE FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+
+    def test_get_all_users(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+        db.fetchall.return_value = [dict(id=1, phone_number='+15105551212', zip_codes=['94103'],
+                                         email_address='me@example.com', emergency_types=['fire'])]
+
+        users.get_all_users(db)
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('SELECT * FROM users',))
