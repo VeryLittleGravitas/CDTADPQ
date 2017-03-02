@@ -5,35 +5,45 @@
 
 {% block main_content %}
   <h1>Admin Dashboard</h1>
-<div class="usa-grid">
+  {% include 'includes/map.html' %}
+<div class="usa-grid-full">
   <div class="usa-width-one-half">
+  <h2>Current emergency situations</h2>
 <ol>
     {% for emergency in emergencies %}
         <li>
             {{ emergency.title }}
-            <a href="{{ url_for('get_send_alert', type=emergency.type, id=emergency.id) }}">Tell people</a>
+            <a href="{{ url_for('get_send_alert', type=emergency.type, id=emergency.id) }}">Send alert</a>
         </li>
     {% endfor %}
   </ol>
+  <ul class="usa-accordion-bordered">
+    <li>
+        <button class="usa-accordion-button"
+          aria-controls="amendment-b-5">
+          Send alert about something else
+        </button>
+        <div id="amendment-b-5" class="usa-accordion-content">
+          <form action="{{ url_for('post_send_broadcast_alert') }}" method="post">
+
+              <label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
+              <textarea id="emergency-message" name="emergency-message" maxlength="140"></textarea>
+              <input id="emergency" type="radio" name="broadcast-notification-types" value="emergency" checked="checked">
+              <label for="emergency">Emergency Notification</label>
+              <input id="emergency" type="radio" name="broadcast-notification-types" value="non-emergency">
+              <label for="non-emergency">Non-Emergency Notification</label>
+          
+
+            <button class="usa-button-secondary">Send Alerts</button>
+
+          </form>
+        </div>
+    </li>
+  </ul>
   </div>
 
   <div class="usa-width-one-half">
-
-    <form action="{{ url_for('post_send_broadcast_alert') }}" method="post">
-
-      <fieldset>
-      <legend>This is the message that will be sent to anyone who has registered to receive admin notifications</legend>
-        <label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
-        <textarea id="emergency-message" name="emergency-message" maxlength="140"></textarea>
-        <input id="emergency" type="radio" name="broadcast-notification-types" value="emergency" checked="checked">
-        <label for="emergency">Emergency Notification</label>
-        <input id="emergency" type="radio" name="broadcast-notification-types" value="non-emergency">
-        <label for="non-emergency">Non-Emergency Notification</label>
-      </fieldset>
-
-      <button class="usa-button-secondary">Send Alerts</button>
-
-    </form>
+     
   </div>
   </div>
 
@@ -41,7 +51,7 @@
 
   
   
-  {% include 'includes/map.html' %}
+  
 
   <p></p>
   
