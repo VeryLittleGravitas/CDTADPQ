@@ -1,19 +1,23 @@
 # CA Alerts, made with Very Little Gravitas
 
-[California Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)), submitted by Very Little Gravitas LLC for the California Department of Technology [Digital Services Agile Development Prequalified Vendor Pool Refresh](https://github.com/CDTProcurement/adpq).
+[CA Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)), submitted by Very Little Gravitas LLC for the California Department of Technology [Digital Services Agile Development Prequalified Vendor Pool Refresh](https://github.com/CDTProcurement/adpq).
 
 ## 1. CA Alerts
 
-[California Alerts](https://vlg-ctdadpq.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
+[CA Alerts](https://vlg-ctdadpq.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies. 
 
-For California residents and visitors, California Alerts:
+This prototype has been developed based on our experience in delivering digital services that meet user needs and that are simple and intuitive enough that users succeed first time. 
+
+Where appropriate, we have [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook). 
+
+### For California residents and visitors, California Alerts:
 
 * lets users receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
 * lets users choose a location (a zipcode) for which they will receive emergency and non-emergency alerts 
 * lets users choose whether to receive alerts by SMS or email (with forthcoming push notification functionality)
 * lets users sign up quickly and easily, by only requiring a phone number and a zipcode
 
-For authorized State emergency workers, California Alerts: 
+### For authorized State emergency workers, California Alerts: 
 
 * publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
 * lets users visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
