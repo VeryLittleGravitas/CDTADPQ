@@ -5,7 +5,7 @@
 
 {% block main_content %}
   <h1>Admin Dashboard</h1>
- 
+
 <div class="usa-grid-full">
   <div class="usa-width-one-half">
   <h2>Current emergency situations</h2>
@@ -21,24 +21,25 @@
     <li>
         <button class="usa-accordion-button"
           aria-controls="amendment-b-5">
-          Send alert about something else
+          Send a manual alert
         </button>
         <div id="amendment-b-5" class="usa-accordion-content">
         <div class="usa-alert usa-alert-info">
           <div class="usa-alert-body">
             <h3 class="usa-alert-heading">Who will this reach?</h3>
-            <p class="usa-alert-text">This alert will be sent to everyone who registered for alerts, regardless of their location.</p>
+            <p class="usa-alert-text">This alert will be sent to all registered users, regardless of their location.</p>
           </div>
         </div>
           <form action="{{ url_for('post_send_broadcast_alert') }}" method="post">
 
-              <label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
+              <label for="emergency-message">Alert message<span class="usa-form-hint">Maximum 140 characters</span></label>
               <textarea id="emergency-message" name="emergency-message" maxlength="140"></textarea>
               <input id="emergency" type="radio" name="broadcast-notification-types" value="emergency" checked="checked">
               <label for="emergency">Emergency Notification</label>
               <input id="emergency" type="radio" name="broadcast-notification-types" value="non-emergency">
               <label for="non-emergency">Non-Emergency Notification</label>
-          
+
+            <p>Non-Emergency notifications will only be sent to users who have opted-in to receive Non-Emergency notifications.</p>
 
             <button class="usa-button-secondary">Send Alert</button>
 
@@ -53,12 +54,12 @@
   </div>
   </div>
 
-  
 
-  
-  
-  
+
+
+
+
 
   <p></p>
-  
+
 {% endblock %}
