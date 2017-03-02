@@ -1,35 +1,36 @@
-# Hello, world
+# California Alerts, made with Very Little Gravitas
 
-## 1. Prototype B
+## 1. California Alerts
 
-The working prototype will be an application that will allow California residents to establish and manage their profile and receive emergency and non-emergency notifications via email, Short Message Service (SMS), and/or push notification based on the location and contact information provided in their profile and/or the geo-location of their cellphone if they have opted in for this service. In addition, the working prototype will provide the authorized administrative users with the ability to publish notifications and track, and analyze and visualize related data. The working prototype does not need to implement any authentication or authorization against an external directory or authentication mechanism.
+[California Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
 
-## 2. The Team
+For California residents and visitors, California Alerts:
 
-The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. He was the assigned leader of the project with responsibility and accountability for the quality of the prototype. 
+* lets users receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
+* lets users choose a location (a zipcode) for which they will receive emergency and non-emergency alerts 
+* lets users choose whether to receive alerts by SMS or email (with forthcoming push notification functionality)
+* lets users sign up quickly and easily, by only requiring a phone number and a zipcode
 
-Composition of the multi-disciplinary team (based on GSA 18F Agile Labor Categories): 
+For authorized State emergency workers, California Alerts: 
 
-**Dan Hon, Product Manager**
+* publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a **CHECK** 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
+* lets users visualize up-to-date data fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
+* lets users publish manual emergency notifications to all users, so that the public can be informed about emergencies
+* lets users publish manual non-emergency notifications to all users, so that the public can be informed about non-emergency situations
+* lets users track data about published notifications 
+* lets users track data about registered users 
 
-@danhon [LinkedIn Profile](https://www.linkedin.com/in/danhon/)
+## 2. Our team
 
-**Michal Migurski, Technical Architect**
+The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him as the assigned leader of the project with full responsibility and authority to build the prototype, and has full accountability for the quality of the prototype.
 
-@migurski [LinkedIn Profile](https://www.linkedin.com/in/michalmigurski/)
+We put together the following multidisciplinary team to build California Alerts, based on our experience and the [GSA 18F Agile Labor Categories](https://pages.18f.gov/agile-labor-categories/):
 
-**Frances Berriman, Interaction Designer / User Researcher / Usability Tester**
-
-@phae [LinkedIn Profile](https://www.linkedin.com/in/fberriman/)
-
-**Erica Kwan, Backend Web Developer**
-
-@pui [LinkedIn Profile](https://www.linkedin.com/in/ericakwan/)
-
-**Kay Chung, Delivery Manager**
-
-@kerrching [LinkedIn Profile](https://www.linkedin.com/in/kerrching/)
-
+* Dan Hon, Product Manager | [@danhon](https://github.com/danhon) and [LinkedIn](https://www.linkedin.com/in/danhon/)
+* Michal Migurski, Technical Architect | [@migurski](https://github.com/migurski) and [LinkedIn](https://www.linkedin.com/in/michalmigurski/)
+* Frances Berriman, Interaction Designer / User Researcher / Usability Tester | [@phae](https://github.com/phae) and [LinkedIn](https://www.linkedin.com/in/fberriman/)
+* Erica Kwan, Backend Web Developer | [@pui](https://github.com/pui) and [LinkedIn](https://www.linkedin.com/in/ericakwan/)
+* Kay Chung, Delivery Manager | [@kerrching](https://github.com/kerrching) and [LinkedIn](https://www.linkedin.com/in/kerrching/)
 
 ## 3. Agile Delivery Process
 
