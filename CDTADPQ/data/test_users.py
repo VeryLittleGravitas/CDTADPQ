@@ -87,7 +87,8 @@ class UsersTests (unittest.TestCase):
             if request.headers['Authorization'] != 'Basic c2lkOnNlY3JldA==':
                 return httmock.response(401, b'Go away')
 
-            body = 'Your CA Alerts PIN code is 1234.\n\nIf you didn\'t ask for this, please ignore this message.'
+
+            body = 'Your CA Alerts PIN code is 1234. Use this to confirm your phone number. \n\nIf you didn\'t ask for this, please ignore this message.'
             form = dict(urllib.parse.parse_qsl(request.body))
 
             if form['From'] != 'number':
