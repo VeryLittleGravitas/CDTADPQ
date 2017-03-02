@@ -5,7 +5,7 @@
 
 {% block main_content %}
   <h1>Admin Dashboard</h1>
-  {% include 'includes/map.html' %}
+ 
 <div class="usa-grid-full">
   <div class="usa-width-one-half">
   <h2>Current emergency situations</h2>
@@ -13,7 +13,7 @@
     {% for emergency in emergencies %}
         <li>
             {{ emergency.title }}
-            <a href="{{ url_for('get_send_alert', type=emergency.type, id=emergency.id) }}">Send alert</a>
+            <a href="{{ url_for('get_send_alert', type=emergency.type, id=emergency.id) }}">Compose alert</a>
         </li>
     {% endfor %}
   </ol>
@@ -43,7 +43,7 @@
   </div>
 
   <div class="usa-width-one-half">
-     
+      {% include 'includes/map.html' %}
   </div>
   </div>
 
