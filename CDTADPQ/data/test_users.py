@@ -9,29 +9,29 @@ class UsersTests (unittest.TestCase):
         db, account = unittest.mock.Mock(), unittest.mock.Mock()
         to_number, signup_id = '+1 (510) 555-1212', 'xxx-yy-zzz'
         zipcode, pin_number = '94612', 1234
-        
+
         with unittest.mock.patch('CDTADPQ.data.users.send_verification_code') as send_verification_code, \
              unittest.mock.patch('random.randint') as randint, \
              unittest.mock.patch('uuid.uuid4') as uuid4:
             randint.return_value = pin_number
             uuid4.return_value = signup_id
             output_id = users.add_unverified_signup(db, account, to_number, zipcode)
-        
+
         self.assertEqual(output_id, signup_id)
-        
+
         db.execute.assert_called_once_with(
             '''INSERT INTO unverified_signups
                   (signup_id, phone_number, pin_number, zipcode)
                   VALUES (%s, %s, %s, %s)''',
                (signup_id, to_number, str(pin_number), zipcode))
-        
+
         send_verification_code.assert_called_once_with(account, to_number, str(pin_number))
-    
+
     def test_verify_user_signup_good_user(self):
         '''
         '''
         db = unittest.mock.Mock()
-        
+
         last_execute_args = dict()
         db.execute.side_effect = lambda query, args: last_execute_args.update(query=query, args=args)
         db.fetchone.side_effect = lambda: (
@@ -41,17 +41,17 @@ class UsersTests (unittest.TestCase):
             )
 
         verified = users.verify_user_signup(db, '1234', 'xxx-yy-zzz')
-        
+
         self.assertEqual(verified, '+15105551212')
         self.assertEqual(db.execute.mock_calls[-3][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
         self.assertEqual(db.execute.mock_calls[-2][1], ('SELECT true FROM users WHERE phone_number = %s', ('+15105551212', )))
         self.assertEqual(db.execute.mock_calls[-1][1], ('INSERT INTO users (phone_number, zip_codes) VALUES (%s, %s)', ('+15105551212', ['94612'])))
-        
+
     def test_verify_user_signup_existing_user(self):
         '''
         '''
         db = unittest.mock.Mock()
-        
+
         last_execute_args = dict()
         db.execute.side_effect = lambda query, args: last_execute_args.update(query=query, args=args)
         db.fetchone.side_effect = lambda: (
@@ -61,22 +61,22 @@ class UsersTests (unittest.TestCase):
             )
 
         verified = users.verify_user_signup(db, '1234', 'xxx-yy-zzz')
-        
+
         self.assertEqual(verified, '+15105551212')
         self.assertEqual(db.execute.mock_calls[-2][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
         self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT true FROM users WHERE phone_number = %s', ('+15105551212', )))
-        
+
     def test_verify_user_signup_no_match(self):
         '''
         '''
         db = unittest.mock.Mock()
-        
+
         db.fetchone.return_value = None
         verified = users.verify_user_signup(db, '1234', 'xxx-yy-zzz')
-        
+
         self.assertFalse(verified)
         self.assertEqual(db.execute.mock_calls[-1][1], ('SELECT pin_number, phone_number, zipcode\n                  FROM unverified_signups WHERE signup_id = %s', ('xxx-yy-zzz',)))
-    
+
     def test_send_verification_code(self):
         '''
         '''
@@ -86,10 +86,10 @@ class UsersTests (unittest.TestCase):
 
             if request.headers['Authorization'] != 'Basic c2lkOnNlY3JldA==':
                 return httmock.response(401, b'Go away')
-            
-            body = 'Your CA Emergency Alert PIN number is 1234.\n\nIf you did not ask for this, please ignore this message.'
+
+            body = 'Your CA Alerts PIN code is 1234.\n\nIf you didn\'t ask for this, please ignore this message.'
             form = dict(urllib.parse.parse_qsl(request.body))
-            
+
             if form['From'] != 'number':
                 return httmock.response(404, b'Not the right number')
 
@@ -102,9 +102,9 @@ class UsersTests (unittest.TestCase):
                 return httmock.response(400, body.encode('utf8'), {'Content-Type': 'application/json'})
 
             raise Exception('Nope')
-        
+
         account = users.TwilioAccount('sid', 'secret', 'account', 'number')
-        
+
         with httmock.HTTMock(response_content_error):
             users.send_verification_code(account, '+15105551212', '1234')
 
@@ -112,7 +112,7 @@ class UsersTests (unittest.TestCase):
                 users.send_verification_code(account, '+1212BADCODE', '1234')
 
         self.assertEqual(str(error.exception), "The 'To' number is not a valid phone number.")
-    
+
     def test_send_email_verification_code(self):
         '''
         '''
@@ -122,11 +122,12 @@ class UsersTests (unittest.TestCase):
 
             if request.headers['Authorization'] != 'Basic YXBpOnNlY3JldA==':
                 return httmock.response(401, b'Go away')
-            
-            subj = 'Your CA Emergency Alert PIN number'
-            body = 'Your CA Emergency Alert PIN number is 1234.\n\nIf you did not ask for this, please ignore this message.'
+
+            subj = 'Your CA Alerts PIN code'
+            body = 'Your CA Alerts PIN code is 1234.\n\nUse this to confirm your email address. If you didn\'t ask for this, please ignore this message.'
+
             form = dict(urllib.parse.parse_qsl(request.body))
-            
+
             if form['from'] != 'disaster-sender':
                 return httmock.response(404, b'Not the right sender')
 
@@ -139,9 +140,9 @@ class UsersTests (unittest.TestCase):
                 return httmock.response(400, body.encode('utf8'), {'Content-Type': 'application/json'})
 
             raise Exception('Nope')
-        
+
         account = users.MailgunAccount('secret', 'sandbox.mailgun.org', 'disaster-sender')
-        
+
         with httmock.HTTMock(response_content_error):
             users.send_email_verification_code(account, 'disaster-recipient', '1234')
 
@@ -149,26 +150,26 @@ class UsersTests (unittest.TestCase):
                 users.send_email_verification_code(account, 'nobody-special', '1234')
 
         self.assertEqual(str(error.exception), "Sandbox subdomains are for test purposes only. Please add your own domain or add the address to authorized recipients in Account Settings.")
-    
+
     def test_get_user_info(self):
         '''
         '''
         db = unittest.mock.Mock()
-        
+
         db.fetchone.return_value = ('+1 (510) 555-1212', ['94612'], 'user@example.com')
         user_info = users.get_user_info(db, '+1 (510) 555-1212')
 
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
                          ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
-        
+
         db.fetchone.return_value = None
         user_info = users.get_user_info(db, '+1 (510) 555-1212')
 
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
                          ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
-    
+
     def test_update_user_profile(self):
         '''
         '''
@@ -193,7 +194,7 @@ class UsersTests (unittest.TestCase):
         '''
         '''
         db = unittest.mock.Mock()
-        
+
         users.delete_user(db, '+1 (510) 555-1212')
 
         self.assertEqual(db.execute.mock_calls[-1][1],
