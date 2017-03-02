@@ -11,4 +11,5 @@ RUN pip3 install honcho
 # https://serverfault.com/questions/782022/keepalive-setting-for-gunicorn-behind-elb-without-nginx
 ENV PYTHONUNBUFFERED 1
 
-CMD honcho run ./debug.py
+# Run the processes named in the Procfile
+CMD honcho start
