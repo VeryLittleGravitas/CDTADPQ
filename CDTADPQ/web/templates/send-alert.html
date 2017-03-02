@@ -5,7 +5,12 @@
 
 {% block main_content %}
   <h1>Compose emergency alert</h1>
-  
+  <div class="usa-alert usa-alert-info">
+    <div class="usa-alert-body">
+      <h3 class="usa-alert-heading">Who will this reach?</h3>
+      <p class="usa-alert-text">This alert will go to only those users registered to receive alerts about emergencies in this specific area.</p>
+    </div>
+  </div>
   <form action="{{ url_for('post_send_alert') }}" method="post">
 
   	<label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
