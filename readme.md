@@ -84,8 +84,11 @@ See our documentation to [install and run the prototype](https://github.com/Very
 
 
 ## 6. Additional Material
-* [Product Backlog and Sprint Taskboard](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
 * [Project wiki](https://github.com/VeryLittleGravitas/CDTADPQ/wiki)
+* [Design exploration](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Design-exploration)
+* [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal)
+* [US Digital Services Playbook approach](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook) 
+* [Product Backlog and Sprint Taskboard](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1)
 
 ____
 
