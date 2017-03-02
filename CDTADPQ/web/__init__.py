@@ -222,7 +222,7 @@ def post_email_confirm():
     return flask.redirect(flask.url_for('get_profile'), code=303)
 
 @app.route('/admin/sent', methods=['GET'])
-def get_login():
+def get_adminsent():
     return flask.render_template('admin-sent.html')
 
 @app.route('/admin/')
