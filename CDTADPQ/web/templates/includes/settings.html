@@ -20,35 +20,34 @@
                 });
             return false;
         }
-    
+
         if('geolocation' in navigator)
         {
             var button = document.getElementById('zip-codes-update');
-            
+
             button.className = 'usa-button-active';
             button.disabled = false;
         }
     </script>
 
+    <p>You can also choose to receive non-emergency alerts, such as information about school closures due to weather.</p>
+
     <ul class="usa-unstyled-list">
-      <li>
-        <input id="emergencies" type="checkbox" name="emergencies" value="truth" checked>
-        <label for="fire">Emergencies</label>
-      </li>
+
       <li>
         <input id="non-emergencies" type="checkbox" name="non-emergencies" value="truth" checked>
-        <label for="non-emergencies">Non-emergencies</label>
+        <label for="non-emergencies">Also receive non-emergency alerts</label>
       </li>
     </ul>
 
     <input type="submit" value="Update Profile">
-    
-    <button type="submit" class="usa-button-secondary" name="action" value="Delete Profile" onclick="return confirm('Delete your profile?')">Delete Profile</button>
 
   </fieldset>
 </form>
 
-<h2>Email alerts</h2>
+<h2>Receive alerts by email</h2>
+
+<p>You can also choose to receive alerts by email.</p>
 
 <form id="email-settings" class="usa-form" action="{{ url_for('post_email_address') }}" method="post">
  <fieldset class="usa-fieldset-inputs usa-sans">
@@ -58,7 +57,18 @@
     <label for="email-address">Email address (optional)</label>
     <input id="email-address" name="email-address" type="email" value="{{ email_address }}">
 
-    <input type="submit" value="Update Email">
+    <input type="submit" value="Update email address">
 
+  </fieldset>
+</form>
+
+<!-- Delete your profile -->
+<h2>Close account</h2>
+
+<p>Closing your account will deregister you from receiving future alerts and will your information from our database.</p>
+
+<form id="profile-settings" class="usa-form" action="{{ url_for('post_profile') }}" method="post">
+  <fieldset class="usa-fieldset-inputs usa-sans">
+    <button type="submit" class="usa-button-secondary" name="action" value="Delete Profile" onclick="return confirm('Delete your profile?')">Delete Profile</button>
   </fieldset>
 </form>
