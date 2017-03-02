@@ -24,6 +24,12 @@
           Send alert about something else
         </button>
         <div id="amendment-b-5" class="usa-accordion-content">
+        <div class="usa-alert usa-alert-info">
+          <div class="usa-alert-body">
+            <h3 class="usa-alert-heading">Who will this reach?</h3>
+            <p class="usa-alert-text">This alert will be sent to everyone who registered for alerts, regardless of their location.</p>
+          </div>
+        </div>
           <form action="{{ url_for('post_send_broadcast_alert') }}" method="post">
 
               <label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
