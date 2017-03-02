@@ -4,7 +4,7 @@
 
 ## 1. CA Alerts
 
-[California Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
+[California Alerts](https://vlg-ctdadpq.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
 
 For California residents and visitors, California Alerts:
 
@@ -16,7 +16,7 @@ For California residents and visitors, California Alerts:
 For authorized State emergency workers, California Alerts: 
 
 * publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
-* lets users visualize up-to-date data fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
+* lets users visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
 * lets users publish manual emergency notifications to all users, so that the public can be informed about emergencies
 * lets users publish manual non-emergency notifications to all users, so that the public can be informed about non-emergency situations
 * lets users track data about published notifications 
@@ -24,7 +24,7 @@ For authorized State emergency workers, California Alerts:
 
 ## 2. Our team
 
-The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him as the assigned leader of the project with full responsibility and authority to build the prototype, and has full accountability for the quality of the prototype.
+The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him the leader of the project with full responsibility and authority to build the prototype, and he therefore has full accountability for the quality of the prototype.
 
 We put together the following multidisciplinary team to build California Alerts, based on our experience and the [GSA 18F Agile Labor Categories](https://pages.18f.gov/agile-labor-categories/):
 
@@ -93,7 +93,7 @@ a. We appointed Dan Hon as both Product Manager and leader of the project. He he
 
 b. Section 2 (above) identifies each member of the multidisciplinary team and their specialisms. 
 
-c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and reflected in the implementation of requirements. See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki for further evidence.
+c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki for further evidence.
 
 d. We used the user-centered design techniques outlined in Section 4 (above).
 
