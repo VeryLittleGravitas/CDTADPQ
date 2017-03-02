@@ -69,12 +69,11 @@ def get_users_to_notify(db, fire_point):
 
 TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
 
-def send_notification(account, user, fire):
+def send_notification(account, user, message):
     ''' Send fire notification to phone number
     '''
     url = uritemplate.expand(TwilioURL, dict(account=account.account))
-    body = 'Fire {}'.format(fire.name)
-    data = dict(From=account.number, To=user.phone_number, Body=body)
+    data = dict(From=account.number, To=user.phone_number, Body=message)
     auth = account.sid, account.secret
     posted = requests.post(url, auth=auth, data=data)
     

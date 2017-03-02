@@ -219,3 +219,41 @@ class AppTests (unittest.TestCase):
 
         got6 = self.client.get(posted2.headers.get('Location'))
         self.assertEqual(got6.status_code, 401)
+
+    def test_send_broadcast_notification(self):
+        '''
+        '''
+        pass
+        # Login
+
+        # got1 = self.client.get('/login')
+        # soup1 = bs4.BeautifulSoup(got1.data, 'html.parser')
+        # form1 = soup1.find('form', id='sign-up')
+        # data1 = {input['name']: None for input in form1.find_all('input')}
+        # data1['phone-number'] = '+1 (510) 555-1212'
+
+        # # Enter phone number to login
+
+        # with unittest.mock.patch('CDTADPQ.data.users.send_verification_code') as send_verification_code:
+        #     posted1 = self.client.open(method=form1['method'], path=form1['action'], data=data1)
+
+        # (pin_number, ) = send_verification_code.mock_calls[0][1][2:]
+
+        # # Follow redirect for PIN confirmation
+
+        # got2 = self.client.get(posted1.headers.get('Location'))
+        # soup2 = bs4.BeautifulSoup(got2.data, 'html.parser')
+        # form2 = soup2.find('form', id='register')
+        # data2 = {input['name']: input.get('value') for input in form2.find_all('input')}
+        # data2['pin-number'] = 'wrong-number'
+
+        # # Enter the PIN number to confirm
+
+        # data2['pin-number'] = pin_number
+        # posted2 = self.client.open(method=form2['method'], path=form2['action'], data=data2)
+
+        # got3 = self.client.get('/admin/')
+        # soup3 = bs4.BeautifulSoup(got3.data, 'html.parser')
+        # print(soup3)
+
+

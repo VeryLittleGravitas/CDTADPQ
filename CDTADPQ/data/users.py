@@ -138,3 +138,13 @@ def delete_user(db, phone_number):
     '''
     db.execute('DELETE FROM users WHERE phone_number = %s',
                (phone_number, ))
+
+def get_all_users(db):
+    '''
+    '''
+    db.execute('SELECT * FROM users')
+    all_users = []
+    for user_row in db.fetchall():
+        all_users.append(User(user_row['id'], user_row['phone_number'], user_row['zip_codes'],
+                                                  user_row['email_address'], user_row['emergency_types']))
+    return all_users

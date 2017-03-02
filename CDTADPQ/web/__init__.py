@@ -253,14 +253,27 @@ def post_send_alert():
             if type == 'fire':
                 emergency = wildfires.get_one_fire(db, id)
                 for user in notify.get_users_to_notify(db, emergency):
-                    print('notify.send_notification:', user, emergency)
-                    notify.send_notification(twilio_account, user, emergency)
+                    print('notify.send_notification:', user, message)
+                    notify.send_notification(twilio_account, user, message)
     return flask.redirect(flask.url_for('get_sent_alert'), code=303)
 
 @app.route('/admin/sent')
 @user_is_an_admin
 def get_sent_alert():
     return flask.render_template('sent.html', **template_kwargs())
+
+@app.route('/admin/send-broadcast-alert', methods=['POST'])
+@user_is_an_admin
+def post_send_broadcast_alert():
+    message = flask.request.form['emergency-message']
+    notification_type = flask.request.form['broadcast-notification-types']
+    twilio_account = flask.current_app.config['twilio_account']
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            for user in users.get_all_users(db):
+                print('notify.send_notification:', user, message)
+                notify.send_notification(twilio_account, user, message)
+    return flask.redirect(flask.url_for('get_sent_alert'), code=303)
 
 @app.route('/stats')
 def get_stats():
