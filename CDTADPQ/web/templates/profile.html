@@ -7,19 +7,17 @@
 {% endblock %}
 
 {% block main_content %}
-  
+
   <h1>Your alert settings</h1>
-  
-	<p>Using this service means that you will receive emergency alerts for:</p>
+
+	<p>You are registered to receive emergency alerts about:</p>
 	<ul>
 	  <li>Fires</li>
 	  <li>Floods</li>
 	  <li>Tsunami</li>
 	  <li>Earthquakes</li>
 	</ul>
-	<p>You can choose to receive non-emergency alerts as well as emergency alerts.</p>
 
-  
  {% include 'includes/settings.html' %}
 
  <form id="log-out" class="usa-form" action="{{ url_for('post_logout') }}" method="post">
@@ -30,5 +28,5 @@
  </fieldset>
  </form>
 
-  
+
 {% endblock %}
