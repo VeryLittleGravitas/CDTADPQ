@@ -45,7 +45,7 @@ The agile delivery process used at Very Little Gravitas is based on the open sta
 Documentation on the [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process)
 
 For the purposes of the ADPQ submission, we implemented a simplified process, appropriate to the scope and available time. 
-The following describes the four 1 week sprints that were completed for the design and build of the prototype. 
+The following describes the work delivered in each of the four 1 week sprints completed in building the prototype. 
 
 #### Sprint 1
 * Defined usecases & personas
@@ -61,13 +61,13 @@ The following describes the four 1 week sprints that were completed for the desi
 * User interface and user flow visualizations
 * Set up page templates
 * User profile creation and management
-* Emergency notification test send
+* Emergency notification send and receive - test
 
 #### Sprint 3
 
 * Set up step-through templates for admin view
 * Notification signup 
-* Update geo-location criteria for notifications
+* Edit geo-location criteria for notifications
 * Selection of delivery format - sms and email
 * Implemented Google Analytics
 
@@ -75,7 +75,7 @@ The following describes the four 1 week sprints that were completed for the desi
 
 * Finalized prototype documentation
 * Finalized copy for the prototype application
-* Customer support and issue reporting for user 
+* Customer support contact and issue reporting for user 
 [TODO - add more]
 
 
