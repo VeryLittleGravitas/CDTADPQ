@@ -168,3 +168,33 @@ class UsersTests (unittest.TestCase):
         self.assertEqual(user_info, db.fetchone.return_value)
         self.assertEqual(db.execute.mock_calls[-1][1],
                          ('SELECT phone_number, zip_codes, email_address\n                  FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))
+    
+    def test_update_user_profile(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+
+        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94612')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', (['94612'], '+1 (510) 555-1212')))
+
+        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94612, 94608')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', (['94612', '94608'], '+1 (510) 555-1212')))
+
+        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94XXX')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', ([], '+1 (510) 555-1212')))
+
+    def test_delete_user(self):
+        '''
+        '''
+        db = unittest.mock.Mock()
+        
+        users.delete_user(db, '+1 (510) 555-1212')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('DELETE FROM users WHERE phone_number = %s', ('+1 (510) 555-1212',)))

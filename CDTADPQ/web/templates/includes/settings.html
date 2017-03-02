@@ -8,6 +8,27 @@
 
     <label for="zip-codes">Zip code</label>
     <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
+    <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+
+    <script>
+        function geolocate_me()
+        {
+            document.getElementById('zip-codes').value = '';
+            document.getElementById('zip-codes').placeholder = 'Locating you...';
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                on_geolocation(pos, "{{ zip_codes }}", "{{ url_for('get_zipcode') }}");
+                });
+            return false;
+        }
+    
+        if('geolocation' in navigator)
+        {
+            var button = document.getElementById('zip-codes-update');
+            
+            button.className = 'usa-button-active';
+            button.disabled = false;
+        }
+    </script>
 
     <ul class="usa-unstyled-list">
       <li>
@@ -28,6 +49,10 @@
       </li>
     </ul>
 
+    <input type="submit" value="Update Profile">
+    
+    <button type="submit" class="usa-button-secondary" name="action" value="Delete Profile" onclick="return confirm('Delete your profile?')">Delete Profile</button>
+
   </fieldset>
 </form>
 
@@ -41,7 +66,7 @@
     <label for="email-address">Email address (optional)</label>
     <input id="email-address" name="email-address" type="email" value="{{ email_address }}">
 
-    <input type="submit">
+    <input type="submit" value="Update Email">
 
   </fieldset>
 </form>

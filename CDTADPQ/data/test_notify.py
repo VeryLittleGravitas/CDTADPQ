@@ -34,15 +34,19 @@ class NotifyTests (unittest.TestCase):
         '''
         with unittest.mock.patch('CDTADPQ.data.wildfires.get_current_fires') as get_current_fires, \
              unittest.mock.patch('CDTADPQ.data.notify.get_users_to_notify') as get_users_to_notify, \
-             unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification:
-            get_current_fires.return_value = [wildfires.FirePoint({"type": "Point", "coordinates": [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)]
-            get_users_to_notify.return_value = [{'phone_number': '+15105551212'}]
+             unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification, \
+             unittest.mock.patch('CDTADPQ.data.notify.log_user_notification') as log_user_notification:
+            get_current_fires.return_value = [wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)]
+            get_users_to_notify.return_value = [users.User(1, '+15105551212', ['94107'], 'me@example.com', ['fire'])]
             notify.main()
         self.assertEqual(len(get_current_fires.mock_calls), 1)
         self.assertEqual(len(get_users_to_notify.mock_calls), 1)
         self.assertEqual(len(send_notification.mock_calls), 1)
+        self.assertEqual(len(log_user_notification.mock_calls), 1)
 
     def test_get_users_to_notify(self):
+        '''
+        '''
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
                 (fire, ) = wildfires.get_current_fires(db)
@@ -51,16 +55,34 @@ class NotifyTests (unittest.TestCase):
                 os.environ['RADIUS_MILES'] = '0.5'
                 users = notify.get_users_to_notify(db, fire)
                 self.assertEqual(1, len(users))
-                self.assertEqual('+15105551212', users[0]['phone_number'])
+                self.assertEqual('+15105551212', users[0].phone_number)
 
                 # Now look again with a really big radius
                 os.environ['RADIUS_MILES'] = '500'
                 users = notify.get_users_to_notify(db, fire)
                 self.assertEqual(2, len(users))
 
+        # If the user has been notified, it should not be returned
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
+                (fire, ) = wildfires.get_current_fires(db)
+
+                # Look for users within a half-mile of the fire
+                os.environ['RADIUS_MILES'] = '0.5'
+
+                # Log entry indicates user has been notified
+                db.execute('INSERT INTO user_emergencies_log (emergency_type, emergency_external_id, user_id) VALUES (%s, %s, %s)',
+                    ('fire', fire.usgs_id, 1))
+
+                users = notify.get_users_to_notify(db, fire)
+                self.assertEqual(0, len(users))
+
     def test_send_notification(self):
+        '''
+        '''
         account = users.TwilioAccount('sid', 'secret', 'account', 'number')
         fire = unittest.mock.Mock(name='Bad Fire')
+        test_user = users.User(1, '+15105551212', ['94107'], 'test_user@example.com', ['fire'])
 
         def response_content_error(url, request):
             if (request.method, url.hostname, url.path) != ('POST', 'api.twilio.com', '/2010-04-01/Accounts/account/Messages.json'):
@@ -79,4 +101,14 @@ class NotifyTests (unittest.TestCase):
             raise Exception('Nope')
         
         with httmock.HTTMock(response_content_error):
-            notify.send_notification(account, '+15105551212', fire)
+            notify.send_notification(account, test_user, fire)
+
+    def test_log_user_notification(self):
+        '''
+        '''
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor() as db:
+                user = users.User(1, '+15105551212', ['94107'], 'me@example.com', ['fire'])
+                fire = wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)
+                notification_succeeded = notify.log_user_notification(db, user, fire)
+                self.assertTrue(notification_succeeded)

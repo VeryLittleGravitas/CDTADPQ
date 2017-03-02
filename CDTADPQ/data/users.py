@@ -1,4 +1,4 @@
-import requests, logging, uritemplate, random, uuid
+import requests, logging, uritemplate, random, uuid, re
 
 TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
 MailgunURL = 'https://api.mailgun.net/v2/{domain}/messages'
@@ -17,6 +17,16 @@ class MailgunAccount:
         self.api_key = api_key
         self.domain = domain
         self.sender = sender
+
+class User:
+
+    def __init__(self, id, phone_number, zip_codes, email_address, emergency_types):
+        self.id = id
+        self.phone_number = phone_number
+        self.zip_codes = zip_codes
+        self.email_address = email_address
+        self.emergency_types = emergency_types
+
 
 def add_unverified_signup(db, account, to_number, zipcode):
     logging.info('add_unverified_signup: {}'.format(to_number))
@@ -108,8 +118,23 @@ def get_user_info(db, phone_number):
     
     return phone_number, zip_codes, email_address
 
+def update_user_profile(db, phone_number, zip_codes_str):
+    '''
+    '''
+    zip_codes = re.findall(r'\b(\d{5})\b', zip_codes_str)
+    
+    db.execute('''UPDATE users SET zip_codes = %s
+                  WHERE phone_number = %s''',
+               (zip_codes, phone_number))
+
 def update_email_address(db, phone_number, email_address):
     '''
     '''
     db.execute('UPDATE users SET email_address = %s WHERE phone_number = %s',
                (email_address, phone_number))
+
+def delete_user(db, phone_number):
+    '''
+    '''
+    db.execute('DELETE FROM users WHERE phone_number = %s',
+               (phone_number, ))

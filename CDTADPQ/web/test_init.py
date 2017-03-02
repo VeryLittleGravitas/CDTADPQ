@@ -186,9 +186,25 @@ class AppTests (unittest.TestCase):
         self.assertIsNotNone(header_text4)
         self.assertIn('profile', posted2.headers.get('Location'))
 
+        # Update the user's profile.
+        
+        form5 = soup4.find('form', id='profile-settings')
+        data5 = {input['name']: input.get('value') for input
+                 in form5.find_all('input') if input.get('name')}
+        
+        data5['zip-codes'] = '94612, 94608'
+        posted4 = self.client.open(method=form5['method'], path=form5['action'], data=data5)
+        self.assertEqual(posted4.status_code, 303)
+
+        got7 = self.client.get(posted4.headers.get('Location'))
+        self.assertEqual(got7.status_code, 200)
+        
+        html7 = got7.data.decode('utf8')
+        self.assertIn('94612, 94608', html7)
+
         form4 = soup4.find('form', id='log-out')
         data4 = {input['name']: input.get('value') for input in form4.find_all('input')}
-
+        
         # Log out using the form
 
         posted3 = self.client.open(method=form4['method'], path=form4['action'], data=data4)
