@@ -4,20 +4,15 @@
 
 
 {% block main_content %}
-  <h1>Configure alert</h1>
+  <h1>Compose emergency alert</h1>
   
   <form action="{{ url_for('post_send_alert') }}" method="post">
-  
-  <fieldset>
-  <legend>This is the message that will be sent to anyone who has registered to be notified about this type of event.</legend>
-  	<label for="emergency-message">SMS Message</label>
-  	<textarea id="emergency-message" name="emergency-message" maxlength="140">There is an emergency near you:&#13;&#10;{{ emergency.description }}&#13;&#10;&#13;&#10;Learn more at [URL].</textarea>
-  	<p>Maximum 140 characters</p>
+
+  	<label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
+  	<textarea id="emergency-message" name="emergency-message" maxlength="140">Emergency: {{ emergency.description }}&#13;&#10;&#13;&#10;Further info: [URL]</textarea>
     <input type="hidden" name="emergency-type" value="{{ emergency.type }}">
     <input type="hidden" name="emergency-id" value="{{ emergency.id }}">
-    </fieldset>
-  
-  <button class="usa-button-secondary">Send Alerts</button>
+  	<button class="usa-button-secondary">Send Alerts</button>
   
   </form>
   
