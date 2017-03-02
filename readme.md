@@ -121,7 +121,6 @@ l. We are using the following modern, open-source technologies for this prototyp
 * [Travis CI](https://travis-ci.org), for continuous integration and testing. 
 
 	To be added: 
-	
 	* AWS
 	* Skyliner
 	* Docker
@@ -138,15 +137,15 @@ o. We are using [Travis CI](https://travis-ci.org) for continuous integration, a
 
 p. **Setup or used configuration management;**
 
-TODO: dependent upon [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).
+[TODO: dependent upon [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).]
 
 q. **Setup or used continuous monitoring;**
 
-TODO: see [Issue 96](https://github.com/VeryLittleGravitas/CDTADPQ/issues/96).
+[TODO: see [Issue 96](https://github.com/VeryLittleGravitas/CDTADPQ/issues/96).]
 
 r. **Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization);**
 
-TODO: see [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).
+[TODO: see [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).]
 
 s. Instructions on installation and running of the prototype can be found here: [https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype).
 
