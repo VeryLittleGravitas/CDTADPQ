@@ -18,6 +18,16 @@ class MailgunAccount:
         self.domain = domain
         self.sender = sender
 
+class User:
+
+    def __init__(self, id, phone_number, zip_codes, email_address, emergency_types):
+        self.id = id
+        self.phone_number = phone_number
+        self.zip_codes = zip_codes
+        self.email_address = email_address
+        self.emergency_types = emergency_types
+
+
 def add_unverified_signup(db, account, to_number, zipcode):
     logging.info('add_unverified_signup: {}'.format(to_number))
     
