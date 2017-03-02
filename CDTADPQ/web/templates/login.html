@@ -4,17 +4,25 @@
 
 
 {% block main_content %}
-  <h1>Login</h1>
-  
-  
+  <h1>Login using your phone number</h1>
+
+  <p>Login to:</p>
+
+  <ul>
+    <li>Change the location you will receive alerts about</li>
+    <li>Change whether you are notified by SMS or email</li>
+    <li>Choose whether you want to receive non-emergency alerts</li>
+    <li>Close your account</li>
+  </ul>
+
 
    <form id="sign-up" class="usa-form" action="{{ url_for('post_register') }}" method="post">
-   
+
       <label for="phone-number" class="usa-input-required">Phone number</label>
       <input id="phone-number" name="phone-number" type="tel" required="" aria-required="true">
       <div class="button_wrapper">
-		<button>Send confirmation message</button>
-	
+		<button>Get a PIN code to login</button>
+
   </form>
-  
+
 {% endblock %}
