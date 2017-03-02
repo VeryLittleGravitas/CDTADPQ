@@ -13,7 +13,7 @@ For California residents and visitors, California Alerts:
 
 For authorized State emergency workers, California Alerts: 
 
-* publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a **CHECK** 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
+* publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
 * lets users visualize up-to-date data fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
 * lets users publish manual emergency notifications to all users, so that the public can be informed about emergencies
 * lets users publish manual non-emergency notifications to all users, so that the public can be informed about non-emergency situations
