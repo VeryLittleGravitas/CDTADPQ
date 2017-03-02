@@ -18,6 +18,18 @@
     },
     "TWILIO_SECRET": {
       "value": "ZYJZpNqQOea84FEunVZY9NBX3FnldNSX"
+    },
+    "MAILGUN_API_KEY": {
+      "required": true
+    },
+    "MAILGUN_DOMAIN": {
+      "required": true
+    },
+    "ADMIN_USERNAME": {
+      "required": true
+    },
+    "ADMIN_PASSWORD": {
+      "required": true
     }
   },
   "formation": {

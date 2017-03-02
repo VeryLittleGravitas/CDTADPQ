@@ -1,30 +1,72 @@
+<form id="profile-settings" class="usa-form" action="{{ url_for('post_profile') }}" method="post">
  <fieldset class="usa-fieldset-inputs usa-sans">
 
     <legend class="usa-sr-only">Alert options</legend>
 
-    <label for="input-type-text">Phone number</label>
-    <input id="input-type-text" name="input-type-text" type="text" value="123-4567-342">
+    <label for="phone-number">Phone number</label>
+    <input id="phone-number" name="phone-number" type="text" value="{{ phone_number }}">
 
-    <label for="input-type-text">Zip code</label>
-    <input id="input-type-text" name="input-type-text" type="text" value="94103">
+    <label for="zip-codes">Zip code</label>
+    <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
+    <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+
+    <script>
+        function geolocate_me()
+        {
+            document.getElementById('zip-codes').value = '';
+            document.getElementById('zip-codes').placeholder = 'Locating you...';
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                on_geolocation(pos, "{{ zip_codes }}", "{{ url_for('get_zipcode') }}");
+                });
+            return false;
+        }
+    
+        if('geolocation' in navigator)
+        {
+            var button = document.getElementById('zip-codes-update');
+            
+            button.className = 'usa-button-active';
+            button.disabled = false;
+        }
+    </script>
 
     <ul class="usa-unstyled-list">
       <li>
-        <input id="fire" type="checkbox" name="alert-type" value="truth" checked>
+        <input id="fire" type="checkbox" name="fire" value="truth" checked>
         <label for="fire">Fire</label>
       </li>
       <li>
-        <input id="flood" type="checkbox" name="alert-type" value="truth" checked>
+        <input id="flood" type="checkbox" name="flood" value="truth" checked>
         <label for="flood">Flood</label>
       </li>
       <li>
-        <input id="tsunami" type="checkbox" name="alert-type" value="truth" checked>
+        <input id="tsunami" type="checkbox" name="tsunami" value="truth" checked>
         <label for="tsunami">Tsunami</label>
       </li>
       <li>
-        <input id="earthquake" type="checkbox" name="alert-type" value="truth" checked>
+        <input id="earthquake" type="checkbox" name="earthquake" value="truth" checked>
         <label for="earthquake">Earthquake</label>
       </li>
     </ul>
 
+    <input type="submit" value="Update Profile">
+    
+    <button type="submit" class="usa-button-secondary" name="action" value="Delete Profile" onclick="return confirm('Delete your profile?')">Delete Profile</button>
+
   </fieldset>
+</form>
+
+<h2>Email alerts</h2>
+
+<form id="email-settings" class="usa-form" action="{{ url_for('post_email_address') }}" method="post">
+ <fieldset class="usa-fieldset-inputs usa-sans">
+
+    <legend class="usa-sr-only">Email address (optional)</legend>
+
+    <label for="email-address">Email address (optional)</label>
+    <input id="email-address" name="email-address" type="email" value="{{ email_address }}">
+
+    <input type="submit" value="Update Email">
+
+  </fieldset>
+</form>

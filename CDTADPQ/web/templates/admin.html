@@ -6,12 +6,17 @@
 {% block main_content %}
   <h1>Admin - Current emergencies</h1>
   
+  <ol>
+    {% for emergency in emergencies %}
+        <li>
+            {{ emergency.title }}
+            <a href="{{ url_for('get_send_alert', type=emergency.type, id=emergency.id) }}">Tell people</a>
+        </li>
+    {% endfor %}
+  </ol>
+  
   {% include 'includes/map.html' %}
 
   <p></p>
-  <div class="button_wrapper">
-    <a href="/send-alert" class="usa-button">Setup and send an alert about an emergency</a>
-  </div>
-   
   
 {% endblock %}

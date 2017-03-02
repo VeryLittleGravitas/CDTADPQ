@@ -153,7 +153,9 @@
       <div class="usa-grid">
         <div class="usa-footer-logo usa-width-one-half">
           <!--img class="usa-footer-logo-img" src="{{ url_for('static', filename='vlg-logo.jpg') }}" alt="Logo image"-->
-          <p>made with <a href="https://github.com/VeryLittleGravitas">very little gravitas</a></p>
+          <p><a href="https://github.com/VeryLittleGravitas/CDTADPQ/issues">Report a problem with this website</a></p>
+          <p>This is a <a href="https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md">prototype</a> of a new Digital Service <br /><span style="color:#999">made with <a style="color:#999" href="https://github.com/VeryLittleGravitas">very little gravitas</a></span></p>
+
         </div>
         <div class="usa-footer-contact-links usa-width-one-half">
           <!--a class="usa-link-facebook" href="javascript:void(0);">
@@ -170,16 +172,26 @@
           </a-->
           <p>A service of</p>
           <address>
-            <h3 class="usa-footer-contact-heading">Office of Emergency Services</h3>
-            <p>(916) 845-8510</p>
-            <a href="mailto:info@agency.gov">info@agency.gov</a>
+            <h3 class="usa-footer-contact-heading">California Governor’s Office of <br />Emergency Services (Cal OES)</h3>
+            <p>Telephone: (916) 845-8510</p>
+            <p>3650 Schriever Avenue, Mather, California 95655-4203</p>
           </address>
-          <p><a href="">What is this website?</a></p>
+          
         </div>
       </div>
     </div>
   </footer>
   <!-- Update the link path to where your JavaScript file is located. For example: /path/to/your/assets/js/lib/uswds.min.js -->
-  <script src="{{ url_for('static', filename='uswds-0.14.0/js/uswds.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='uswds-0.14.0/js/uswds.min.js') }}"></script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-92776453-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
   </body>
 </html>
