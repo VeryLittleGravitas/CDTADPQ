@@ -200,7 +200,7 @@ def post_email_address():
 def get_email_addressed(address_encoded):
     signer = itsdangerous.URLSafeSerializer(flask.current_app.secret_key)
     email_address = signer.loads(address_encoded)
-    print('POOP', email_address, 'from', address_encoded)
+    print('TEST', email_address, 'from', address_encoded)
     return flask.render_template('email-registered.html', email_address=email_address)
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
