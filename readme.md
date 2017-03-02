@@ -1,6 +1,6 @@
 # CA Alerts, made with Very Little Gravitas
 
-[California Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)) 
+[California Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)), submitted by Very Little Gravitas LLC for the California Department of Technology [Digital Services Agile Development Prequalified Vendor Pool Refresh](https://github.com/CDTProcurement/adpq).
 
 ## 1. CA Alerts
 
