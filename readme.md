@@ -196,9 +196,7 @@ q. **Setup or used continuous monitoring;**
 
 [TODO: see [Issue 96](https://github.com/VeryLittleGravitas/CDTADPQ/issues/96).]
 
-r. **Deployed their software in an open source container, such as Docker (i.e., utilized operating-system-level virtualization
-
-CA Alerts has been built with Docker, with a single Docker image that includes PostgreSQL, the CA Alerts web application and required dependencies. The production application is deployed on the Heroku PaaS.
+r. CA Alerts has been built with Docker: a single Docker image includes PostgreSQL, the CA Alerts web application and required dependencies. The production application is deployed on the Heroku PaaS.
 
 [TODO: see [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).]
 
