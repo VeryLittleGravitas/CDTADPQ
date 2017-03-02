@@ -92,13 +92,13 @@ b. Section 2 (above) identifies each member of the multidisciplinary team and th
 
 c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and reflected in the implementation of requirements. See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki for further evidence.
 
-d. We used the following user-centered design techniques outlined in Section 4 (above).
+d. We used the user-centered design techniques outlined in Section 4 (above).
 
 e. See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) in Github.
 
 f. **Used Swagger to document the RESTful API, and provided a link to the Swagger API;**
 
-TODO: but we have created 1 API in this project that returns a zipcode for a given latitude and longitude. 
+[TODO: we have created 1 API in this project that returns a zipcode for a given latitude and longitude, but need swagger documentation link]
 
 g. See the code repository for the specifics of how the user-facing templates were implemented [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master). They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).
 
