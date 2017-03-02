@@ -1,5 +1,6 @@
-FROM python:3.6-alpine
-RUN apk add --no-cache supervisor
+FROM ubuntu:14.04
+RUN apt-get update -y
+RUN apt-get install -y python3-pip python3-dev postgresql-dev build-essential supervisor
 ADD . .
 RUN pip install -r ./requirements.txt
 
