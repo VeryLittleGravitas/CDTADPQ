@@ -46,7 +46,7 @@ def send_verification_code(account, to_number, code):
     '''
     '''
     url = uritemplate.expand(TwilioURL, dict(account=account.account))
-    body = 'Your CA Alerts PIN code is {}. Use this to confirm your phone number. \n\nIf you didn't ask for this, please ignore this message.'.format(code)
+    body = 'Your CA Alerts PIN code is {}. Use this to confirm your phone number. \n\nIf you didn\'t ask for this, please ignore this message.'.format(code)
     data = dict(From=account.number, To=to_number, Body=body)
     auth = account.sid, account.secret
     posted = requests.post(url, auth=auth, data=data)
@@ -63,8 +63,8 @@ def send_email_verification_code(account, to_address, code):
     '''
     '''
     url = uritemplate.expand(MailgunURL, dict(domain=account.domain))
-    body = 'Your CA Emergency Alert PIN number is {}.\n\nIf you did not ask for this, please ignore this message.'.format(code)
-    data = {'from': account.sender, 'to': to_address, 'subject': 'Your CA Emergency Alert PIN number', 'text': body}
+    body = 'Your CA Alerts PIN code is {}.\n\nUse this to confirm your email address. If you didn\'t ask for this, please ignore this message.'.format(code)
+    data = {'from': account.sender, 'to': to_address, 'subject': 'Your CA Alerts PIN code', 'text': body}
     auth = 'api', account.api_key
     posted = requests.post(url, auth=auth, data=data)
 
