@@ -98,11 +98,11 @@ The RFI explicitly identifies 20 requirements (a-t) for the prototype submission
 
 a. We appointed Dan Hon as both Product Manager and leader of the project. He helped the team understand the requirements, was responsible for prioritizing work, and is ultimately accountable for the quality of the submitted prototype 
 
-b. Section 2 (above) identifies each member of the multidisciplinary team and their specialisms. 
+b. [Section 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md#2-our-team) (above) identifies each member of our multidisciplinary team and their specialisms. 
 
-c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See the [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) on the project wiki for further evidence.
+c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for further evidence.
 
-d. We used the user-centered design techniques outlined in Section 4 (above).
+d. We used the user-centered design techniques outlined in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
 
 e. See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) in Github.
 
@@ -110,17 +110,17 @@ f. **Used Swagger to document the RESTful API, and provided a link to the Swagge
 
 [TODO: we have created 1 API in this project that returns a zipcode for a given latitude and longitude, but need swagger documentation link]
 
-g. See the code repository for the specifics of how the user-facing templates were implemented [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master). They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).
+g. See our code repository for the specifics of how the user-facing templates were implemented [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master). They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).
 
 h. This project uses the [Draft U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library. See [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) for the initial implementation of the pattern library.
 
 i. See [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for evidence of usability testing videos, as well as notes from interviews.
 
-j. The lightweight scrum process we used provided a review point at the end of each sprint, enabling us to reflect users' feedback into the grooming and planning session of the subsequent sprint. This has allowed us to iteratively produce features that reflect real users' requirements. See Section 3 (above) for further detail. 
+j. The lightweight scrum process we used provided a review point at the end of each sprint, enabling us to reflect users' feedback into the grooming and planning session of the subsequent sprint. This has allowed us to iteratively produce features that reflect real users' requirements. See [Section 3](https://github.com/VeryLittleGravitas/CDTADPQ#3-agile-delivery-process) (above) for further detail. 
 
-k. We have chosen to use the Draft U.S. Web Design Standards with no custom HTML. This pattern library was chosen to ensure the delivery of a responsive design that works on multiple devices.
+k. We chose the Draft U.S. Web Design Standards with no custom HTML or CSS to ensure a responsive design that works on multiple devices.
 
-l. We are using the following modern, open-source technologies for this prototype:
+l. We are using the following modern, open-source technologies:
 
 1. Our prototype is written in [Python 3](https://www.python.org/download/releases/3.0/).
 2. [Flask](http://flask.pocoo.org), a micro web framework for Python based on [Werkzeug](http://werkzeug.pocoo.org/docs/0.11/), the WSGI toolkit, and [Jinja 2](http://jinja.pocoo.org/docs/2.9/), a templating language based on Django's templating approach. The Flask framework also features integrated support for unit testing and RESTful request dispatching.
@@ -142,15 +142,15 @@ To be added:
 15. [Skyliner](https://www.skyliner.io), to automate self-contained Production and QA environments on Amazon Web Services.
 16. Docker
 
-m. This project is using [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.
+m. We use [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.
 
-We are currently automatically deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
+We automatically deploy the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
 
-n. Our Github respository includes a master list of unit tests at https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py
+n. Our repository includes a master list of unit tests at https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py
 
-Automated tests are run by Travis CI, and the results are available at https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds
+Automated tests are run by Travis CI, the results are available at https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds
 
-o. We are using [Travis CI](https://travis-ci.org) for continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.
+o. We use [Travis CI](https://travis-ci.org) for continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.
 
 p. **Setup or used configuration management;**
 
@@ -166,4 +166,4 @@ r. **Deployed their software in an open source container, such as Docker (i.e., 
 
 s. Instructions on installation and running of the prototype can be found here: [https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype).
 
-t. We have chosen the [MIT License](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/LICENSE) for this prototype.
+t. Our work and code for this prototype is licensed under the [MIT License](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/LICENSE).
