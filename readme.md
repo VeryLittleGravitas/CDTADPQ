@@ -119,12 +119,13 @@ l. We are using the following modern, open-source technologies for this prototyp
 2. [Flask](http://flask.pocoo.org), a micro web framework for Python based on [Werkzeug](http://werkzeug.pocoo.org/docs/0.11/), the WSGI toolkit, and [Jinja 2](http://jinja.pocoo.org/docs/2.9/), a templating language based on Django's templating approach. The Flask framework also features integrated support for unit testing and RESTful request dispatching.
 3. [PIP](https://pip.pypa.io/en/stable/) for ensuring the correct Python packages are installed to support the application
 4. [PostgreSQL 9](https://www.postgresql.org), an enterprise-grade database used by government agencies in the U.S. such as The National Weather Service, the Centers for Disease Control and Prevention and State Department. 
-5. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
-6. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
-7. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
-8. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
-9. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
-10. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
+5. [psycopg](http://initd.org/psycopg/) as the PostgreSQL adapter for Python.
+6. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
+7. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
+8. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
+9. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
+10. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
+11. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
 12. [Slack](https://slack.com) for team collaboration and chat.
 
 To be added: 
