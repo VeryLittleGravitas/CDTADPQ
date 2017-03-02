@@ -1,6 +1,6 @@
-# California Alerts, made with Very Little Gravitas
+# CA Alerts, made with Very Little Gravitas
 
-## 1. California Alerts
+## 1. CA Alerts
 
 [California Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
 
