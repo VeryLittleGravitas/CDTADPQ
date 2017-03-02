@@ -8,27 +8,27 @@
 {% block main_content %}
    <form id="register" class="usa-form" action="{{ url_for('post_confirm') }}" method="post">
     <fieldset>
-      <legend>PIN Number</legend>
+      <legend>Confirm your phone number</legend>
 
       {% if error_wrong_pin_number %}
          <div class="usa-alert usa-alert-error" role="alert">
            <div class="usa-alert-body">
              <h3 class="usa-alert-heading">Wrong PIN</h3>
-             <p class="usa-alert-text">You entered a wrong PIN number. Try again.</p>
+             <p class="usa-alert-text">We couldn't confirm the phone number you gave us. Try entering the PIN again, or <a href="{{ url_for('get_register') }}">get another PIN code</a>.</p>
            </div>
          </div>
       {% endif %}
-      
-      <p>In a few minutes, you should receive a text message to the phone number you gave us.</p>
-      
-      <p>Enter the number here:</p>
 
-      <label for="pin-number" class="usa-input-required">PIN number</label>
+      <p>In a few minutes, you should receive a text message with a PIN code to the phone number you gave us.</p>
+
+      <p>Enter the PIN you received below.</p>
+
+      <label for="pin-number" class="usa-input-required">PIN code</label>
       <input id="pin-number" name="pin-number" type="text" required="" aria-required="true">
       <input id="signup-id" name="signup-id" type="hidden" value="{{signup_id}}">
 
       <div class="button_wrapper">
-		<button>Submit</button>
+		<button>Confirm phone number</button>
 		</div>
 
       <p>If you’ve waited more than 5 minutes, <a href="{{ url_for('get_register') }}">go back and try again</a>.</p>
