@@ -10,15 +10,12 @@
 
   <fieldset>
   <legend>This is the message that will be sent to anyone who has registered to receive admin notifications</legend>
-    <label for="emergency-message">SMS Message</label>
+    <label for="emergency-message">SMS Message <span class="usa-form-hint">Maximum 140 characters</span></label>
     <textarea id="emergency-message" name="emergency-message" maxlength="140"></textarea>
     <input id="emergency" type="radio" name="broadcast-notification-types" value="emergency" checked="checked">
     <label for="emergency">Emergency Notification</label>
     <input id="emergency" type="radio" name="broadcast-notification-types" value="non-emergency">
     <label for="non-emergency">Non-Emergency Notification</label>
-
-
-    <p>Maximum 140 characters</p>
   </fieldset>
 
   <button class="usa-button-secondary">Send Alerts</button>
