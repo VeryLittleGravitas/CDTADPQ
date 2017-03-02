@@ -58,15 +58,25 @@ The following describes the four 1 week sprints that were completed for the desi
 
 #### Sprint 2
 
-[TODO: LIST OUT DELIVERED SCOPE, REFERENCE USER STORIES FROM KABAN]
+* User interface and user flow visualizations
+* Set up page templates
+* User profile creation and management
+* Emergency notification test send
 
 #### Sprint 3
 
-[TODO: LIST OUT DELIVERED SCOPE, REFERENCE USER STORIES FROM KABAN]
+* Set up step-through templates for admin view
+* Notification signup 
+* Update geo-location criteria for notifications
+* Selection of delivery format - sms and email
+* Implemented Google Analytics
 
 #### Sprint 4
 
-[TODO: LIST OUT DELIVERED SCOPE, REFERENCE USER STORIES FROM KABAN]
+* Finalized prototype documentation
+* Finalized copy for the prototype application
+* Customer support and issue reporting for user 
+[TODO - add more]
 
 
 ## 4. User-Centered Design 
