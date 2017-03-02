@@ -20,7 +20,7 @@
         <header class="usa-banner-header">
           <div class="usa-grid usa-banner-inner">
           <img src="{{ url_for('static', filename='cadotgov/cadotgov.png') }}" alt="ca.gov">
-          <p>An official website of the State of California</p>
+          <p>A <strong>prototype</strong> website for the State of California</p>
           <button class="usa-accordion-button usa-banner-button"
             aria-expanded="false" aria-controls="gov-banner">
             <span class="usa-banner-button-text">Here's how you know</span>
@@ -29,19 +29,21 @@
         </header>
         <div class="usa-banner-content usa-grid usa-accordion-content" id="gov-banner">
           <div class="usa-banner-guidance-gov usa-width-one-half">
-            <img class="usa-banner-icon usa-media_block-img" src="{{ url_for('static', filename='uswds-0.14.0/img/icon-dot-gov.svg') }}" alt="Dot gov">
+            <!-- <img class="usa-banner-icon usa-media_block-img" src="{{ url_for('static', filename='uswds-0.14.0/img/icon-dot-gov.svg') }}" alt="Dot gov"> -->
+            <img class="usa-banner-icon usa-media_block-img" src="{{ url_for('static', filename='cadotgov/cadotgov-large.png') }}" alt="CA Dot gov">
+
             <div class="usa-media_block-body">
               <p>
-                <strong>The .gov means it’s official.</strong>
+                <strong>The ca.gov means it’s official.</strong>
                 <br>
-                Federal government websites always use a .gov or .mil domain. Before sharing sensitive information online, make sure you’re on a .gov or .mil site by inspecting your browser’s address (or “location”) bar.
+                State of California government websites always use a ca.gov address. Before sharing sensitive information online, make sure you’re on a ca.gov checking your browser’s address (or “location”) bar.
               </p>
             </div>
           </div>
           <div class="usa-banner-guidance-ssl usa-width-one-half">
-            <img class="usa-banner-icon usa-media_block-img" src="{{ url_for('static', filename='uswds-0.1 4.0/img/icon-https.svg') }}" alt="SSL">
+            <img class="usa-banner-icon usa-media_block-img" src="{{ url_for('static', filename='uswds-0.14.0/img/icon-https.svg') }}" alt="SSL">
             <div class="usa-media_block-body">
-              <p>This site is also protected by an SSL (Secure Sockets Layer) certificate that’s been signed by the U.S. government. The <strong>https://</strong> means all transmitted data is encrypted  — in other words, any information or browsing history that you provide is transmitted securely.</p>
+              <p>This site is also protected by an SSL (Secure Sockets Layer) certificate that’s been signed by the State of California. The <strong>https://</strong> means all transmitted data is encrypted  — in other words, any information or browsing history that you provide is transmitted securely.</p>
             </div>
           </div>
         </div>
@@ -55,7 +57,7 @@
         <button class="usa-menu-btn">Menu</button>
         <div class="usa-logo" id="logo">
           <em class="usa-logo-text">
-            <a href="/" accesskey="1" title="Home" aria-label="Home">CA Emergency Alerts</a>
+            <a href="/" accesskey="1" title="Home" aria-label="Home">CA Alerts</a>
           </em>
         </div>
       </div>
@@ -175,7 +177,7 @@
             <p>Telephone: (916) 845-8510</p>
             <p>3650 Schriever Avenue, Mather, California 95655-4203</p>
           </address>
-          
+
         </div>
       </div>
     </div>

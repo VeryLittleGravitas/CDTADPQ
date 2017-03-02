@@ -47,6 +47,11 @@
    <form id="sign-up" class="usa-form" action="{{ url_for('post_register') }}" method="post">
     <p>Use your phone number and zip code to get fire, flood, earthquake and tsunami emergency alerts from the State of California.</p>
 
+    <ul>
+      <li>Enter the Zip Code for the area that you want to receive alerts</li>
+      <li>To confirm your phone number, we'll send you a PIN code</li>
+    </ul>
+
       <label for="phone-number" class="usa-input-required">Phone number</label>
       <input id="phone-number" name="phone-number" type="tel" required="" aria-required="true">
 
@@ -54,9 +59,9 @@
       <input id="zipcode" name="zipcode" type="text" required="" aria-required="true">
 
       <div class="button_wrapper">
-		<button>Send confirmation message</button>
+		<button>Get a PIN code</button>
 		</div>
-   
+
   </form>
 
   <script>
