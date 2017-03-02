@@ -77,13 +77,39 @@ We used a number of different user-centered design techniques in developing the 
 * [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
 * [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
 
+## 5. Technical description and narrative of code flow
 
-## 5. Deployment Instructions 
+CA Alerts is a Python 3 web application built using the Flask micro web framework. The web application front-end is implemented using the U.S. Web Design Standards pattern library with no alterations or custom CSS.  
+
+When the user opens the CA Alerts home page, they can:
+
+* register for alerts
+* sign in 
+* sign in as an administrator
+
+The application's web [__init__.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) file defines the addresses/routes and HTTP methods through which the application delivers functionality. Application routes are rendered in HTML for users using the Jinja templating engine built into the Flask framework. The application uses the Python module [Psycop](http://initd.org/psycopg/) to connect to the application Postgres database for data storage and retrieval.
+
+Following the modern software engineering practice of separation of concerns, application functionality relating to the following areas is imported through Python modules stored in the application's data directory: 
+
+* [users.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/users.py) for functions such as returning user information from the application database, verifying user SMS identity via Twilio APIs, verifying user email address via Mailgun APIs, managing user profile information and so on
+* [zipcodes.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/zipcodes.py) for functions such as returning a zipcode for a given latitude and longitude
+* [wildfires.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/wildfires.py) for functions such as wildfire data parsing, storing wildfire information in the application database, returning a list of current fires, returning data about an individual fir
+* [notify.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/notify.py) for notification functions, setting up third party API credentials, returning a list of geofenced users to notify, sending notifications via supported third party APIs, logging
+
+Public users register to receive emergency alerts by submitting a phone number and a zipcode. The zipcode can be entered manually or is retrieved from a supported browser by the HTML geolocation API. Entering a phone number and zipcode results in an HTTP POST to the application web server, which creates an (unregistered) user in the application database, generates a PIN confirmation code and uses the Twilio SMS API to send the PIN confirmation code to the user's phone number. The user must then enter a code on a confirmation screen to verify their phone number. 
+
+Verified public users (who have entered the correct PIN code) may edit their profile and add an email address. If they choose to receive notifications by email, the Mailgun API is used to deliver email notifications. 
+
+We use the same confirmation system to perform public user login. There is no "password", just simple authentication. For an existing user to log in, they identify themselves with their phone number and we send a PIN code confirmation in the same flow as above. This acts as user verification for login. 
+
+The **Heroku** environment is configured to refresh the required data sources **every hour** and **scripts** are run to analyze and parse that data for presentation to the admin user. 
+
+## 6. Deployment Instructions 
 
 See our documentation to [install and run the prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype)
 
 
-## 6. Additional Material
+## 7. Additional Material
 * [Project wiki](https://github.com/VeryLittleGravitas/CDTADPQ/wiki)
 * [Design exploration](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Design-exploration)
 * [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal)
