@@ -27,7 +27,40 @@
         maxZoom: 18
     }).addTo(map);
 
-    L.geoJSON({{ emergencies_geojson|tojson|safe }}).bindPopup(function (layer) {
+    L.geoJSON({{ emergencies_geojson|tojson|safe }},
+        {
+            pointToLayer: function(point, latlng)
+            {
+                if(point.properties.type == 'fire')
+                {
+                    var url = '{{ url_for("static", filename="orange-marker-icon.png") }}',
+                        url2x = '{{ url_for("static", filename="orange-marker-icon-2x.png") }}',
+                        url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
+                        opts = L.Icon.Default.prototype.options;
+                    return L.marker(latlng, { icon: L.icon({
+                        iconUrl: url, iconRetinaUrl: url2x, shadowUrl: url_,
+                        iconSize: opts.iconSize, iconAnchor: opts.iconAnchor,
+                        popupAnchor: opts.popupAnchor, shadowSize: opts.shadowSize,
+                        shadowAnchor: opts.shadowAnchor
+                        }) })
+                }
+                else if(point.properties.type == 'earthquake')
+                {
+                    var url = '{{ url_for("static", filename="yellow-marker-icon.png") }}',
+                        url2x = '{{ url_for("static", filename="yellow-marker-icon-2x.png") }}',
+                        url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
+                        opts = L.Icon.Default.prototype.options;
+                    return L.marker(latlng, { icon: L.icon({
+                        iconUrl: url, iconRetinaUrl: url2x, shadowUrl: url_,
+                        iconSize: opts.iconSize, iconAnchor: opts.iconAnchor,
+                        popupAnchor: opts.popupAnchor, shadowSize: opts.shadowSize,
+                        shadowAnchor: opts.shadowAnchor
+                        }) })
+                }
+
+                return L.marker(latlng)
+            }
+        }).bindPopup(function (layer) {
         var p = layer.feature.properties;
         if(p.href) {
             return '<a href="' + p.href + '">' + p.description + '</a>';
@@ -41,8 +74,8 @@
     L.geoJSON({{users_geojson|tojson|safe}},
         {
             pointToLayer: function(point, latlng) {
-                var url = '{{ url_for("static", filename="marker-icon.png") }}',
-                    url2x = '{{ url_for("static", filename="marker-icon-2x.png") }}',
+                var url = '{{ url_for("static", filename="green-marker-icon.png") }}',
+                    url2x = '{{ url_for("static", filename="green-marker-icon-2x.png") }}',
                     url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
                     opts = L.Icon.Default.prototype.options;
                 return L.marker(latlng, { icon: L.icon({
