@@ -24,6 +24,13 @@
         maxZoom: 18
     }).addTo(map);
     
-    L.geoJSON({{ emergencies_geojson|tojson|safe }}).addTo(map);
+    L.geoJSON({{ emergencies_geojson|tojson|safe }}).bindPopup(function (layer) {
+        var p = layer.feature.properties;
+        if(p.href) {
+            return '<a href="' + p.href + '">' + p.description + '</a>';
+        } else {
+            return p.description;
+        }
+    }).addTo(map);
 
 </script>
