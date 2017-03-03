@@ -1,0 +1,12 @@
+FLASK_SECRET_KEY={Secret string you choose}
+DATABASE_URL={PostgreSQL database connection string}
+TWILIO_NUMBER={Twilio phone number}
+TWILIO_ACCOUNT={Twilio account ID}
+TWILIO_SID={Twilio API SID}
+TWILIO_SECRET={Twilio API secret}
+MAILGUN_API_KEY={Mailgun API key}
+MAILGUN_DOMAIN={Mailgun account domain}
+MAILGUN_SENDER={Mailgun sender email address}
+ADMIN_USERNAME={Admin username you choose}
+ADMIN_PASSWORD={Admin password you choose}
+RADIUS_MILES={Radius in miles for alerts}
