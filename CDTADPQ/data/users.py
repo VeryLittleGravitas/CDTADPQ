@@ -107,16 +107,15 @@ def verify_user_signup(db, given_pin_number, signup_id):
 def get_user_info(db, phone_number):
     '''
     '''
-    db.execute('''SELECT phone_number, zip_codes, email_address
+    db.execute('''SELECT phone_number, zip_codes, email_address, notification_types
                   FROM users WHERE phone_number = %s''',
                (phone_number, ))
 
     try:
-        (phone_number, zip_codes, email_address) = db.fetchone()
+        (phone_number, zip_codes, email_address, notification_types) = db.fetchone()
     except TypeError:
         return None
-
-    return phone_number, zip_codes, email_address
+    return phone_number, zip_codes, email_address, notification_types
 
 def update_user_profile(db, phone_number, zip_codes_str, notification_types_str):
     '''
