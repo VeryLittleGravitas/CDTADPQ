@@ -55,6 +55,22 @@ def emergencies2geojson(emergencies, include_hrefs):
     
     return dict(type='FeatureCollection', features=features)
 
+def users2geojson(users):
+    '''
+    '''
+    features = [
+        dict(
+            type='Feature',
+            geometry=u['location'],
+            properties=dict(
+                users=u['users'],
+                zip_code=u['zip_code']
+                ))
+        for u in users
+        ]
+    
+    return dict(type='FeatureCollection', features=features)
+
 app = flask.Flask(__name__) 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = os.environ['FLASK_SECRET_KEY']
@@ -264,11 +280,13 @@ def get_admin():
             emergencies.extend(earthquakes.get_current_quakes(db))
             emergencies.extend(wildfires.get_current_fires(db))
             emergencies.extend(floods.get_current_floods(db))
+            users = notify.get_user_locations(db)
     
     emergencies_geojson = emergencies2geojson(emergencies, True)
+    users_geojson = users2geojson(users)
     return flask.render_template('admin.html', emergencies=emergencies,
                                  emergencies_geojson=emergencies_geojson,
-                                 **template_kwargs())
+                                 users_geojson=users_geojson, **template_kwargs())
 
 @app.route('/admin/send-alert/<type>/<id>')
 @user_is_an_admin

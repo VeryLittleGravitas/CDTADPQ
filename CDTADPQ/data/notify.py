@@ -36,6 +36,26 @@ def main():
                     log_user_notification(db, user, fire)
                 log_notification_for_admin_records(db, message, len(users_to_notify), fire.internal_id, 'fire')
 
+def get_user_locations(db):
+    '''
+    '''
+    db.execute('''SELECT COUNT(u.phone_number) AS users, u.zip_codes[u.index],
+                         ST_AsGeoJSON(ST_Centroid(z.geog::geometry)) AS center
+                  FROM (
+                      SELECT generate_subscripts(zip_codes, 1) AS index, zip_codes, phone_number
+                      FROM users
+                  ) AS u
+                  JOIN tl_2016_us_zcta510 AS z ON z."ZCTA5CE10" = u.zip_codes[u.index]
+                  GROUP BY u.zip_codes[u.index], z.geog''')
+    
+    users = []
+    for (count, zip_code, location_geojson) in db.fetchall():
+        location = json.loads(location_geojson)
+        user = dict(users=count, zip_code=zip_code, location=location)
+        users.append(user)
+    
+    return users
+
 def get_users_to_notify(db, fire_point):
     ''' Return the users that should be notified of this fire
     '''
