@@ -10,6 +10,8 @@
 
 Ths prototype is based on our experience delivering digital services that meet user needs and are simple and intuitive enough so users succeed first time.
 
+A [screenshot walkthrough](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/CA-Alerts-Walkthrough) shows the flow of the production application on our wiki.
+
 Where appropriate, we've [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook).
 
 ### California residents and visitors can use CA Alerts to:
