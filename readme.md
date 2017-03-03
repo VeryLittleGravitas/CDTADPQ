@@ -10,14 +10,14 @@ This prototype has been developed based on our experience in delivering digital 
 
 Where appropriate, we have [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook). 
 
-### For California residents and visitors, California Alerts:
+### For California residents and visitors, CA Alerts:
 
 * lets users receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
 * lets users choose a location (a zipcode) for which they will receive emergency and non-emergency alerts 
 * lets users choose whether to receive alerts by SMS or email (with forthcoming push notification functionality)
 * lets users sign up quickly and easily, by only requiring a phone number and a zipcode
 
-### For authorized State emergency workers, California Alerts: 
+### For authorized State emergency workers, CA Alerts: 
 
 * publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
 * lets users visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
@@ -168,13 +168,14 @@ l. We are using the following modern, open-source technologies:
 3. [PIP](https://pip.pypa.io/en/stable/) for ensuring the correct Python packages are installed to support the application
 4. [PostgreSQL 9](https://www.postgresql.org), an enterprise-grade database used by government agencies in the U.S. such as The National Weather Service, the Centers for Disease Control and Prevention and State Department. 
 5. [psycopg](http://initd.org/psycopg/) as the PostgreSQL adapter for Python.
-6. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
-7. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
-8. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
-9. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
-10. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
-11. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
-12. [Slack](https://slack.com) for team collaboration and chat.
+6. [Swagger](http://swagger.io) to document APIs
+7. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
+8. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
+9. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
+10. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
+11. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
+12. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
+13. [Slack](https://slack.com) for team collaboration and chat.
 
 To be added: 
 
