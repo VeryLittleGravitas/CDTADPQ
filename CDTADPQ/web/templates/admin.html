@@ -36,7 +36,7 @@
         </div>
           <form action="{{ url_for('post_send_broadcast_alert') }}" method="post">
 
-              <label for="emergency-message">Alert message<span class="usa-form-hint">Maximum 140 characters</span></label>
+              <label for="emergency-message">Alert message <span class="usa-form-hint">Maximum 140 characters</span></label>
               <textarea id="emergency-message" name="emergency-message" maxlength="140"></textarea>
               <input id="emergency" type="radio" name="broadcast-notification-types" value="emergency" checked="checked">
               <label for="emergency">Emergency Notification</label>
