@@ -28,7 +28,7 @@ Where appropriate, we've [applied the plays from the US Digital Services Playboo
 
 * Request the prototype Authorized User username and password by sending an email to: <a href="mailto:ca-alerts-admin@verylittlegravitas.com?subject=CA Alerts Admin Request">ca-alerts-admin@verylittlegravitas.com</a> with the subject "CA Alerts Admin Request".
 
-## 2. Our team
+## 2. Our Team
 
 The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him the leader of the project, with full responsibility and authority to build the prototype. He had full accountability for the quality of the prototype.
 
@@ -71,12 +71,18 @@ For this RFI, we implemented a simplified process, appropriate to scope and avai
 * Edit geo-location criteria for notifications
 * Selection of delivery format - SMS and email
 * Implemented Google Analytics
+* Reassess issue priorities and assign [stretch](https://github.com/VeryLittleGravitas/CDTADPQ/issues?q=is%3Aissue+is%3Aopen+label%3AStretch) label to stories out of prototype scope 
 
 #### Sprint 4
 
 * Finalized prototype documentation
 * Finalized copy for the prototype application
 * Customer support contact and issue reporting for user
+* Administrator user research
+* Implement email delivery 
+* Implement administrator map interface improvements
+* Reassess issue priorities and assign [stretch](https://github.com/VeryLittleGravitas/CDTADPQ/issues?q=is%3Aissue+is%3Aopen+label%3AStretch) label to stories out of prototype scope 
+
 [TODO - add more]
 
 
@@ -89,7 +95,7 @@ We used these user-centered design techniques:
 3. [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
 4. [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if real users could successfully use our service
 
-## 5. Technical description and narrative of code flow
+## 5. Written Technical Approach
 
 CA Alerts is a Python 3 web application built using the Flask micro web framework. The web front-end is implemented using the U.S. Web Design Standards pattern library with no alterations or custom CSS.  
 
