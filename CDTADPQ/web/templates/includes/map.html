@@ -1,5 +1,19 @@
 <div id="the-map" style="height:500px; width:100%; background-color:#eee">map placeholder</div>
- 
+<ul class="usa-accordion-bordered">
+    <li>
+        <button class="usa-accordion-button" aria-controls="amendment-b-5">
+        Map legend
+        </button>
+        <div id="amendment-b-5" class="usa-accordion-content">
+        <ul style="list-style-type: none">
+            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Fire marker" /> Fire location</li>
+            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Flood marker" /> Flood location</li>
+            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Earthquake marker" /> Earthquake location</li>
+            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Fire marker" /> Fire location</li>
+            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Users marker" /> Registered users</li>
+        </div>
+    </li>
+</ul> 
 
 <script>
     var div = document.getElementById('the-map');
