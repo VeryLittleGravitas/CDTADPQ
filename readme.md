@@ -44,6 +44,10 @@ We assembled our multidisciplinary team based on our experience and [GSA 18F Agi
 * **Backend Web Developer**: Erica Kwan, [@pui](https://github.com/pui) and [LinkedIn](https://www.linkedin.com/in/ericakwan/)
 * **Delivery Manager**: Kay Chung, [@kerrching](https://github.com/kerrching) and [LinkedIn](https://www.linkedin.com/in/kerrching/)
 
+A photograph of our team doing a remote standup in Sprint 2:
+
+![A photograph of our team doing a remote standup in Sprint 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/documentation/week2/remote-standup.jpg)
+
 ## 3. Agile Delivery Process
 
 The agile delivery process used at Very Little Gravitas is based on the open standards Scrum framework, with input and iterative feedback from user-centered design techniques.
