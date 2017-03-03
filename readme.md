@@ -1,10 +1,10 @@
 # CA Alerts, made with Very Little Gravitas for CDT RFI # CDT-ADPQ-0117
 
-[CA Alerts](https://vlg-ctdadpq.herokuapp.com) ([https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com)), submitted by Very Little Gravitas LLC for the California Department of Technology [Digital Services Agile Development Prequalified Vendor Pool Refresh](https://github.com/CDTProcurement/adpq) for CDT RFI # CDT-ADPQ-0117.
+[CA Alerts](https://alerts-ca.herokuapp.com) ([https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com)), submitted by Very Little Gravitas LLC for the California Department of Technology [Digital Services Agile Development Prequalified Vendor Pool Refresh](https://github.com/CDTProcurement/adpq) for CDT RFI # CDT-ADPQ-0117.
 
 ## 1. CA Alerts
 
-[CA Alerts](https://vlg-ctdadpq.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
+[CA Alerts](https://alerts-ca.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
 
 This prototype has been developed based on our experience in delivering digital services that meet user needs and that are simple and intuitive enough that users succeed first time.
 
@@ -146,7 +146,7 @@ d. We used 4 user-centered design techniques in [Section 4](https://github.com/V
 
 e. The project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) is in Github.
 
-f. We used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://vlg-ctdadpq.herokuapp.com/api/).
+f. We used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://alerts-ca.herokuapp.com/api/).
 
 g. Our [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) shows how user-facing templates were implemented using standards compliant, accessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement). The U.S. Web Design Standards were used, which are [fully compliant with ADA and WCAG 2.0](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility)
 
@@ -182,11 +182,11 @@ To be added:
 15. [Skyliner](https://www.skyliner.io), to automate self-contained Production and QA environments on Amazon Web Services.
 16. Docker
 
-m. We use [Heroku](https://www.heroku.com) as PaaS provider. [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) shows inital setup of the Heroku deployment pipeline. The master branch is automatically deployed to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
+m. We use [Heroku](https://www.heroku.com) as PaaS provider. [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) shows inital setup of the Heroku deployment pipeline. The master branch is automatically deployed to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com).
 
 n. We have a [master list of unit tests](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py) and automated tests are run by Travis CI, [build and test results are public](https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds)
 
-o. [Travis CI](https://travis-ci.org) provides continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) documents initial setup.
+o. [Travis CI](https://travis-ci.org) provides continuous integration, automatically and continuously deploying the master branch to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com). [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) documents initial setup.
 
 p. **Setup or used configuration management;**
 
