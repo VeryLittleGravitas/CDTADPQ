@@ -38,3 +38,8 @@ class FloodTests (unittest.TestCase):
                 floods.store_flood_poly(db, flood)
                 db.execute('SELECT * FROM flood_polys WHERE valid_time = %s', ("FEB 28 - MAR 5",))
                 self.assertEqual(db.rowcount, 1)
+
+                # Ensure flood has not been added again
+                floods.store_flood_poly(db, flood)
+                db.execute('SELECT * FROM flood_polys WHERE valid_time = %s', ("FEB 28 - MAR 5",))
+                self.assertEqual(db.rowcount, 1)

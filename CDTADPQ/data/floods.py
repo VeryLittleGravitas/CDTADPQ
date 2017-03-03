@@ -39,13 +39,16 @@ class FloodPolygon:
 def store_flood_poly(db, flood_poly):
     ''' Add flood poly to the db if the flood poly does not already exist in the db
     '''
-    # Convert input GeoJSON to WKT
-    flood_json = json.dumps(flood_poly.location)
-    db.execute('SELECT ST_AsText(ST_GeomFromGeoJSON(%s))', (flood_json, ))
-    (geography_wkt, ) = db.fetchone()
+    db.execute('SELECT * FROM flood_polys WHERE start_time = %s', (flood_poly.start_time,))
+    flood_exists = db.rowcount
+    if not flood_exists:
+        # Convert input GeoJSON to WKT
+        flood_json = json.dumps(flood_poly.location)
+        db.execute('SELECT ST_AsText(ST_GeomFromGeoJSON(%s))', (flood_json, ))
+        (geography_wkt, ) = db.fetchone()
 
-    db.execute('INSERT INTO flood_polys (location, valid_time, outlook, issue_time, start_time, end_time, idp_source, idp_subset) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
-     (geography_wkt, flood_poly.valid_time, flood_poly.outlook, flood_poly.issue_time, flood_poly.start_time, flood_poly.end_time, flood_poly.idp_source, flood_poly.idp_subset))
+        db.execute('INSERT INTO flood_polys (location, valid_time, outlook, issue_time, start_time, end_time, idp_source, idp_subset) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+         (geography_wkt, flood_poly.valid_time, flood_poly.outlook, flood_poly.issue_time, flood_poly.start_time, flood_poly.end_time, flood_poly.idp_source, flood_poly.idp_subset))
 
 def convert_flood_poly(feature):
     '''
