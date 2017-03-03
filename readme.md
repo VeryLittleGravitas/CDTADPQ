@@ -115,7 +115,7 @@ We use the same confirmation system to perform public user login. There is no "p
 The **Heroku** environment is configured to refresh the required data sources **every hour** and **scripts** are run to analyze and parse that data for presentation to the admin user. 
 
 ### DESCRIBE HOW THE MAPS WORK
-Something something maps.
+We use [Leaflet.js](http://leafletjs.com) is used to display emergency data through a map interface on the CA Alerts homepage and in the Admin interface. SOMETHING GETS SOME JAVASCRIPT THAT IS USED ELSEWHERE TO DO A THING IN LEAFLET.
 
 ## 6. Deployment Instructions 
 
