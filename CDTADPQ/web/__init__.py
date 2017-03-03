@@ -37,6 +37,7 @@ def template_kwargs():
         )
 
 app = flask.Flask(__name__) 
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
@@ -229,7 +230,24 @@ def get_admin():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             emergencies.extend(wildfires.get_current_fires(db))
+    
+    features = [
+        dict(
+            type='Feature',
+            geometry=e.location,
+            properties=dict(
+                type=e.type,
+                id=e.id,
+                title=e.title,
+                description=e.description,
+                href=flask.url_for('get_send_alert', type=e.type, id=e.id)
+                ))
+        for e in emergencies
+        ]
+    emergencies_geojson = dict(type='FeatureCollection', features=features)
+    
     return flask.render_template('admin.html', emergencies=emergencies,
+                                 emergencies_geojson=emergencies_geojson,
                                  **template_kwargs())
 
 @app.route('/admin/send-alert/<type>/<id>')

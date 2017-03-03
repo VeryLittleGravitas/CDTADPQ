@@ -1,4 +1,4 @@
-<div style="height:500px; width:100%; background-color:#eee">map placeholder</div>
+<div id="the-map" style="height:500px; width:100%; background-color:#eee">map placeholder</div>
   <ul class="usa-accordion-bordered">
     <li>
         <button class="usa-accordion-button"
@@ -12,3 +12,18 @@
         </div>
     </li>
   </ul>
+
+<script>
+    // initialize the map on the "map" div with a given center and zoom
+    var map = L.map('the-map', {
+        center: [40, -100],
+        zoom: 3
+    });
+
+    L.tileLayer('http://c.tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png', {
+        maxZoom: 18
+    }).addTo(map);
+    
+    L.geoJSON({{ emergencies_geojson|tojson|safe }}).addTo(map);
+
+</script>
