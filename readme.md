@@ -198,21 +198,16 @@ l. We are using the following modern, open-source technologies:
 12. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
 13. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
 14. [Slack](https://slack.com) for team collaboration and chat.
+15. [Docker](https://www.docker.com) for containerization 
+16. [Pingdom](https://www.pingdom.com) for continuous monitoring of the prototype website.
 
-To be added:
-
-13. [Pingdom](https://www.pingdom.com) for continuous monitoring of the prototype website.
-14. Amazon Web Services
-15. [Skyliner](https://www.skyliner.io), to automate self-contained Production and QA environments on Amazon Web Services.
-16. Docker
-
-m. We use [Heroku](https://www.heroku.com) as PaaS provider. [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) shows inital setup of the Heroku deployment pipeline. The master branch is automatically deployed to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com).
+m. The production application is deployed on the [Heroku](https://www.heroku.com) PaaS. [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) shows setup of the Heroku deployment pipeline. The master branch is automatically deployed to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com).
 
 n. We have a [master list of unit tests](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py) and automated tests are run by Travis CI, [build and test results are public](https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds)
 
 o. [Travis CI](https://travis-ci.org) provides continuous integration, automatically and continuously deploying the master branch to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com). [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) documents initial setup.
 
-p. Our configuration management is implemented in an env-vars file that is used in production on Heroku, in development and for [running the Docker image](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Use-the-Docker-image)
+p. Configuration management is implemented in an env-vars file that is used in production on Heroku, in [development](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype) and for [running the Docker image](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Use-the-Docker-image)
 
 q. CA Alerts is continuously monitored using Pingdom with a [public uptime report](http://stats.pingdom.com/qp87mnx745hc/2571878).
 
