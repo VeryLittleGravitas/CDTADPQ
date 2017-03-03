@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous, psycopg2.extras
-from ..data import users, zipcodes, wildfires, notify, earthquakes, floods
+from ..data import users, zipcodes, wildfires, notify, earthquakes, floods, stats
 
 def user_is_logged_in(untouched_route):
     ''' Checks for presence of "phone_number" session variable.
@@ -322,11 +322,18 @@ def post_send_alert():
 @app.route('/admin/sent')
 @user_is_an_admin
 def get_sent_alert():
-    return flask.render_template('sent.html', **template_kwargs())
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            statistics = stats.get_all_notifications_log_rows(db)
+    return flask.render_template('sent.html', statistics=statistics, **template_kwargs())
 
 @app.route('/admin/log', methods=['GET'])
 def get_log():
-    return flask.render_template('admin-sent.html')
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            statistics = stats.get_all_notifications_log_rows(db)
+    return flask.render_template('admin-sent.html', statistics=statistics,
+                                 **template_kwargs())
 
 @app.route('/admin/send-broadcast-alert', methods=['POST'])
 @user_is_an_admin
