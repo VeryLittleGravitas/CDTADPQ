@@ -118,14 +118,14 @@ def get_user_info(db, phone_number):
 
     return phone_number, zip_codes, email_address
 
-def update_user_profile(db, phone_number, zip_codes_str):
+def update_user_profile(db, phone_number, zip_codes_str, notification_types_str):
     '''
     '''
     zip_codes = re.findall(r'\b(\d{5})\b', zip_codes_str)
 
-    db.execute('''UPDATE users SET zip_codes = %s
+    db.execute('''UPDATE users SET zip_codes = %s, notification_types = %s
                   WHERE phone_number = %s''',
-               (zip_codes, phone_number))
+               (zip_codes, [notification_types_str], phone_number))
 
 def update_email_address(db, phone_number, email_address):
     '''
@@ -139,10 +139,13 @@ def delete_user(db, phone_number):
     db.execute('DELETE FROM users WHERE phone_number = %s',
                (phone_number, ))
 
-def get_all_users(db):
+def get_all_users(db, notification_type):
     '''
     '''
-    db.execute('SELECT * FROM users')
+    if notification_type == 'non-emergency':
+        db.execute('SELECT * FROM users WHERE %s = ANY(notification_types)', (notification_type,))
+    else:
+        db.execute('SELECT * FROM users')
     all_users = []
     for user_row in db.fetchall():
         all_users.append(User(user_row['id'], user_row['phone_number'], user_row['zip_codes'],

@@ -212,7 +212,8 @@ def post_profile():
             else:
                 phone_number = flask.session['phone_number']
                 zip_codes_str = flask.request.form.get('zip-codes', '')
-                users.update_user_profile(db, phone_number, zip_codes_str)
+                notification_type_str = flask.request.form.get('non-emergencies', '')
+                users.update_user_profile(db, phone_number, zip_codes_str, notification_type_str)
                 redirect_url = flask.url_for('get_profile')
                 return flask.redirect(redirect_url, code=303)
 
@@ -318,7 +319,7 @@ def post_send_broadcast_alert():
     twilio_account = flask.current_app.config['twilio_account']
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
-            users_to_notify = users.get_all_users(db)
+            users_to_notify = users.get_all_users(db, notification_type)
             for user in users_to_notify:
                 print('notify.send_notification:', user, message)
                 notify.send_notification(twilio_account, user, message)

@@ -176,20 +176,20 @@ class UsersTests (unittest.TestCase):
         '''
         db = unittest.mock.Mock()
 
-        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94612')
+        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94612', 'non-emergency')
 
         self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', (['94612'], '+1 (510) 555-1212')))
+                         ('UPDATE users SET zip_codes = %s, notification_types = %s\n                  WHERE phone_number = %s', (['94612'], ['non-emergency'], '+1 (510) 555-1212')))
 
-        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94612, 94608')
-
-        self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', (['94612', '94608'], '+1 (510) 555-1212')))
-
-        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94XXX')
+        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94612, 94608', '')
 
         self.assertEqual(db.execute.mock_calls[-1][1],
-                         ('UPDATE users SET zip_codes = %s\n                  WHERE phone_number = %s', ([], '+1 (510) 555-1212')))
+                         ('UPDATE users SET zip_codes = %s, notification_types = %s\n                  WHERE phone_number = %s', (['94612', '94608'], [''], '+1 (510) 555-1212')))
+
+        user_info = users.update_user_profile(db, '+1 (510) 555-1212', '94XXX', 'non-emergency')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('UPDATE users SET zip_codes = %s, notification_types = %s\n                  WHERE phone_number = %s', ([], ['non-emergency'], '+1 (510) 555-1212')))
 
     def test_delete_user(self):
         '''
@@ -208,7 +208,12 @@ class UsersTests (unittest.TestCase):
         db.fetchall.return_value = [dict(id=1, phone_number='+15105551212', zip_codes=['94103'],
                                          email_address='me@example.com', emergency_types=['fire'])]
 
-        users.get_all_users(db)
+        users.get_all_users(db, '')
 
         self.assertEqual(db.execute.mock_calls[-1][1],
                          ('SELECT * FROM users',))
+
+        users.get_all_users(db, 'non-emergency')
+
+        self.assertEqual(db.execute.mock_calls[-1][1],
+                         ('SELECT * FROM users WHERE %s = ANY(notification_types)', ('non-emergency', )))
