@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous, psycopg2.extras
-from ..data import users, zipcodes, wildfires, notify
+from ..data import users, zipcodes, wildfires, notify, earthquakes
 
 def user_is_logged_in(untouched_route):
     ''' Checks for presence of "phone_number" session variable.
@@ -90,6 +90,7 @@ def get_index():
     emergencies = list()
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            emergencies.extend(earthquakes.get_current_quakes(db))
             emergencies.extend(wildfires.get_current_fires(db))
     
     emergencies_geojson = emergencies2geojson(emergencies, False)
@@ -259,6 +260,7 @@ def get_admin():
     emergencies = list()
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            emergencies.extend(earthquakes.get_current_quakes(db))
             emergencies.extend(wildfires.get_current_fires(db))
     
     emergencies_geojson = emergencies2geojson(emergencies, True)

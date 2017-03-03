@@ -1,4 +1,4 @@
-import os, psycopg2
+import os, psycopg2, json
 from datetime import datetime
 from . import sources
 
@@ -16,6 +16,24 @@ class EarthquakePoint:
         self.numstations = numstations
         self.region = region
         self.datetime = datetime
+    
+    @property
+    def title(self):
+        x, y = self.location['coordinates']
+        return '{magnitude} earthquake near {lat:.2f}, {lon:.2f}'.format(lon=x, lat=y, **self.__dict__)
+    
+    @property
+    def description(self):
+        x, y = self.location['coordinates']
+        return '{magnitude} earthquake'.format(lon=x, lat=y, **self.__dict__)
+    
+    @property
+    def type(self):
+        return 'earthquake'
+    
+    @property
+    def id(self):
+        return self.quake_id
 
 def store_quake_point(db, quake_point):
     ''' Add quake point to the db if the quake point does not already exist in the db
@@ -46,6 +64,25 @@ def convert_quake_point(feature):
         quaketime = None
 
     return EarthquakePoint(feature['geometry'], quake_id, magnitude, depth, numstations, region, quaketime)
+
+def get_current_quakes(db):
+    ''' Return all quakes that users should be notified of.
+    '''
+    # Need to not get all quakes, need to get all for today or something?
+    db.execute('''SELECT ST_AsGeoJSON(location) as coordinates_json, *
+                  FROM quake_points
+                  WHERE quake_id IS NOT NULL
+                    AND datetime > (NOW() - INTERVAL '2 days')''')
+
+    quake_rows = db.fetchall()
+    quakes = []
+    for quake_row in quake_rows:
+        quake_location = json.loads(quake_row['coordinates_json'])
+        quake_point = EarthquakePoint(quake_location, quake_row['quake_id'], quake_row['magnitude'],
+                                      quake_row['depth'], quake_row['numstations'], quake_row['region'],
+                                      quake_row['datetime'])
+        quakes.append(quake_point)
+    return quakes
 
 def main():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
