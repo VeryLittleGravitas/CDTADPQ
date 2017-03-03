@@ -14,10 +14,12 @@
   </ul>
 
 <script>
+    var div = document.getElementById('the-map');
+
     // initialize the map on the "map" div with a given center and zoom
-    var map = L.map('the-map', {
+    var map = L.map(div, {
         center: [40, -100],
-        zoom: 3
+        zoom: (div.clientWidth > 600 ? 4 : 3)
     });
 
     L.tileLayer('http://c.tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png', {
