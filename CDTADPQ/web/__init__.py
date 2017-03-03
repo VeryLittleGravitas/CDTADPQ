@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous, psycopg2.extras
-from ..data import users, zipcodes, wildfires, notify, earthquakes
+from ..data import users, zipcodes, wildfires, notify, earthquakes, floods
 
 def user_is_logged_in(untouched_route):
     ''' Checks for presence of "phone_number" session variable.
@@ -92,6 +92,7 @@ def get_index():
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             emergencies.extend(earthquakes.get_current_quakes(db))
             emergencies.extend(wildfires.get_current_fires(db))
+            emergencies.extend(floods.get_current_floods(db))
     
     emergencies_geojson = emergencies2geojson(emergencies, False)
     return flask.render_template('index.html', emergencies_geojson=emergencies_geojson,
@@ -262,6 +263,7 @@ def get_admin():
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             emergencies.extend(earthquakes.get_current_quakes(db))
             emergencies.extend(wildfires.get_current_fires(db))
+            emergencies.extend(floods.get_current_floods(db))
     
     emergencies_geojson = emergencies2geojson(emergencies, True)
     return flask.render_template('admin.html', emergencies=emergencies,
@@ -275,6 +277,8 @@ def get_send_alert(type, id):
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             if type == 'fire':
                 emergency = wildfires.get_one_fire(db, id)
+            if type == 'flood':
+                emergency = floods.get_one_flood(db, id)
     return flask.render_template('send-alert.html', emergency=emergency,
                                  **template_kwargs())
 
