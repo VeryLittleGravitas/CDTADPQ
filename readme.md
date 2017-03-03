@@ -42,10 +42,9 @@ We put together the following multidisciplinary team to build California Alerts,
 
 The agile delivery process used at Very Little Gravitas is based on the open standards Scrum framework, with input and iterative feedback from user-centered design techniques. 
 
-Documentation on the [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process)
+Please see our documentation for our [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process).
 
-For the purposes of the ADPQ submission, we implemented a simplified process, appropriate to the scope and available time. 
-The following describes the work delivered in each of the four 1 week sprints completed in building the prototype. 
+For this RFI, we implemented a simplified process, appropriate to the scope and available time. The following describes the work delivered in each of the four 1 week sprints completed in building the prototype. 
 
 #### Sprint 1
 * Defined usecases & personas
