@@ -1,5 +1,18 @@
 <div id="the-map" style="height:500px; width:100%; background-color:#eee">map placeholder</div>
- 
+<ul class="usa-accordion-bordered">
+    <li>
+        <button class="usa-accordion-button" aria-controls="amendment-b-5">
+        Map legend
+        </button>
+        <div id="amendment-b-5" class="usa-accordion-content">
+        <ul style="list-style-type: none">
+            <li><img src="{{ url_for("static", filename="orange-marker-icon.png") }}" alt="Fire marker" /> Fire location</li>
+            <li><img src="{{ url_for("static", filename="flood-marker-icon.png") }}" alt="Flood marker" style="height:35px" /> Flood location</li>
+            <li><img src="{{ url_for("static", filename="yellow-marker-icon.png") }}" alt="Earthquake marker" /> Earthquake location</li>
+            <li><img src="{{ url_for("static", filename="green-marker-icon.png") }}" alt="Users marker" /> Registered users</li>
+        </div>
+    </li>
+</ul>
 
 <script>
     var div = document.getElementById('the-map');
@@ -13,8 +26,41 @@
     L.tileLayer('http://c.tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png', {
         maxZoom: 18
     }).addTo(map);
-    
-    L.geoJSON({{ emergencies_geojson|tojson|safe }}).bindPopup(function (layer) {
+
+    L.geoJSON({{ emergencies_geojson|tojson|safe }},
+        {
+            pointToLayer: function(point, latlng)
+            {
+                if(point.properties.type == 'fire')
+                {
+                    var url = '{{ url_for("static", filename="orange-marker-icon.png") }}',
+                        url2x = '{{ url_for("static", filename="orange-marker-icon-2x.png") }}',
+                        url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
+                        opts = L.Icon.Default.prototype.options;
+                    return L.marker(latlng, { icon: L.icon({
+                        iconUrl: url, iconRetinaUrl: url2x, shadowUrl: url_,
+                        iconSize: opts.iconSize, iconAnchor: opts.iconAnchor,
+                        popupAnchor: opts.popupAnchor, shadowSize: opts.shadowSize,
+                        shadowAnchor: opts.shadowAnchor
+                        }) })
+                }
+                else if(point.properties.type == 'earthquake')
+                {
+                    var url = '{{ url_for("static", filename="yellow-marker-icon.png") }}',
+                        url2x = '{{ url_for("static", filename="yellow-marker-icon-2x.png") }}',
+                        url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
+                        opts = L.Icon.Default.prototype.options;
+                    return L.marker(latlng, { icon: L.icon({
+                        iconUrl: url, iconRetinaUrl: url2x, shadowUrl: url_,
+                        iconSize: opts.iconSize, iconAnchor: opts.iconAnchor,
+                        popupAnchor: opts.popupAnchor, shadowSize: opts.shadowSize,
+                        shadowAnchor: opts.shadowAnchor
+                        }) })
+                }
+
+                return L.marker(latlng)
+            }
+        }).bindPopup(function (layer) {
         var p = layer.feature.properties;
         if(p.href) {
             return '<a href="' + p.href + '">' + p.description + '</a>';
@@ -22,14 +68,14 @@
             return p.description;
         }
     }).addTo(map);
-    
+
     {% if users_geojson %}
 
     L.geoJSON({{users_geojson|tojson|safe}},
         {
             pointToLayer: function(point, latlng) {
-                var url = '{{ url_for("static", filename="marker-icon.png") }}',
-                    url2x = '{{ url_for("static", filename="marker-icon-2x.png") }}',
+                var url = '{{ url_for("static", filename="green-marker-icon.png") }}',
+                    url2x = '{{ url_for("static", filename="green-marker-icon-2x.png") }}',
                     url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
                     opts = L.Icon.Default.prototype.options;
                 return L.marker(latlng, { icon: L.icon({
@@ -43,7 +89,7 @@
             var p = layer.feature.properties;
             return p.users + (p.users > 1 ? ' users in ' : ' user in ') + p.zip_code;
     }).addTo(map);
-    
+
     {% endif %}
 
 </script>
