@@ -172,7 +172,7 @@ def get_zipcode():
 def get_confirmation():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number, zip_codes, email_address \
+            phone_number, zip_codes, email_address, notification_types \
                 = users.get_user_info(db, flask.session['phone_number'])
         
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
@@ -186,13 +186,14 @@ def get_confirmation():
 def get_profile():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor() as db:
-            phone_number, zip_codes, email_address \
+            phone_number, zip_codes, email_address, notification_types \
                 = users.get_user_info(db, flask.session['phone_number'])
         
     zip_code_str = ', '.join(zip_codes) if zip_codes else ''
     email_addr_str = email_address or ''
+    is_checked = 'checked' if notification_types and 'non-emergency' in notification_types else ''
     return flask.render_template('profile.html', phone_number=phone_number,
-                                 zip_codes=zip_code_str, email_address=email_addr_str,
+                                 zip_codes=zip_code_str, email_address=email_addr_str, is_checked=is_checked,
                                  **template_kwargs())
 
 @app.route('/profile', methods=['POST'])
@@ -210,7 +211,8 @@ def post_profile():
             else:
                 phone_number = flask.session['phone_number']
                 zip_codes_str = flask.request.form.get('zip-codes', '')
-                users.update_user_profile(db, phone_number, zip_codes_str)
+                notification_type_str = flask.request.form.get('non-emergencies', '')
+                users.update_user_profile(db, phone_number, zip_codes_str, notification_type_str)
                 redirect_url = flask.url_for('get_profile')
                 return flask.redirect(redirect_url, code=303)
 
@@ -333,7 +335,7 @@ def post_send_broadcast_alert():
     mailgun_account = flask.current_app.config['mailgun_account']
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
-            users_to_notify = users.get_all_users(db)
+            users_to_notify = users.get_all_users(db, notification_type)
             for user in users_to_notify:
                 print('notify.send_notification:', user, message)
                 notify.send_notification(twilio_account, user, message)
