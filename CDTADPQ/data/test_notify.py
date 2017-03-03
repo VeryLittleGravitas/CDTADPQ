@@ -3,6 +3,7 @@ from . import recreate
 from . import notify
 from . import users
 from . import wildfires
+from . import notifications
 
 import psycopg2, psycopg2.extras
 
@@ -35,6 +36,7 @@ class NotifyTests (unittest.TestCase):
         with unittest.mock.patch('CDTADPQ.data.wildfires.get_current_fires') as get_current_fires, \
              unittest.mock.patch('CDTADPQ.data.notify.get_users_to_notify') as get_users_to_notify, \
              unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification, \
+             unittest.mock.patch('CDTADPQ.data.notify.send_email_notification') as send_email_notification, \
              unittest.mock.patch('CDTADPQ.data.notify.log_user_notification') as log_user_notification:
             get_current_fires.return_value = [wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, 1, '123', 'fire', 'True', 'now', 'people', 15)]
             get_users_to_notify.return_value = [users.User(1, '+15105551212', ['94107'], 'me@example.com', ['fire'])]
@@ -42,6 +44,7 @@ class NotifyTests (unittest.TestCase):
         self.assertEqual(len(get_current_fires.mock_calls), 1)
         self.assertEqual(len(get_users_to_notify.mock_calls), 1)
         self.assertEqual(len(send_notification.mock_calls), 1)
+        self.assertEqual(len(send_email_notification.mock_calls), 1)
         self.assertEqual(len(log_user_notification.mock_calls), 1)
 
     def test_get_users_to_notify(self):
@@ -80,27 +83,27 @@ class NotifyTests (unittest.TestCase):
     def test_send_notification(self):
         '''
         '''
-        account = users.TwilioAccount('sid', 'secret', 'account', 'number')
+        account = notifications.TwilioAccount('sid', 'secret', 'account', 'number')
         fire = unittest.mock.Mock(name='Bad Fire')
         test_user = users.User(1, '+15105551212', ['94107'], 'test_user@example.com', ['fire'])
 
-        def response_content_error(url, request):
-            if (request.method, url.hostname, url.path) != ('POST', 'api.twilio.com', '/2010-04-01/Accounts/account/Messages.json'):
-                raise Exception('Nope')
-
-            if request.headers['Authorization'] != 'Basic c2lkOnNlY3JldA==':
-                return httmock.response(401, b'Go away')
-            
-            form = dict(urllib.parse.parse_qsl(request.body))
-            
-            if form == {'From': 'number', 'To': '+15105551212', 'Body': 'omg fire'}:
-                body = '''{"sid": "...", "date_created": "Wed, 22 Feb 2017 02:32:26 +0000", "date_updated": "Wed, 22 Feb 2017 02:32:26 +0000", "date_sent": null, "account_sid": "...", "to": "+15105551212", "from": "+15105551212", "messaging_service_sid": null, "body": "Yo", "status": "queued", "num_segments": "1", "num_media": "0", "direction": "outbound-api", "api_version": "2010-04-01", "price": null, "price_unit": "USD", "error_code": null, "error_message": null, "uri": "/2010-04-01/Accounts/.../Messages/....json", "subresource_uris": {"media": "/2010-04-01/Accounts/.../Messages/.../Media.json"}}'''
-                return httmock.response(201, body.encode('utf8'), {'Content-Type': 'application/json'})
-
-            raise Exception('Nope')
-        
-        with httmock.HTTMock(response_content_error):
+        with unittest.mock.patch('CDTADPQ.data.notifications.send_sms') as send_sms:
             notify.send_notification(account, test_user, 'omg fire')
+            send_sms.assert_called_once_with(account, test_user.phone_number, 'omg fire')
+
+    def test_send_email_notification(self):
+        '''
+        '''
+        account = notifications.MailgunAccount('api-key', 'domain', 'sender')
+        fire = unittest.mock.Mock(name='Bad Fire')
+        test_user1 = users.User(1, '+15105551212', ['94107'], 'test_user@example.com', ['fire'])
+        test_user2 = users.User(1, '+15105551212', ['94107'], None, ['fire'])
+
+        with unittest.mock.patch('CDTADPQ.data.notifications.send_email') as send_email:
+            notify.send_email_notification(account, test_user1, 'omg fire')
+            notify.send_email_notification(account, test_user2, 'omg fire')
+
+        send_email.assert_called_once_with(account, test_user1.email_address, 'Emergency!', 'omg fire')
 
     def test_log_user_notification(self):
         '''

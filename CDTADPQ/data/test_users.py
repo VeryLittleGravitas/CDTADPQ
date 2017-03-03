@@ -1,5 +1,5 @@
 import unittest, unittest.mock, httmock, urllib.parse
-from . import users
+from . import users, notifications
 
 class UsersTests (unittest.TestCase):
 
@@ -104,7 +104,7 @@ class UsersTests (unittest.TestCase):
 
             raise Exception('Nope')
 
-        account = users.TwilioAccount('sid', 'secret', 'account', 'number')
+        account = notifications.TwilioAccount('sid', 'secret', 'account', 'number')
 
         with httmock.HTTMock(response_content_error):
             users.send_verification_code(account, '+15105551212', '1234')
@@ -142,7 +142,7 @@ class UsersTests (unittest.TestCase):
 
             raise Exception('Nope')
 
-        account = users.MailgunAccount('secret', 'sandbox.mailgun.org', 'disaster-sender')
+        account = notifications.MailgunAccount('secret', 'sandbox.mailgun.org', 'disaster-sender')
 
         with httmock.HTTMock(response_content_error):
             users.send_email_verification_code(account, 'disaster-recipient', '1234')

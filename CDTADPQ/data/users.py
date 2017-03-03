@@ -1,22 +1,5 @@
 import requests, logging, uritemplate, random, uuid, re
-
-TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
-MailgunURL = 'https://api.mailgun.net/v2/{domain}/messages'
-
-class TwilioAccount:
-
-    def __init__(self, sid, secret, account, number):
-        self.sid = sid
-        self.secret = secret
-        self.account = account
-        self.number = number
-
-class MailgunAccount:
-
-    def __init__(self, api_key, domain, sender):
-        self.api_key = api_key
-        self.domain = domain
-        self.sender = sender
+from . import notifications
 
 class User:
 
@@ -45,36 +28,14 @@ def add_unverified_signup(db, account, to_number, zipcode):
 def send_verification_code(account, to_number, code):
     '''
     '''
-    url = uritemplate.expand(TwilioURL, dict(account=account.account))
     body = 'Your CA Alerts PIN code is {}. Use this to confirm your phone number. \n\nIf you didn\'t ask for this, please ignore this message.'.format(code)
-    data = dict(From=account.number, To=to_number, Body=body)
-    auth = account.sid, account.secret
-    posted = requests.post(url, auth=auth, data=data)
-
-    if posted.status_code not in range(200, 299):
-        if 'message' in posted.json():
-            raise RuntimeError(posted.json()['message'])
-        else:
-            raise RuntimeError('Bad response from Twilio')
-
-    return True
+    return notifications.send_sms(account, to_number, body)
 
 def send_email_verification_code(account, to_address, code):
     '''
     '''
-    url = uritemplate.expand(MailgunURL, dict(domain=account.domain))
     body = 'Your CA Alerts PIN code is {}.\n\nUse this to confirm your email address. If you didn\'t ask for this, please ignore this message.'.format(code)
-    data = {'from': account.sender, 'to': to_address, 'subject': 'Your CA Alerts PIN code', 'text': body}
-    auth = 'api', account.api_key
-    posted = requests.post(url, auth=auth, data=data)
-
-    if posted.status_code not in range(200, 299):
-        if 'message' in posted.json():
-            raise RuntimeError(posted.json()['message'])
-        else:
-            raise RuntimeError('Bad response from Mailgun')
-
-    return True
+    return notifications.send_email(account, to_address, 'Your CA Alerts PIN code', body)
 
 def verify_user_signup(db, given_pin_number, signup_id):
     '''
