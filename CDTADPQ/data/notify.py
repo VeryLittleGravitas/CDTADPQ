@@ -85,9 +85,10 @@ def send_notification(account, user, message):
     return notifications.send_sms(account, user.phone_number, message)
 
 def send_email_notification(account, user, message):
-    ''' Send fire notification to phone number
+    ''' Send fire notification to email address
     '''
-    return notifications.send_email(account, user.email_address, 'Emergency!', message)
+    if user.email_address:
+        return notifications.send_email(account, user.email_address, 'Emergency!', message)
 
 def log_user_notification(db, user, fire):
     ''' Log that the user has been notified of this emergency

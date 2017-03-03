@@ -91,6 +91,20 @@ class NotifyTests (unittest.TestCase):
             notify.send_notification(account, test_user, 'omg fire')
             send_sms.assert_called_once_with(account, test_user.phone_number, 'omg fire')
 
+    def test_send_email_notification(self):
+        '''
+        '''
+        account = notifications.MailgunAccount('api-key', 'domain', 'sender')
+        fire = unittest.mock.Mock(name='Bad Fire')
+        test_user1 = users.User(1, '+15105551212', ['94107'], 'test_user@example.com', ['fire'])
+        test_user2 = users.User(1, '+15105551212', ['94107'], None, ['fire'])
+
+        with unittest.mock.patch('CDTADPQ.data.notifications.send_email') as send_email:
+            notify.send_email_notification(account, test_user1, 'omg fire')
+            notify.send_email_notification(account, test_user2, 'omg fire')
+
+        send_email.assert_called_once_with(account, test_user1.email_address, 'Emergency!', 'omg fire')
+
     def test_log_user_notification(self):
         '''
         '''

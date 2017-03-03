@@ -27,3 +27,27 @@ class NotificationsTests (unittest.TestCase):
         
         with httmock.HTTMock(response_content_error):
             notifications.send_sms(account, '+15105551212', 'omg fire')
+
+    def test_send_email(self):
+        '''
+        '''
+        account = notifications.MailgunAccount('api-key', 'domain', 'sender')
+        fire = unittest.mock.Mock(name='Bad Fire')
+
+        def response_content_error(url, request):
+            if (request.method, url.hostname, url.path) != ('POST', 'api.mailgun.net', '/v2/domain/messages'):
+                raise Exception('Nope')
+
+            if request.headers['Authorization'] != 'Basic YXBpOmFwaS1rZXk=':
+                return httmock.response(401, b'Go away')
+            
+            form = dict(urllib.parse.parse_qsl(request.body))
+            
+            if form == {'from': 'sender', 'to': '+15105551212', 'subject': 'yo fire', 'text': 'omg fire'}:
+                body = '''{"whatever": "..."}'''
+                return httmock.response(201, body.encode('utf8'), {'Content-Type': 'application/json'})
+
+            raise Exception('Nope')
+        
+        with httmock.HTTMock(response_content_error):
+            notifications.send_email(account, '+15105551212', 'yo fire', 'omg fire')
