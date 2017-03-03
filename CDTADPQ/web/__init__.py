@@ -75,26 +75,8 @@ app = flask.Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
-if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
-    app.config['twilio_account'] = notifications.TwilioAccount(
-        sid = os.environ.get('TWILIO_SID', ''),
-        secret = os.environ.get('TWILIO_SECRET', ''),
-        account = os.environ.get('TWILIO_ACCOUNT', ''),
-        number = os.environ.get('TWILIO_NUMBER', '')
-        )
-else:
-    app.config['twilio_account'] = notifications.TwilioAccount(
-        sid = codecs.decode(os.environ.get('TWILIO_SID', ''), 'rot13'),
-        secret = codecs.decode(os.environ.get('TWILIO_SECRET', ''), 'rot13'),
-        account = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), 'rot13'),
-        number = os.environ.get('TWILIO_NUMBER', '')
-        )
-
-app.config['mailgun_account'] = users.MailgunAccount(
-    api_key = os.environ.get('MAILGUN_API_KEY', ''),
-    domain = os.environ.get('MAILGUN_DOMAIN', ''),
-    sender = os.environ.get('MAILGUN_SENDER', 'alerts@verylittlegravitas.com')
-    )
+app.config['twilio_account'] = notifications.make_twilio_account(os.environ)
+app.config['mailgun_account'] = notifications.make_mailgun_account(os.environ)
 
 app.config['admin_credentials'] = dict(
     username = os.environ.get('ADMIN_USERNAME', 'admin'),
@@ -307,6 +289,7 @@ def post_send_alert():
     id = flask.request.form['emergency-id']
     message = flask.request.form['emergency-message']
     twilio_account = flask.current_app.config['twilio_account']
+    mailgun_account = flask.current_app.config['mailgun_account']
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             if type == 'fire':
@@ -320,6 +303,7 @@ def post_send_alert():
                 for user in users_to_notify:
                     print('notify.send_notification:', user, message)
                     notify.send_notification(twilio_account, user, message)
+                    notify.send_email_notification(mailgun_account, user, message)
                     notify.log_user_notification(db, user, emergency)
                 notify.log_notification_for_admin_records(db, message, len(users_to_notify), emergency.internal_id, 'fire')
     return flask.redirect(flask.url_for('get_sent_alert'), code=303)
@@ -346,12 +330,14 @@ def post_send_broadcast_alert():
     message = flask.request.form['emergency-message']
     notification_type = flask.request.form['broadcast-notification-types']
     twilio_account = flask.current_app.config['twilio_account']
+    mailgun_account = flask.current_app.config['mailgun_account']
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             users_to_notify = users.get_all_users(db)
             for user in users_to_notify:
                 print('notify.send_notification:', user, message)
                 notify.send_notification(twilio_account, user, message)
+                notify.send_email_notification(mailgun_account, user, message)
             notify.log_notification_for_admin_records(db, message, len(users_to_notify))
     return flask.redirect(flask.url_for('get_sent_alert'), code=303)
 

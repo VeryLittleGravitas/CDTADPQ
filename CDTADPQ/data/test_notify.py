@@ -36,6 +36,7 @@ class NotifyTests (unittest.TestCase):
         with unittest.mock.patch('CDTADPQ.data.wildfires.get_current_fires') as get_current_fires, \
              unittest.mock.patch('CDTADPQ.data.notify.get_users_to_notify') as get_users_to_notify, \
              unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification, \
+             unittest.mock.patch('CDTADPQ.data.notify.send_email_notification') as send_email_notification, \
              unittest.mock.patch('CDTADPQ.data.notify.log_user_notification') as log_user_notification:
             get_current_fires.return_value = [wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, 1, '123', 'fire', 'True', 'now', 'people', 15)]
             get_users_to_notify.return_value = [users.User(1, '+15105551212', ['94107'], 'me@example.com', ['fire'])]
@@ -43,6 +44,7 @@ class NotifyTests (unittest.TestCase):
         self.assertEqual(len(get_current_fires.mock_calls), 1)
         self.assertEqual(len(get_users_to_notify.mock_calls), 1)
         self.assertEqual(len(send_notification.mock_calls), 1)
+        self.assertEqual(len(send_email_notification.mock_calls), 1)
         self.assertEqual(len(log_user_notification.mock_calls), 1)
 
     def test_get_users_to_notify(self):

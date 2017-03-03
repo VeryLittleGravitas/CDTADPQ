@@ -9,21 +9,8 @@ from . import users
 def main():
     '''
     '''
-    if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
-        # TODO move TwilioAccount out of users
-        twilio_account = notifications.TwilioAccount(
-            sid = os.environ.get('TWILIO_SID', ''),
-            secret = os.environ.get('TWILIO_SECRET', ''),
-            account = os.environ.get('TWILIO_ACCOUNT', ''),
-            number = os.environ.get('TWILIO_NUMBER', '')
-            )
-    else:
-        twilio_account = notifications.TwilioAccount(
-            sid = codecs.decode(os.environ.get('TWILIO_SID', ''), 'rot13'),
-            secret = codecs.decode(os.environ.get('TWILIO_SECRET', ''), 'rot13'),
-            account = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), 'rot13'),
-            number = os.environ.get('TWILIO_NUMBER', '')
-            )
+    twilio_account = notifications.make_twilio_account(os.environ)
+    mailgun_account = notifications.make_mailgun_account(os.environ)
 
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
@@ -33,6 +20,7 @@ def main():
                 message = ('Emergency: {}').format(fire.description)
                 for user in users_to_notify:
                     send_notification(twilio_account, user, message)
+                    send_email_notification(mailgun_account, user, message)
                     log_user_notification(db, user, fire)
                 log_notification_for_admin_records(db, message, len(users_to_notify), fire.internal_id, 'fire')
 
@@ -95,6 +83,11 @@ def send_notification(account, user, message):
     ''' Send fire notification to phone number
     '''
     return notifications.send_sms(account, user.phone_number, message)
+
+def send_email_notification(account, user, message):
+    ''' Send fire notification to phone number
+    '''
+    return notifications.send_email(account, user.email_address, 'Emergency!', message)
 
 def log_user_notification(db, user, fire):
     ''' Log that the user has been notified of this emergency

@@ -142,7 +142,7 @@ class UsersTests (unittest.TestCase):
 
             raise Exception('Nope')
 
-        account = users.MailgunAccount('secret', 'sandbox.mailgun.org', 'disaster-sender')
+        account = notifications.MailgunAccount('secret', 'sandbox.mailgun.org', 'disaster-sender')
 
         with httmock.HTTMock(response_content_error):
             users.send_email_verification_code(account, 'disaster-recipient', '1234')
