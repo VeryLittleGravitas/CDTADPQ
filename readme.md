@@ -112,7 +112,11 @@ Verified public users (who have entered the correct PIN code) may edit their pro
 
 We use the same confirmation system to perform public user login. There is no "password", just simple authentication. For an existing user to log in, they identify themselves with their phone number and we send a PIN code confirmation in the same flow as above. This acts as user verification for login. 
 
+### DESCRIBE THE HEROKU ENVIRONMENT 
 The **Heroku** environment is configured to refresh the required data sources **every hour** and **scripts** are run to analyze and parse that data for presentation to the admin user. 
+
+### DESCRIBE HOW THE MAPS WORK
+Something something maps.
 
 ## 6. Deployment Instructions 
 
@@ -143,7 +147,7 @@ d. We used the user-centered design techniques outlined in [Section 4](https://g
 
 e. See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) in Github.
 
-f. **Used Swagger to document the RESTful API, and provided a link to the Swagger API;**
+f. We have used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://vlg-ctdadpq.herokuapp.com/api/) 
 
 [TODO: we have created 1 API in this project that returns a zipcode for a given latitude and longitude, but need swagger documentation link]
 
