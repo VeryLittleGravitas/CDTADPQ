@@ -116,7 +116,8 @@ The **Heroku** environment is configured to refresh the required data sources **
 
 ## 6. Deployment Instructions 
 
-See our documentation to [install and run the prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype)
+* [Install and run the prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype)
+* [Use the Docker image](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Use-the-Docker-image)
 
 
 ## 7. Additional Material
