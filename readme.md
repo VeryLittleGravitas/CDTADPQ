@@ -192,9 +192,7 @@ p. **Setup or used configuration management;**
 
 [TODO: dependent upon [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).]
 
-q. **Setup or used continuous monitoring;**
-
-[TODO: see [Issue 96](https://github.com/VeryLittleGravitas/CDTADPQ/issues/96).]
+q. CA Alerts is continuously monitored using Pingdom with a [public uptime report](http://stats.pingdom.com/qp87mnx745hc/2571878).
 
 r. CA Alerts has been built with Docker: a single Docker image includes PostgreSQL, the CA Alerts web application and required dependencies. The production application is deployed on the Heroku PaaS. Learn how to [use the Docker image](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Use-the-Docker-image).
 
