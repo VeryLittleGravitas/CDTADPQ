@@ -26,7 +26,7 @@ Where appropriate, we've [applied the plays from the US Digital Services Playboo
 
 ### Logging in as an Authorized State emergency worker
 
-* Request the prototype Authorized User username and password by sending an email to: <a href="mailto:ca-alerts-admin@verylittlegravitas.com?subject=CA Alerts Admin Request">ca-alerts-admin@verylittlegravitas.com</a> with the subject "CA Alerts Admin Request".
+* Request the prototype Authorized User username and password by sending an email to: <a href="mailto:ca-alerts-support@verylittlegravitas.com?subject=CA Alerts Admin Request">ca-alerts-support@verylittlegravitas.com</a> with the subject "CA Alerts Admin Request".
 
 ## 2. Our Team
 
@@ -44,7 +44,7 @@ We assembled our multidisciplinary team based on our experience and [GSA 18F Agi
 
 The agile delivery process used at Very Little Gravitas is based on the open standards Scrum framework, with input and iterative feedback from user-centered design techniques.
 
-We've documented our [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process) on the wiki.
+Our wiki documents our [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process).
 
 For this RFI, we implemented a simplified process, appropriate to scope and available time. The following describes the work delivered in each of the four 1 week sprints completed in building the prototype.
 
@@ -97,35 +97,49 @@ We used these user-centered design techniques:
 
 ## 5. Written Technical Approach
 
-CA Alerts is a Python 3 web application built using the Flask micro web framework. The web front-end is implemented using the U.S. Web Design Standards pattern library with no alterations or custom CSS.  
+CA Alerts is a Python 3 web application built using the Flask micro web framework. Users use the application via a web front-end that uses the U.S. Web Design Standards pattern library.
 
-On the CA Alerts home page, users can:
+On the [CA Alerts homepage](https://alerts-ca.herokuapp.com), users can:
 
 * register
 * sign in
 * sign in as an administrator
 
-The application's web [__init__.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) file defines the addresses/routes and HTTP methods delivering the application's functionality. Using an HTTP method on a route results in the application running the appropriate code - for example sending a notification using the Twilio or Mailgun APIs. Application routes are rendered in HTML for users by the Jinja templating engine. The Python module [Psycopg](http://initd.org/psycopg/) is used to connect to the application's Postgres database.
+The application router [\_\_init\_\_.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) defines the addresses/routes and HTTP methods implementing the application's functionality. HTTP methods (GETs, POSTs etc) on routes result in running the appropriate code. Routes are rendered in HTML by the Jinja templating engine. The Python module [Psycopg](http://initd.org/psycopg/) is used to connect to the application database. The application database is a PostgreSQL database with the PostGIS extension for geolocation support.
 
-Following the pattern of separation of concerns, application functionality for the following areas is imported through Python modules in the application's [data](https://github.com/VeryLittleGravitas/CDTADPQ/tree/master/CDTADPQ/data) directory:
+Following the separation of concerns pattern, certain application functionality imported through Python modules in the application's [data](https://github.com/VeryLittleGravitas/CDTADPQ/tree/master/CDTADPQ/data) directory:
 
-* [users.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/users.py) (returning user information from the application database, verifying user SMS identity via Twilio APIs, verifying user email address via Mailgun APIs, managing user profile information etc.)
-* [zipcodes.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/zipcodes.py) (returning a zipcode for a given latitude and longitude)
-* [wildfires.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/wildfires.py) (wildfire data parsing, storing wildfire information in the application database, returning a list of current fires, returning data about an individual fire)
-* [notify.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/notify.py) (notification functions, setting up third party API credentials, returning a list of geofenced users to notify, sending notifications via supported third party APIs, logging)
+* [users.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/users.py) (create, read, update, delete (CRUD) user methods on the application database, verify user identity via appropriate Twilio and Mailgun APIs, managing user profile information etc.)
+* [zipcodes.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/zipcodes.py) (return a zipcode for a given latitude and longitude)
+* [wildfires.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/wildfires.py) (wildfire data parsing, storing wildfire information in the application database, returning a list of current fires, returning individual fires)
+* [notify.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/notify.py) (notification functions, setting up third party API credentials, returning a list of geofenced users to notify, send notifications via third party APIs, notification logging)
 
-Public users register to receive emergency alerts by entering a phone number and a Zip Code in an HTML form. The Zip Code can be entered manually or retrieved from a browser using the HTML geolocation API. Submitting the form as an HTTP POST to the application web server creates an (unregistered) user in the application database, generates a PIN confirmation code and uses the Twilio SMS API to send an SMS PIN confirmation code to the user's phone number. The user must then enter a code on a confirmation screen to verify their phone number.
+Public users [register](https://alerts-ca.herokuapp.com/register) by entering a phone number and a zipcode in an HTML form. The zipcode is entered manually or retrieved using the HTML geolocation API. 
+
+Submitting the form as an HTTP POST to the application web server calls the appropriate route to 
+
+* create an (unregistered) user in the application database
+* generates a PIN confirmation code
+* send the PIN confirmation code via the Twilio SMS API to the user phone number
+* redirect the user browser to a confirmation URL
+
+The user enters their confirmation code at a unique confirmation URL to verify their phone number.
 
 Verified public users (who have entered the correct PIN code) may edit their profile and add an email address. If they choose to receive notifications by email, the Mailgun API is used to deliver email notifications.
 
-We use the same confirmation system to perform public user login. There is no password: just simple authentication. For an existing user to log in, they identify themselves with their phone number and we send a PIN code confirmation in the same flow as above. This acts as user verification for login.
+Public user login is two-factor authentication. Users log in by supplying something they know (a confirmation code sent by email or SMS) and something they have (access to a phone number or email address). 
 
-Admin users  anually publish notifications using an HTML form. Data from an HTTP POST to the appropriate route creates a notification object, calls the required functions to send notifications using the Twilio or Mailgun APIs and logs the notification in the application database.
+[Admin users](https://alerts-ca.herokuapp.com/admin/) manually publish notifications using an HTML form. An emergency notification HTML form is HTTP POSTed to the appropriate route creating a notification object, calling the required functions to send notifications using the appropriate APIs and logs the notification in the application database.
 
-[Leaflet.js](http://leafletjs.com) is used to display emergency data through a map interface on the CA Alerts homepage and in the Admin interface. Internally, the application uses a Python object representing emergency data, retrieved from the emergency data stored in the application database. The Python object is serialized to JSON and delivered inline in the HTML response by the application server when a browser requests a page containing the map template.  
+Emergency and related data is displayed using a [Leaflet.js](http://leafletjs.com) map interface on the CA Alerts homepage and in the Admin interface. The  application uses a Python object representing emergency data, generated from emergency data stored in the application database. The object is serialized to JSON and delivered inline in the HTML response by the application server when a browser requests a page containing the map template.  
 
-On the backend, the prototype data sources are all ESRI feature servers. We use a scheduled task provided by our PaaS (Heroku) to run a collection script ([collect.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/collect.py)) every hour to GET the data at the provided URLs and store it in our application database (our application database is a PostgreSQL database with the PostGIS extension to support location data). A script identifies users within 50 miles of fire points within California and sends emergency notification to those users, logging the notification in the application database.
+On the backend, a scheduled task provided by our PaaS (Heroku) runs a collection script ([collect.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/collect.py)) every hour to
 
+* GET the data at the provided URLs from the prototype data source ESRI feature servers
+* store returned data in the application database
+* identify users within 50 miles of fire points within California
+* send emergency notification to those users
+* log sent notifications
 
 ## 6. Deployment Instructions
 
