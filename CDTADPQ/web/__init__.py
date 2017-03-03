@@ -124,6 +124,10 @@ def post_confirm():
             else:
                 return flask.redirect(flask.url_for('get_profile'), code=303)
 
+@app.route('/api/')
+def get_api():
+    return flask.render_template('api-index.html', **template_kwargs())
+
 @app.route('/api/zipcode')
 def get_zipcode():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
