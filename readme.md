@@ -24,6 +24,10 @@ Where appropriate, we've [applied the plays from the US Digital Services Playboo
 * publish manual emergency and non-emergency notifications, so the public can be informed about emergency and non-emergency situations
 * track and analyze data about published notifications and public users
 
+### Logging in as an Authorized State emergency worker
+
+* Request the prototype Authorized User username and password by sending an email to: <a href="mailto:ca-alerts-admin@verylittlegravitas.com?subject=CA Alerts Admin Request">ca-alerts-admin@verylittlegravitas.com</a> with the subject "CA Alerts Admin Request".
+
 ## 2. Our team
 
 The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him the leader of the project, with full responsibility and authority to build the prototype. He had full accountability for the quality of the prototype.
