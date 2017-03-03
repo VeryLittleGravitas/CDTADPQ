@@ -18,6 +18,24 @@ class FloodPolygon:
         self.idp_source = idp_source
         self.idp_subset = idp_subset
 
+    @property
+    def title(self):
+        x, y = self.location['coordinates'][0][0]
+        return '{} flood near {lat:.2f}, {lon:.2f}'.format(self.start_time.strftime('%b %m, %Y'), lon=x, lat=y)
+    
+    @property
+    def description(self):
+        x, y = self.location['coordinates'][0][0]
+        return '{} flood'.format(self.start_time.strftime('%b %m, %Y'))
+    
+    @property
+    def type(self):
+        return 'flood'
+    
+    @property
+    def id(self):
+        return str(self.start_time)
+
 def store_flood_poly(db, flood_poly):
     ''' Add flood poly to the db if the flood poly does not already exist in the db
     '''
@@ -42,6 +60,37 @@ def convert_flood_poly(feature):
     idp_subset = properties['idp_subset']
     
     return FloodPolygon(feature['geometry'], valid_time, outlook, issue_time, start_time, end_time, idp_source, idp_subset)
+
+def get_one_flood(db, start_time):
+    '''
+    '''
+    db.execute('''SELECT ST_AsGeoJSON(location) as coordinates_json, *
+                  FROM flood_polys WHERE start_time = %s''',
+               (start_time, ))
+    
+    flood_row = db.fetchone()
+    location = json.loads(flood_row['coordinates_json'])
+
+    return FloodPolygon(location, flood_row['valid_time'], flood_row['outlook'],
+                        flood_row['issue_time'], flood_row['start_time'], flood_row['end_time'],
+                        flood_row['idp_source'], flood_row['idp_subset'])
+
+def get_current_floods(db):
+    ''' Return all floods that users should be notified of.
+    '''
+    # Need to not get all floods, need to get all for today or something?
+    db.execute('''SELECT ST_AsGeoJSON(location) as coordinates_json, *
+                  FROM flood_polys''')
+
+    flood_rows = db.fetchall()
+    floods = []
+    for flood_row in flood_rows:
+        flood_location = json.loads(flood_row['coordinates_json'])
+        flood_point = FloodPolygon(flood_location, flood_row['valid_time'], flood_row['outlook'],
+                                   flood_row['issue_time'], flood_row['start_time'], flood_row['end_time'],
+                                   flood_row['idp_source'], flood_row['idp_subset'])
+        floods.append(flood_point)
+    return floods
 
 def main():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
