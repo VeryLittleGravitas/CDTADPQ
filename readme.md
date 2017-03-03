@@ -10,14 +10,14 @@ This prototype has been developed based on our experience in delivering digital 
 
 Where appropriate, we have [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook). 
 
-### For California residents and visitors, California Alerts:
+### For California residents and visitors, CA Alerts:
 
 * lets users receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
 * lets users choose a location (a zipcode) for which they will receive emergency and non-emergency alerts 
 * lets users choose whether to receive alerts by SMS or email (with forthcoming push notification functionality)
 * lets users sign up quickly and easily, by only requiring a phone number and a zipcode
 
-### For authorized State emergency workers, California Alerts: 
+### For authorized State emergency workers, CA Alerts: 
 
 * publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
 * lets users visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
@@ -32,20 +32,19 @@ The Product Manager, Dan Hon, also served as Product Owner in the agile delivery
 
 We put together the following multidisciplinary team to build California Alerts, based on our experience and the [GSA 18F Agile Labor Categories](https://pages.18f.gov/agile-labor-categories/):
 
-* Dan Hon, Product Manager | [@danhon](https://github.com/danhon) and [LinkedIn](https://www.linkedin.com/in/danhon/)
-* Michal Migurski, Technical Architect | [@migurski](https://github.com/migurski) and [LinkedIn](https://www.linkedin.com/in/michalmigurski/)
-* Frances Berriman, Interaction Designer / User Researcher / Usability Tester | [@phae](https://github.com/phae) and [LinkedIn](https://www.linkedin.com/in/fberriman/)
-* Erica Kwan, Backend Web Developer | [@pui](https://github.com/pui) and [LinkedIn](https://www.linkedin.com/in/ericakwan/)
-* Kay Chung, Delivery Manager | [@kerrching](https://github.com/kerrching) and [LinkedIn](https://www.linkedin.com/in/kerrching/)
+* **Product Manager**: Dan Hon, [@danhon](https://github.com/danhon) and [LinkedIn](https://www.linkedin.com/in/danhon/)
+* **Technical Architect**: Michal Migurski, [@migurski](https://github.com/migurski) and [LinkedIn](https://www.linkedin.com/in/michalmigurski/)
+* **Interaction Designer / User Researcher / Usability Tester**: Frances Berriman, [@phae](https://github.com/phae) and [LinkedIn](https://www.linkedin.com/in/fberriman/)
+* **Backend Web Developer**: Erica Kwan, [@pui](https://github.com/pui) and [LinkedIn](https://www.linkedin.com/in/ericakwan/)
+* **Delivery Manager**: Kay Chung, [@kerrching](https://github.com/kerrching) and [LinkedIn](https://www.linkedin.com/in/kerrching/)
 
 ## 3. Agile Delivery Process
 
 The agile delivery process used at Very Little Gravitas is based on the open standards Scrum framework, with input and iterative feedback from user-centered design techniques. 
 
-Documentation on the [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process)
+Please see our documentation for our [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process).
 
-For the purposes of the ADPQ submission, we implemented a simplified process, appropriate to the scope and available time. 
-The following describes the work delivered in each of the four 1 week sprints completed in building the prototype. 
+For this RFI, we implemented a simplified process, appropriate to the scope and available time. The following describes the work delivered in each of the four 1 week sprints completed in building the prototype. 
 
 #### Sprint 1
 * Defined usecases & personas
@@ -112,7 +111,11 @@ Verified public users (who have entered the correct PIN code) may edit their pro
 
 We use the same confirmation system to perform public user login. There is no "password", just simple authentication. For an existing user to log in, they identify themselves with their phone number and we send a PIN code confirmation in the same flow as above. This acts as user verification for login. 
 
+### DESCRIBE THE HEROKU ENVIRONMENT 
 The **Heroku** environment is configured to refresh the required data sources **every hour** and **scripts** are run to analyze and parse that data for presentation to the admin user. 
+
+### DESCRIBE HOW THE MAPS WORK
+Something something maps.
 
 ## 6. Deployment Instructions 
 
@@ -135,17 +138,15 @@ The RFI explicitly identifies 20 requirements (a-t) for the prototype submission
 
 a. We appointed Dan Hon as both Product Manager and leader of the project. He helped the team understand the requirements, was responsible for prioritizing work, and is ultimately accountable for the quality of the submitted prototype 
 
-b. [Section 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md#2-our-team) (above) identifies each member of our multidisciplinary team and their specialisms. 
+b. [Section 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md#2-our-team) (above) identifies each member of our multidisciplinary team and their labor category. 
 
-c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for further evidence.
+c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal).
 
-d. We used the user-centered design techniques outlined in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
+d. We used the user-centered design techniques in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
 
-e. See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) in Github.
+e. The project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) is in Github.
 
-f. **Used Swagger to document the RESTful API, and provided a link to the Swagger API;**
-
-[TODO: we have created 1 API in this project that returns a zipcode for a given latitude and longitude, but need swagger documentation link]
+f. We have used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://vlg-ctdadpq.herokuapp.com/api/) 
 
 g. See our code repository for the specifics of how the user-facing templates were implemented [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master). They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).
 
@@ -164,13 +165,14 @@ l. We are using the following modern, open-source technologies:
 3. [PIP](https://pip.pypa.io/en/stable/) for ensuring the correct Python packages are installed to support the application
 4. [PostgreSQL 9](https://www.postgresql.org), an enterprise-grade database used by government agencies in the U.S. such as The National Weather Service, the Centers for Disease Control and Prevention and State Department. 
 5. [psycopg](http://initd.org/psycopg/) as the PostgreSQL adapter for Python.
-6. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
-7. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
-8. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
-9. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
-10. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
-11. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
-12. [Slack](https://slack.com) for team collaboration and chat.
+6. [Swagger](http://swagger.io) to document APIs
+7. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
+8. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
+9. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
+10. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
+11. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
+12. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
+13. [Slack](https://slack.com) for team collaboration and chat.
 
 To be added: 
 
@@ -181,7 +183,7 @@ To be added:
 
 m. We use [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.
 
-We automatically deploy the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
+The master branch is automatically deployed to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
 
 n. Our repository includes a master list of unit tests at https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py
 
@@ -197,10 +199,8 @@ q. **Setup or used continuous monitoring;**
 
 [TODO: see [Issue 96](https://github.com/VeryLittleGravitas/CDTADPQ/issues/96).]
 
-r. CA Alerts has been built with Docker: a single Docker image includes PostgreSQL, the CA Alerts web application and required dependencies. The production application is deployed on the Heroku PaaS.
+r. CA Alerts has been built with Docker: a single Docker image includes PostgreSQL, the CA Alerts web application and required dependencies. The production application is deployed on the Heroku PaaS. Learn how to [use the Docker image](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Use-the-Docker-image).
 
-[TODO: see [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).]
-
-s. Instructions on installation and running of the prototype can be found here: [https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype).
+s. Learn how to [install and run the prototype](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Installing-and-running-the-prototype).
 
 t. Our work and code for this prototype is licensed under the [MIT License](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/LICENSE).
