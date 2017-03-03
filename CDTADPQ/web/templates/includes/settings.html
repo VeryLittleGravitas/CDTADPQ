@@ -8,7 +8,9 @@
 
     <label for="zip-codes">Zip code</label>
     <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
-    <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+    <p class="usa-form-note">
+        <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+    </p>
 
     <script>
         function geolocate_me()
@@ -30,7 +32,7 @@
         }
     </script>
 
-    <p>You can also choose to receive non-emergency alerts, such as information about school closures due to weather.</p>
+    <p style="clear:both;display:block">You can also choose to receive non-emergency alerts, such as information about school closures due to weather.</p>
 
     <ul class="usa-unstyled-list">
 
