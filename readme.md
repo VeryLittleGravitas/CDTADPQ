@@ -4,24 +4,24 @@
 
 ## 1. CA Alerts
 
-[CA Alerts](https://alerts-ca.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to find out about emergencies that may affect them and for State emergency workers to assess and inform the public about emergencies.
+[CA Alerts](https://alerts-ca.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to be notified of emergencies affecting them and for State emergency workers to assess and inform the public about emergencies.
 
-This prototype has been developed based on our experience in delivering digital services that meet user needs and that are simple and intuitive enough that users succeed first time.
+Ths prototype is based on our experience delivering digital services that meet user needs and are simple and intuitive enough so users succeed first time.
 
-Where appropriate, we have [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook).
+Where appropriate, we've [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook).
 
 ### California residents and visitors can use CA Alerts to:
 
-* sign up quickly and easily, by only requiring a phone number and a zipcode
-* receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
-* choose a location (a zipcode) for which they will receive emergency and non-emergency alerts
-* choose to receive alerts by SMS or email (with forthcoming push notification functionality)
+* sign up quickly and easily, by only requiring a phone number and zipcode
+* receive timely emergency and non-emergency alerts to keep themselves, their loved ones and the people they're responsible for safe
+* choose a location (a zipcode) to receive emergency and non-emergency alerts for
+* receive alerts by SMS or email (with forthcoming push notification functionality)
 
 ### Authorized State emergency workers can use CA Alerts to:
 
-* publish automatic fire alert emergency notifications to registered users whose location is within a 50 mile geofence of a fire, so that the public are notified about nearby fire emergencies
-* visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so they can assess and make decisions about publishing emergency or non-emergency notifications
-* publish manual emergency and non-emergency notifications, so that the public can be informed about emergency and non-emergency situations
+* publish automatic fire alert emergency notifications to registered users whose location is within a 50 mile geofence of a fire, so the public are notified about nearby fire emergencies
+* visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior in California or may affect California, so they can assess and make decisions about publishing emergency or non-emergency notifications
+* publish manual emergency and non-emergency notifications, so the public can be informed about emergency and non-emergency situations
 * track and analyze data about published notifications and public users
 
 ## 2. Our team
@@ -95,7 +95,7 @@ On the CA Alerts home page, users can:
 * sign in
 * sign in as an administrator
 
-The application's web [__init__.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) file defines the addresses/routes and HTTP methods that deliver the application's functionality. Using an HTTP method on a route results in the application running the appropriate code - for example sending a notification using the Twilio or Mailgun APIs. Application routes are rendered in HTML for users by the Jinja templating engine. The Python module [Psycopg](http://initd.org/psycopg/) is used to connect to the application's Postgres database.
+The application's web [__init__.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) file defines the addresses/routes and HTTP methods delivering the application's functionality. Using an HTTP method on a route results in the application running the appropriate code - for example sending a notification using the Twilio or Mailgun APIs. Application routes are rendered in HTML for users by the Jinja templating engine. The Python module [Psycopg](http://initd.org/psycopg/) is used to connect to the application's Postgres database.
 
 Following the pattern of separation of concerns, application functionality for the following areas is imported through Python modules in the application's [data](https://github.com/VeryLittleGravitas/CDTADPQ/tree/master/CDTADPQ/data) directory:
 
@@ -112,7 +112,7 @@ We use the same confirmation system to perform public user login. There is no pa
 
 Admin users  anually publish notifications using an HTML form. Data from an HTTP POST to the appropriate route creates a notification object, calls the required functions to send notifications using the Twilio or Mailgun APIs and logs the notification in the application database.
 
-[Leaflet.js](http://leafletjs.com) is used to display emergency data through a map interface on the CA Alerts homepage and in the Admin interface. Internally, the application uses a Python object that represents emergency data, retrieved from the emergency data stored in the application database. The Python object is serialized to JSON and delivered inline in the HTML response by the application server when a browser requests a page containing the map template.  
+[Leaflet.js](http://leafletjs.com) is used to display emergency data through a map interface on the CA Alerts homepage and in the Admin interface. Internally, the application uses a Python object representing emergency data, retrieved from the emergency data stored in the application database. The Python object is serialized to JSON and delivered inline in the HTML response by the application server when a browser requests a page containing the map template.  
 
 On the backend, the prototype data sources are all ESRI feature servers. We use a scheduled task provided by our PaaS (Heroku) to run a collection script ([collect.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/collect.py)) every hour to GET the data at the provided URLs and store it in our application database (our application database is a PostgreSQL database with the PostGIS extension to support location data). A script identifies users within 50 miles of fire points within California and sends emergency notification to those users, logging the notification in the application database.
 
@@ -146,7 +146,7 @@ d. We used 4 user-centered design techniques in [Section 4](https://github.com/V
 
 e. The project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) is in Github.
 
-f. We used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://alerts-ca.herokuapp.com/api/).
+f. We used Swagger to document the 1 API for this product [returning a zipcode for a given latitude and longitude](https://alerts-ca.herokuapp.com/api/).
 
 g. Our [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) shows how user-facing templates were implemented using standards compliant, accessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement). The U.S. Web Design Standards were used, which are [fully compliant with ADA and WCAG 2.0](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility)
 
@@ -156,7 +156,7 @@ i. Our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Res
 
 j. The lightweight scrum process we used provided a review point at the end of each sprint, enabling us to reflect users' feedback in the planning session of the next sprint. We iteratively produced features reflecting real users' requirements. See [Section 3](https://github.com/VeryLittleGravitas/CDTADPQ#3-agile-delivery-process) (above) for further detail.
 
-k. Using the U.S. Web Design Standards with no custom HTML or CSS ensures a responsive design that works on multiple devices.
+k. Using the U.S. Web Design Standards with no custom HTML or CSS ensures a responsive design on multiple devices.
 
 l. We are using the following modern, open-source technologies:
 
@@ -168,7 +168,7 @@ l. We are using the following modern, open-source technologies:
 6. [Swagger](http://swagger.io) to document APIs
 7. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
 8. [Leaflet.js](http://leafletjs.com), an open-source JavaScript library for interactive maps
-9. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
+9. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government service, meeting Web Content Accessibility Guidelines.
 10. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
 11. [Travis CI](https://travis-ci.org), for continuous integration and testing.
 12. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
