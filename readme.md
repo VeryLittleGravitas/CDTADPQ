@@ -212,9 +212,7 @@ n. We have a [master list of unit tests](https://github.com/VeryLittleGravitas/C
 
 o. [Travis CI](https://travis-ci.org) provides continuous integration, automatically and continuously deploying the master branch to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com). [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) documents initial setup.
 
-p. **Setup or used configuration management;**
-
-[TODO: dependent upon [Issue 95](https://github.com/VeryLittleGravitas/CDTADPQ/issues/95).]
+p. Our configuration management is implemented in an env-vars file that is used in production on Heroku, in development and for [running the Docker image](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Use-the-Docker-image)
 
 q. CA Alerts is continuously monitored using Pingdom with a [public uptime report](http://stats.pingdom.com/qp87mnx745hc/2571878).
 
