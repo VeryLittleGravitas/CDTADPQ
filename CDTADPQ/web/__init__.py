@@ -36,7 +36,27 @@ def template_kwargs():
         user_is_logged_in = bool('phone_number' in flask.session)
         )
 
+def emergencies2geojson(emergencies, include_hrefs):
+    '''
+    '''
+    features = [
+        dict(
+            type='Feature',
+            geometry=e.location,
+            properties=dict(
+                type=e.type,
+                id=e.id,
+                title=e.title,
+                description=e.description,
+                href=(flask.url_for('get_send_alert', type=e.type, id=e.id) if include_hrefs else None)
+                ))
+        for e in emergencies
+        ]
+    
+    return dict(type='FeatureCollection', features=features)
+
 app = flask.Flask(__name__) 
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
@@ -67,7 +87,14 @@ app.config['admin_credentials'] = dict(
 
 @app.route('/')
 def get_index():
-    return flask.render_template('index.html', **template_kwargs())
+    emergencies = list()
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            emergencies.extend(wildfires.get_current_fires(db))
+    
+    emergencies_geojson = emergencies2geojson(emergencies, False)
+    return flask.render_template('index.html', emergencies_geojson=emergencies_geojson,
+                                 **template_kwargs())
 
 @app.route('/about')
 def get_about():
@@ -233,7 +260,10 @@ def get_admin():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             emergencies.extend(wildfires.get_current_fires(db))
+    
+    emergencies_geojson = emergencies2geojson(emergencies, True)
     return flask.render_template('admin.html', emergencies=emergencies,
+                                 emergencies_geojson=emergencies_geojson,
                                  **template_kwargs())
 
 @app.route('/admin/send-alert/<type>/<id>')
