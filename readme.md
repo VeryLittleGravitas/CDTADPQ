@@ -10,27 +10,25 @@ This prototype has been developed based on our experience in delivering digital 
 
 Where appropriate, we have [applied the plays from the US Digital Services Playbook](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/US-Digital-Services-Playbook).
 
-### For California residents and visitors, CA Alerts:
+### California residents and visitors can use CA Alerts to:
 
-* lets users receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
-* lets users choose a location (a zipcode) for which they will receive emergency and non-emergency alerts
-* lets users choose whether to receive alerts by SMS or email (with forthcoming push notification functionality)
-* lets users sign up quickly and easily, by only requiring a phone number and a zipcode
+* sign up quickly and easily, by only requiring a phone number and a zipcode
+* receive up-to-date emergency and non-emergency alerts so that they can keep themselves, their loved ones and the people they're responsible for safe
+* choose a location (a zipcode) for which they will receive emergency and non-emergency alerts
+* choose to receive alerts by SMS or email (with forthcoming push notification functionality)
 
-### For authorized State emergency workers, CA Alerts:
+### Authorized State emergency workers can use CA Alerts to:
 
-* publishes automatic fire alert emergency notifications based on up-to-date data to registered users whose location is within a 50 mile geofence of a fire, so that the public are automatically notified about fire emergencies
-* lets users visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so that users can assess and make decisions about publishing emergency or non-emergency notifications
-* lets users publish manual emergency notifications to all users, so that the public can be informed about emergencies
-* lets users publish manual non-emergency notifications to all users, so that the public can be informed about non-emergency situations
-* lets users track data about published notifications
-* lets users track data about registered users
+* publish automatic fire alert emergency notifications to registered users whose location is within a 50 mile geofence of a fire, so that the public are notified about nearby fire emergencies
+* visualize up-to-date data on fire, river gauge, weather hazard, earthquake, tsunami and other natural hazards from the U.S. Geological Survey, National Oceanic and Atmospheric Administration and the U.S. Department of Interior that is in California or may affect California, so they can assess and make decisions about publishing emergency or non-emergency notifications
+* publish manual emergency and non-emergency notifications, so that the public can be informed about emergency and non-emergency situations
+* track and analyze data about published notifications and public users
 
 ## 2. Our team
 
-The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him the leader of the project with full responsibility and authority to build the prototype, and he therefore has full accountability for the quality of the prototype.
+The Product Manager, Dan Hon, also served as Product Owner in the agile delivery process. We assigned him the leader of the project, with full responsibility and authority to build the prototype. He had full accountability for the quality of the prototype.
 
-We put together the following multidisciplinary team to build California Alerts, based on our experience and the [GSA 18F Agile Labor Categories](https://pages.18f.gov/agile-labor-categories/):
+We assembled our multidisciplinary team based on our experience and [GSA 18F Agile Labor Categories](https://pages.18f.gov/agile-labor-categories/):
 
 * **Product Manager**: Dan Hon, [@danhon](https://github.com/danhon) and [LinkedIn](https://www.linkedin.com/in/danhon/)
 * **Technical Architect**: Michal Migurski, [@migurski](https://github.com/migurski) and [LinkedIn](https://www.linkedin.com/in/michalmigurski/)
@@ -42,9 +40,9 @@ We put together the following multidisciplinary team to build California Alerts,
 
 The agile delivery process used at Very Little Gravitas is based on the open standards Scrum framework, with input and iterative feedback from user-centered design techniques.
 
-Please see our documentation for our [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process).
+We've documented our [full agile delivery process](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Agile-Delivery-Process) on the wiki.
 
-For this RFI, we implemented a simplified process, appropriate to the scope and available time. The following describes the work delivered in each of the four 1 week sprints completed in building the prototype.
+For this RFI, we implemented a simplified process, appropriate to scope and available time. The following describes the work delivered in each of the four 1 week sprints completed in building the prototype.
 
 #### Sprint 1
 * Defined usecases & personas
@@ -53,7 +51,7 @@ For this RFI, we implemented a simplified process, appropriate to the scope and 
 * [Design exploration](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Design-exploration)
 * [Technical exploration](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Technical-exploration)
 * Set up a Slack group for team communication
-* Set up a [kanban board](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1) in the team’s Github repo for use as a lightweight product backlog and sprint task board
+* Set up a [kanban board](https://github.com/VeryLittleGravitas/CDTADPQ/projects/1) in the team’s repository as a lightweight product backlog and sprint task board
 
 #### Sprint 2
 
@@ -67,7 +65,7 @@ For this RFI, we implemented a simplified process, appropriate to the scope and 
 * Set up step-through templates for admin view
 * Notification signup
 * Edit geo-location criteria for notifications
-* Selection of delivery format - sms and email
+* Selection of delivery format - SMS and email
 * Implemented Google Analytics
 
 #### Sprint 4
@@ -79,37 +77,38 @@ For this RFI, we implemented a simplified process, appropriate to the scope and 
 
 
 ## 4. User-Centered Design
-We used a number of different user-centered design techniques in developing the prototype:
 
-* [User survey](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
-* [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representative archetypes of our users
-* [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
-* [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if our users are able to successfully use our service
+We used these user-centered design techniques:
+
+1. [User surveys](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal), to better understand the expectations of a wide number of potential users of our system (quantitative research)
+2. [Personas](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Personas), to create representative archetypes of our users
+3. [Interviews](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#interview-diary), to ask in more detail focussed questions about user expectations (qualitative research)
+4. [Interactive user testing](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal#user-testing-remote-week-3), to see if real users could successfully use our service
 
 ## 5. Technical description and narrative of code flow
 
-CA Alerts is a Python 3 web application built using the Flask micro web framework. The web application front-end is implemented using the U.S. Web Design Standards pattern library with no alterations or custom CSS.  
+CA Alerts is a Python 3 web application built using the Flask micro web framework. The web front-end is implemented using the U.S. Web Design Standards pattern library with no alterations or custom CSS.  
 
-When the user opens the CA Alerts home page, they can:
+On the CA Alerts home page, users can:
 
-* register for alerts
+* register
 * sign in
 * sign in as an administrator
 
-The application's web [__init__.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) file defines the addresses/routes and HTTP methods through which the application delivers functionality. Application routes are rendered in HTML for users using the Jinja templating engine built into the Flask framework. The application uses the Python module [Psycop](http://initd.org/psycopg/) to connect to the application Postgres database for data storage and retrieval.
+The application's web [__init__.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/web/__init__.py) file defines the addresses/routes and HTTP methods that deliver the application's functionality. Application routes are rendered in HTML using the Jinja templating engine built into the Flask framework. The Python module [Psycopg](http://initd.org/psycopg/) is used to connect to the application's Postgres database.
 
-Following the modern software engineering practice of separation of concerns, application functionality relating to the following areas is imported through Python modules stored in the application's data directory:
+Following the pattern of separation of concerns, application functionality for the following areas is imported through Python modules in the application's [data](https://github.com/VeryLittleGravitas/CDTADPQ/tree/master/CDTADPQ/data) directory:
 
-* [users.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/users.py) for functions such as returning user information from the application database, verifying user SMS identity via Twilio APIs, verifying user email address via Mailgun APIs, managing user profile information and so on
-* [zipcodes.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/zipcodes.py) for functions such as returning a zipcode for a given latitude and longitude
-* [wildfires.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/wildfires.py) for functions such as wildfire data parsing, storing wildfire information in the application database, returning a list of current fires, returning data about an individual fire
-* [notify.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/notify.py) for notification functions, setting up third party API credentials, returning a list of geofenced users to notify, sending notifications via supported third party APIs, logging
+* [users.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/users.py) (returning user information from the application database, verifying user SMS identity via Twilio APIs, verifying user email address via Mailgun APIs, managing user profile information etc.)
+* [zipcodes.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/zipcodes.py) (returning a zipcode for a given latitude and longitude)
+* [wildfires.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/wildfires.py) (wildfire data parsing, storing wildfire information in the application database, returning a list of current fires, returning data about an individual fire)
+* [notify.py](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/CDTADPQ/data/notify.py) (notification functions, setting up third party API credentials, returning a list of geofenced users to notify, sending notifications via supported third party APIs, logging)
 
-Public users register to receive emergency alerts by submitting a phone number and a zipcode. The zipcode can be entered manually or is retrieved from a supported browser by the HTML geolocation API. Entering a phone number and zipcode results in an HTTP POST to the application web server, which creates an (unregistered) user in the application database, generates a PIN confirmation code and uses the Twilio SMS API to send the PIN confirmation code to the user's phone number. The user must then enter a code on a confirmation screen to verify their phone number.
+Public users register to receive emergency alerts by entering a phone number and a Zip Code in an HTML form. The Zip Code can be entered manually or retrieved from a browser that supports the HTML geolocation API. Submitting the form results in an HTTP POST to the application web server, which creates an (unregistered) user in the application database, generates a PIN confirmation code and uses the Twilio SMS API to send an SMS PIN confirmation code to the user's phone number. The user must then enter a code on a confirmation screen to verify their phone number.
 
 Verified public users (who have entered the correct PIN code) may edit their profile and add an email address. If they choose to receive notifications by email, the Mailgun API is used to deliver email notifications.
 
-We use the same confirmation system to perform public user login. There is no "password", just simple authentication. For an existing user to log in, they identify themselves with their phone number and we send a PIN code confirmation in the same flow as above. This acts as user verification for login.
+We use the same confirmation system to perform public user login. There is no password: just simple authentication. For an existing user to log in, they identify themselves with their phone number and we send a PIN code confirmation in the same flow as above. This acts as user verification for login.
 
 [Leaflet.js](http://leafletjs.com) is used to display emergency data through a map interface on the CA Alerts homepage and in the Admin interface. Internally, the application uses a Python object that represents emergency data, retrieved from the emergency data stored in the application database. The Python object is serialized to JSON and delivered inline in the HTML response by the application server when a browser requests a page containing the map template.  
 
@@ -139,23 +138,23 @@ a. We appointed Dan Hon as both Product Manager and leader of the project. He he
 
 b. [Section 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md#2-our-team) (above) identifies each member of our multidisciplinary team and their labor category.
 
-c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal).
+c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights from these exercises were used directly in design exploration and reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal).
 
-d. We used the user-centered design techniques in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
+d. We used 4 user-centered design techniques in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
 
 e. The project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) is in Github.
 
-f. We have used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://vlg-ctdadpq.herokuapp.com/api/)
+f. We used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://vlg-ctdadpq.herokuapp.com/api/).
 
-g. See our code repository for the specifics of how the user-facing templates were implemented [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master). They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).
+g. Our [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) shows how user-facing templates were implemented using standards compliant, accessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement). The U.S. Web Design Standards were used, which are [fully compliant with ADA and WCAG 2.0](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility)
 
-h. This project uses the [Draft U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library. See [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) for the initial implementation of the pattern library.
+h. We used the [U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library. [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) shows initial implementation.
 
-i. See [Research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for evidence of usability testing videos, as well as notes from interviews.
+i. Our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) documents usability testing videos and notes from interviews.
 
-j. The lightweight scrum process we used provided a review point at the end of each sprint, enabling us to reflect users' feedback into the grooming and planning session of the subsequent sprint. This has allowed us to iteratively produce features that reflect real users' requirements. See [Section 3](https://github.com/VeryLittleGravitas/CDTADPQ#3-agile-delivery-process) (above) for further detail.
+j. The lightweight scrum process we used provided a review point at the end of each sprint, enabling us to reflect users' feedback in the planning session of the next sprint. We iteratively produced features reflecting real users' requirements. See [Section 3](https://github.com/VeryLittleGravitas/CDTADPQ#3-agile-delivery-process) (above) for further detail.
 
-k. We chose the Draft U.S. Web Design Standards with no custom HTML or CSS to ensure a responsive design that works on multiple devices.
+k. Using the U.S. Web Design Standards with no custom HTML or CSS ensures a responsive design that works on multiple devices.
 
 l. We are using the following modern, open-source technologies:
 
@@ -181,15 +180,11 @@ To be added:
 15. [Skyliner](https://www.skyliner.io), to automate self-contained Production and QA environments on Amazon Web Services.
 16. Docker
 
-m. We use [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.
+m. We use [Heroku](https://www.heroku.com) as PaaS provider. [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) shows inital setup of the Heroku deployment pipeline. The master branch is automatically deployed to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
 
-The master branch is automatically deployed to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
+n. We have a [master list of unit tests](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py) and automated tests are run by Travis CI, [build and test results are public](https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds)
 
-n. Our repository includes a master list of unit tests at https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py
-
-Automated tests are run by Travis CI, the results are available at https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds
-
-o. We use [Travis CI](https://travis-ci.org) for continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). See the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for initial setup.
+o. [Travis CI](https://travis-ci.org) provides continuous integration, automatically and continuously deploying the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com). [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) documents initial setup.
 
 p. **Setup or used configuration management;**
 
