@@ -1,6 +1,6 @@
 <table class="usa-table-borderless">
     <thead>
-      <tr>{{ statistics }}
+      <tr>
         <th scope="col">Sent</th>
         <th scope="col">Message</th>
         <th scope="col">Users reached</th>
@@ -9,9 +9,9 @@
     <tbody>
     {% for statistic in statistics %}
       <tr>
-        <th scope="row">02/27/2017 11:00am</th>
-        <td>Flood warning for Sausilito area.</td>
-        <td>1776</td>
+        <th scope="row">{{ statistic['created_at'] }}</th>
+        <td>{{ statistic['message'] }}</td>
+        <td>{{ statistic['notified_users_count'] }}</td>
       </tr>
     {% endfor %}
     </tbody>

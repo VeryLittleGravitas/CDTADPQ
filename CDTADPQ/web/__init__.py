@@ -322,12 +322,15 @@ def post_send_alert():
 @app.route('/admin/sent')
 @user_is_an_admin
 def get_sent_alert():
-    return flask.render_template('sent.html', **template_kwargs())
+    with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
+            statistics = stats.get_all_notifications_log_rows(db)
+    return flask.render_template('sent.html', statistics=statistics, **template_kwargs())
 
 @app.route('/admin/log', methods=['GET'])
 def get_log():
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
-        with conn.cursor() as db:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             statistics = stats.get_all_notifications_log_rows(db)
     return flask.render_template('admin-sent.html', statistics=statistics,
                                  **template_kwargs())
