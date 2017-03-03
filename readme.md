@@ -138,17 +138,15 @@ The RFI explicitly identifies 20 requirements (a-t) for the prototype submission
 
 a. We appointed Dan Hon as both Product Manager and leader of the project. He helped the team understand the requirements, was responsible for prioritizing work, and is ultimately accountable for the quality of the submitted prototype 
 
-b. [Section 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md#2-our-team) (above) identifies each member of our multidisciplinary team and their specialisms. 
+b. [Section 2](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/readme.md#2-our-team) (above) identifies each member of our multidisciplinary team and their labor category. 
 
-c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) for further evidence.
+c. We surveyed over 30 potential users of the service, and conducted detailed interviews with a number of individuals. Insights gathered from these user research exercises were fed directly into the design exploration and are reflected in the implementation of requirements. See our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal).
 
-d. We used the user-centered design techniques outlined in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
+d. We used the user-centered design techniques in [Section 4](https://github.com/VeryLittleGravitas/CDTADPQ#4-user-centered-design) (above).
 
-e. See the project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) in Github.
+e. The project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) is in Github.
 
 f. We have used Swagger to document the 1 API for this product that [returns a zipcode for a given latitude and longitude](https://vlg-ctdadpq.herokuapp.com/api/) 
-
-[TODO: we have created 1 API in this project that returns a zipcode for a given latitude and longitude, but need swagger documentation link]
 
 g. See our code repository for the specifics of how the user-facing templates were implemented [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master). They are written with standards complient, acessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement), directly using the U.S. Web Design Standards which are fully complient with ADA and WCAG 2.0. See [Pattern Library Accessibility Notes](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility).
 
@@ -185,7 +183,7 @@ To be added:
 
 m. We use [Heroku](https://www.heroku.com) as PaaS provider, see the following [Issue](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) for the inital setup of the Heroku deployment pipeline.
 
-We automatically deploy the master branch to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
+The master branch is automatically deployed to [https://vlg-ctdadpq.herokuapp.com](https://vlg-ctdadpq.herokuapp.com).
 
 n. Our repository includes a master list of unit tests at https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py
 
