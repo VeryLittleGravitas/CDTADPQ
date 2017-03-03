@@ -32,11 +32,11 @@ The Product Manager, Dan Hon, also served as Product Owner in the agile delivery
 
 We put together the following multidisciplinary team to build California Alerts, based on our experience and the [GSA 18F Agile Labor Categories](https://pages.18f.gov/agile-labor-categories/):
 
-* Dan Hon, Product Manager | [@danhon](https://github.com/danhon) and [LinkedIn](https://www.linkedin.com/in/danhon/)
-* Michal Migurski, Technical Architect | [@migurski](https://github.com/migurski) and [LinkedIn](https://www.linkedin.com/in/michalmigurski/)
-* Frances Berriman, Interaction Designer / User Researcher / Usability Tester | [@phae](https://github.com/phae) and [LinkedIn](https://www.linkedin.com/in/fberriman/)
-* Erica Kwan, Backend Web Developer | [@pui](https://github.com/pui) and [LinkedIn](https://www.linkedin.com/in/ericakwan/)
-* Kay Chung, Delivery Manager | [@kerrching](https://github.com/kerrching) and [LinkedIn](https://www.linkedin.com/in/kerrching/)
+* **Product Manager**: Dan Hon, [@danhon](https://github.com/danhon) and [LinkedIn](https://www.linkedin.com/in/danhon/)
+* **Technical Architect**: Michal Migurski, [@migurski](https://github.com/migurski) and [LinkedIn](https://www.linkedin.com/in/michalmigurski/)
+* **Interaction Designer / User Researcher / Usability Tester**: Frances Berriman, [@phae](https://github.com/phae) and [LinkedIn](https://www.linkedin.com/in/fberriman/)
+* **Backend Web Developer**: Erica Kwan, [@pui](https://github.com/pui) and [LinkedIn](https://www.linkedin.com/in/ericakwan/)
+* **Delivery Manager**: Kay Chung, [@kerrching](https://github.com/kerrching) and [LinkedIn](https://www.linkedin.com/in/kerrching/)
 
 ## 3. Agile Delivery Process
 
