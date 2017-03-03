@@ -6,14 +6,13 @@
         </button>
         <div id="amendment-b-5" class="usa-accordion-content">
         <ul style="list-style-type: none">
-            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Fire marker" /> Fire location</li>
-            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Flood marker" /> Flood location</li>
-            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Earthquake marker" /> Earthquake location</li>
-            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Fire marker" /> Fire location</li>
-            <li><img src="{{ url_for("static", filename="marker-icon.png") }}" alt="Users marker" /> Registered users</li>
+            <li><img src="{{ url_for("static", filename="orange-marker-icon.png") }}" alt="Fire marker" /> Fire location</li>
+            <li><img src="{{ url_for("static", filename="flood-marker-icon.png") }}" alt="Flood marker" /> Flood location</li>
+            <li><img src="{{ url_for("static", filename="yellow-marker-icon.png") }}" alt="Earthquake marker" /> Earthquake location</li>
+            <li><img src="{{ url_for("static", filename="green-marker-icon.png") }}" alt="Users marker" /> Registered users</li>
         </div>
     </li>
-</ul> 
+</ul>
 
 <script>
     var div = document.getElementById('the-map');
@@ -27,7 +26,7 @@
     L.tileLayer('http://c.tile.stamen.com/toner-lite/{z}/{x}/{y}@2x.png', {
         maxZoom: 18
     }).addTo(map);
-    
+
     L.geoJSON({{ emergencies_geojson|tojson|safe }}).bindPopup(function (layer) {
         var p = layer.feature.properties;
         if(p.href) {
@@ -36,7 +35,7 @@
             return p.description;
         }
     }).addTo(map);
-    
+
     {% if users_geojson %}
 
     L.geoJSON({{users_geojson|tojson|safe}},
@@ -57,7 +56,7 @@
             var p = layer.feature.properties;
             return p.users + (p.users > 1 ? ' users in ' : ' user in ') + p.zip_code;
     }).addTo(map);
-    
+
     {% endif %}
 
 </script>
