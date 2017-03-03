@@ -8,7 +8,9 @@
 
     <label for="zip-codes">Zip code</label>
     <input id="zip-codes" name="zip-codes" type="text" value="{{ zip_codes }}">
-    <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+    <p class="usa-form-note">
+        <button type="button" id="zip-codes-update" onclick="return geolocate_me()" class="usa-button-disabled" disabled>Locate Me</button>
+    </p>
 
     <script>
         function geolocate_me()
