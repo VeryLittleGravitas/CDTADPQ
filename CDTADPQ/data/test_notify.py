@@ -3,6 +3,7 @@ from . import recreate
 from . import notify
 from . import users
 from . import wildfires
+from . import notifications
 
 import psycopg2, psycopg2.extras
 
@@ -80,7 +81,7 @@ class NotifyTests (unittest.TestCase):
     def test_send_notification(self):
         '''
         '''
-        account = users.TwilioAccount('sid', 'secret', 'account', 'number')
+        account = notifications.TwilioAccount('sid', 'secret', 'account', 'number')
         fire = unittest.mock.Mock(name='Bad Fire')
         test_user = users.User(1, '+15105551212', ['94107'], 'test_user@example.com', ['fire'])
 

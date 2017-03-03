@@ -1,5 +1,5 @@
 import flask, codecs, psycopg2, os, json, functools, sys, itsdangerous, psycopg2.extras
-from ..data import users, zipcodes, wildfires, notify, earthquakes, floods, stats
+from ..data import users, zipcodes, wildfires, notify, earthquakes, floods, stats, notifications
 
 def user_is_logged_in(untouched_route):
     ''' Checks for presence of "phone_number" session variable.
@@ -76,14 +76,14 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = os.environ['FLASK_SECRET_KEY']
 
 if os.environ['TWILIO_ACCOUNT'].startswith('AC'):
-    app.config['twilio_account'] = users.TwilioAccount(
+    app.config['twilio_account'] = notifications.TwilioAccount(
         sid = os.environ.get('TWILIO_SID', ''),
         secret = os.environ.get('TWILIO_SECRET', ''),
         account = os.environ.get('TWILIO_ACCOUNT', ''),
         number = os.environ.get('TWILIO_NUMBER', '')
         )
 else:
-    app.config['twilio_account'] = users.TwilioAccount(
+    app.config['twilio_account'] = notifications.TwilioAccount(
         sid = codecs.decode(os.environ.get('TWILIO_SID', ''), 'rot13'),
         secret = codecs.decode(os.environ.get('TWILIO_SECRET', ''), 'rot13'),
         account = codecs.decode(os.environ.get('TWILIO_ACCOUNT', ''), 'rot13'),
@@ -311,6 +311,11 @@ def post_send_alert():
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             if type == 'fire':
                 emergency = wildfires.get_one_fire(db, id)
+            elif type == 'flood':
+                emergency = floods.get_one_flood(db, id)
+            else:
+                emergency = None
+            if emergency:
                 users_to_notify = notify.get_users_to_notify(db, emergency)
                 for user in users_to_notify:
                     print('notify.send_notification:', user, message)

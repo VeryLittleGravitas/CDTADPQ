@@ -1,15 +1,7 @@
 import requests, logging, uritemplate, random, uuid, re
+from . import notifications
 
-TwilioURL = 'https://api.twilio.com/2010-04-01/Accounts/{account}/Messages.json'
 MailgunURL = 'https://api.mailgun.net/v2/{domain}/messages'
-
-class TwilioAccount:
-
-    def __init__(self, sid, secret, account, number):
-        self.sid = sid
-        self.secret = secret
-        self.account = account
-        self.number = number
 
 class MailgunAccount:
 
@@ -45,19 +37,8 @@ def add_unverified_signup(db, account, to_number, zipcode):
 def send_verification_code(account, to_number, code):
     '''
     '''
-    url = uritemplate.expand(TwilioURL, dict(account=account.account))
     body = 'Your CA Alerts PIN code is {}. Use this to confirm your phone number. \n\nIf you didn\'t ask for this, please ignore this message.'.format(code)
-    data = dict(From=account.number, To=to_number, Body=body)
-    auth = account.sid, account.secret
-    posted = requests.post(url, auth=auth, data=data)
-
-    if posted.status_code not in range(200, 299):
-        if 'message' in posted.json():
-            raise RuntimeError(posted.json()['message'])
-        else:
-            raise RuntimeError('Bad response from Twilio')
-
-    return True
+    return notifications.send_sms(account, to_number, body)
 
 def send_email_verification_code(account, to_address, code):
     '''
