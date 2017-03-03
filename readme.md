@@ -167,12 +167,13 @@ l. We are using the following modern, open-source technologies:
 5. [psycopg](http://initd.org/psycopg/) as the PostgreSQL adapter for Python.
 6. [Swagger](http://swagger.io) to document APIs
 7. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
-8. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
-9. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
-10. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
-11. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
-12. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
-13. [Slack](https://slack.com) for team collaboration and chat.
+8. [Leaflet.js](http://leafletjs.com), an open-source JavaScript library for interactive maps
+9. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government services that meet Web Content Accessibility Guidelines.
+10. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
+11. [Travis CI](https://travis-ci.org), for continuous integration and testing. 
+12. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
+13. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
+14. [Slack](https://slack.com) for team collaboration and chat.
 
 To be added: 
 
