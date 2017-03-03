@@ -170,11 +170,11 @@ d. We used 4 user-centered design techniques in [Section 4](https://github.com/V
 
 e. The project [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) is in Github.
 
-f. We used Swagger to document the 1 API for this product [returning a zipcode for a given latitude and longitude](https://alerts-ca.herokuapp.com/api/).
+f. Swagger documentation for our [RESTful API](https://alerts-ca.herokuapp.com/api/).
 
-g. Our [commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) shows how user-facing templates were implemented using standards compliant, accessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement). The U.S. Web Design Standards were used, which are [fully compliant with ADA and WCAG 2.0](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility)
+g. [Commit history](https://github.com/VeryLittleGravitas/CDTADPQ/commits/master) shows how user-facing templates were implemented using standards compliant, accessible, semantic HTML using [Progressive Enhancement](https://en.wikipedia.org/wiki/Progressive_enhancement). The U.S. Web Design Standards were used, which are [fully compliant with ADA and WCAG 2.0](https://standards.usa.gov/getting-started/designers/#notes-on-accessibility)
 
-h. We used the [U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library. [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) shows initial implementation.
+h. We used the [U.S. Web Design Standards](https://standards.usa.gov/) as style guide and/or pattern library. [Pull Request 13](https://github.com/VeryLittleGravitas/CDTADPQ/pull/13) shows implementation.
 
 i. Our [research journal](https://github.com/VeryLittleGravitas/CDTADPQ/wiki/Research-journal) documents usability testing videos and notes from interviews.
 
@@ -184,26 +184,26 @@ k. Using the U.S. Web Design Standards with no custom HTML or CSS ensures a resp
 
 l. We are using the following modern, open-source technologies:
 
-1. Our prototype is written in [Python 3](https://www.python.org/download/releases/3.0/).
-2. [Flask](http://flask.pocoo.org), a micro web framework for Python based on [Werkzeug](http://werkzeug.pocoo.org/docs/0.11/), the WSGI toolkit, and [Jinja 2](http://jinja.pocoo.org/docs/2.9/), a templating language based on Django's templating approach. The Flask framework also features integrated support for unit testing and RESTful request dispatching.
+1. [Python 3](https://www.python.org/download/releases/3.0/).
+2. [Flask](http://flask.pocoo.org), a micro web framework for Python based on [Werkzeug](http://werkzeug.pocoo.org/docs/0.11/), the WSGI toolkit, and [Jinja 2](http://jinja.pocoo.org/docs/2.9/), a templating language based on Django's templating approach. The framework features integrated support for unit testing and RESTful request dispatching.
 3. [PIP](https://pip.pypa.io/en/stable/) for ensuring the correct Python packages are installed to support the application
-4. [PostgreSQL 9](https://www.postgresql.org), an enterprise-grade database used by government agencies in the U.S. such as The National Weather Service, the Centers for Disease Control and Prevention and State Department.
+4. [PostgreSQL 9](https://www.postgresql.org), an enterprise-grade database.
 5. [psycopg](http://initd.org/psycopg/) as the PostgreSQL adapter for Python.
 6. [Swagger](http://swagger.io) to document APIs
-7. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database. PostGIS adds support for geographic objects, allowing for location queries to be run in SQL.
-8. [Leaflet.js](http://leafletjs.com), an open-source JavaScript library for interactive maps
+7. [PostGIS](http://www.postgis.net), a spatial database extender for the Postgres database with support for geographic objects, allowing for SQL location queries.
+8. [Leaflet.js](http://leafletjs.com), an open-source JavaScript library for interactive maps.
 9. The [U.S. Web Design Standards](https://standards.usa.gov), which provides design guidelines and code to quickly create trustworthy, accessible and consistent digital government service, meeting Web Content Accessibility Guidelines.
-10. [Heroku](https://www.heroku.com/home) as our prototype's platform-as-a-service.
+10. [Heroku](https://www.heroku.com/home) as production PaaS.
 11. [Travis CI](https://travis-ci.org), for continuous integration and testing.
-12. [Twilio](https://www.twilio.com) for sending SMS notifications to users.
-13. [Mailgun](https://www.mailgun.com) for sending email notifications to users.
+12. [Twilio](https://www.twilio.com) for sending SMS notifications.
+13. [Mailgun](https://www.mailgun.com) for sending email notifications.
 14. [Slack](https://slack.com) for team collaboration and chat.
-15. [Docker](https://www.docker.com) for containerization 
-16. [Pingdom](https://www.pingdom.com) for continuous monitoring of the prototype website.
+15. [Docker](https://www.docker.com) for containerization.
+16. [Pingdom](https://www.pingdom.com) for continuous monitoring of the production website.
 
 m. The production application is deployed on the [Heroku](https://www.heroku.com) PaaS. [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) shows setup of the Heroku deployment pipeline. The master branch is automatically deployed to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com).
 
-n. We have a [master list of unit tests](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py) and automated tests are run by Travis CI, [build and test results are public](https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds)
+n. We have a [master list of unit tests](https://github.com/VeryLittleGravitas/CDTADPQ/blob/master/test.py), automated tests are run by Travis CI, [build and test results are public](https://travis-ci.org/VeryLittleGravitas/CDTADPQ/builds)
 
 o. [Travis CI](https://travis-ci.org) provides continuous integration, automatically and continuously deploying the master branch to [https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com). [Issue 3](https://github.com/VeryLittleGravitas/CDTADPQ/issues/3) documents initial setup.
 
