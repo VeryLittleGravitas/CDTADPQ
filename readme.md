@@ -2,6 +2,8 @@
 
 [CA Alerts](https://alerts-ca.herokuapp.com) ([https://alerts-ca.herokuapp.com](https://alerts-ca.herokuapp.com)), submitted by Very Little Gravitas LLC for the California Department of Technology [Digital Services Agile Development Prequalified Vendor Pool Refresh](https://github.com/CDTProcurement/adpq) for CDT RFI # CDT-ADPQ-0117.
 
+[![Build Status](https://travis-ci.org/VeryLittleGravitas/CDTADPQ.svg?branch=master)](https://travis-ci.org/VeryLittleGravitas/CDTADPQ/branches)
+
 ## 1. CA Alerts
 
 [CA Alerts](https://alerts-ca.herokuapp.com) is a faster, clearer, simpler way for California residents and visitors to be notified of emergencies affecting them and for State emergency workers to assess and inform the public about emergencies.
