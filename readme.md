@@ -79,12 +79,10 @@ For this RFI, we implemented a simplified process, appropriate to scope and avai
 * Finalized copy for the prototype application
 * Customer support contact and issue reporting for user
 * Administrator user research
-* Implement email delivery 
-* Implement administrator map interface improvements
-* Reassess issue priorities and assign [stretch](https://github.com/VeryLittleGravitas/CDTADPQ/issues?q=is%3Aissue+is%3Aopen+label%3AStretch) label to stories out of prototype scope 
-
-[TODO - add more]
-
+* Implemented email delivery 
+* Implemented stories for tracking, analyzing, visualizing data
+* Reassessed issue priorities and assign [stretch](https://github.com/VeryLittleGravitas/CDTADPQ/issues?q=is%3Aissue+is%3Aopen+label%3AStretch) label to stories out of prototype scope 
+* Implemented administrator map UI improvements (stretch)
 
 ## 4. User-Centered Design
 
