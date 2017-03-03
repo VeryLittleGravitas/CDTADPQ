@@ -34,5 +34,28 @@
             return p.description;
         }
     }).addTo(map);
+    
+    {% if users_geojson %}
+
+    L.geoJSON({{users_geojson|tojson|safe}},
+        {
+            pointToLayer: function(point, latlng) {
+                var url = '{{ url_for("static", filename="marker-icon.png") }}',
+                    url2x = '{{ url_for("static", filename="marker-icon-2x.png") }}',
+                    url_ = '{{ url_for("static", filename="marker-shadow.png") }}',
+                    opts = L.Icon.Default.prototype.options;
+                return L.marker(latlng, { icon: L.icon({
+                    iconUrl: url, iconRetinaUrl: url2x, shadowUrl: url_,
+                    iconSize: opts.iconSize, iconAnchor: opts.iconAnchor,
+                    popupAnchor: opts.popupAnchor, shadowSize: opts.shadowSize,
+                    shadowAnchor: opts.shadowAnchor
+                    }) })
+            }
+        }).bindPopup(function (layer) {
+            var p = layer.feature.properties;
+            return p.users + (p.users > 1 ? ' users in ' : ' user in ') + p.zip_code;
+    }).addTo(map);
+    
+    {% endif %}
 
 </script>
