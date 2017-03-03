@@ -30,9 +30,11 @@ def main():
             fires = wildfires.get_current_fires(db)
             for fire in fires:
                 users_to_notify = get_users_to_notify(db, fire)
+                message = ('Emergency: {}').format(fire.description)
                 for user in users_to_notify:
-                    send_notification(twilio_account, user, fire)
+                    send_notification(twilio_account, user, message)
                     log_user_notification(db, user, fire)
+                log_notification_for_admin_records(db, message, len(users_to_notify), fire.internal_id, 'fire')
 
 def get_users_to_notify(db, fire_point):
     ''' Return the users that should be notified of this fire
@@ -89,6 +91,13 @@ def log_user_notification(db, user, fire):
     '''
     db.execute('INSERT INTO user_emergencies_log (emergency_type, emergency_external_id, user_id) VALUES (%s, %s, %s)',
                 ('fire', fire.usgs_id, user.id))
+    return True
+
+def log_notification_for_admin_records(db, message, notified_users_count, emergency_id=None, emergency_type=None):
+    ''' Log the notification so admins can see notifications previously sent
+    '''
+    db.execute('INSERT INTO notifications_log (message, notified_users_count, emergency_id, emergency_type) VALUES (%s, %s, %s, %s)',
+                (message, notified_users_count, emergency_id, emergency_type))
     return True
 
 if __name__ == '__main__':

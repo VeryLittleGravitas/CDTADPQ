@@ -293,9 +293,12 @@ def post_send_alert():
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
             if type == 'fire':
                 emergency = wildfires.get_one_fire(db, id)
-                for user in notify.get_users_to_notify(db, emergency):
+                users_to_notify = notify.get_users_to_notify(db, emergency)
+                for user in users_to_notify:
                     print('notify.send_notification:', user, message)
                     notify.send_notification(twilio_account, user, message)
+                    notify.log_user_notification(db, user, emergency)
+                notify.log_notification_for_admin_records(db, message, len(users_to_notify), emergency.internal_id, 'fire')
     return flask.redirect(flask.url_for('get_sent_alert'), code=303)
 
 @app.route('/admin/sent')
@@ -315,9 +318,11 @@ def post_send_broadcast_alert():
     twilio_account = flask.current_app.config['twilio_account']
     with psycopg2.connect(os.environ['DATABASE_URL']) as conn:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as db:
-            for user in users.get_all_users(db):
+            users_to_notify = users.get_all_users(db)
+            for user in users_to_notify:
                 print('notify.send_notification:', user, message)
                 notify.send_notification(twilio_account, user, message)
+            notify.log_notification_for_admin_records(db, message, len(users_to_notify))
     return flask.redirect(flask.url_for('get_sent_alert'), code=303)
 
 @app.route('/stats')

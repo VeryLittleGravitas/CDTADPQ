@@ -15,14 +15,14 @@ class NotifyTests (unittest.TestCase):
 
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory = psycopg2.extras.DictCursor) as db:
-                fire = wildfires.convert_fire_point({'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [-122, 37]},
+                fire_dict = wildfires.convert_fire_point({'type': 'Feature', 'geometry': {'type': 'Point', 'coordinates': [-122, 37]},
                                                      'properties': {'objectid': 1, 'latitude': 37, 'longitude': -122, 'gacc': 'SACC',
                                                      'hotlink': 'http://www.nifc.gov/fireInfo/nfn.htm', 'state': 'OK', 'status': 'I', 'irwinid': '{14DD44C2-ACF0-4998-A99B-971BF60E9A11}',
                                                      'acres': 1500, 'firecause': 'Human', 'reportdatetime': 1487091600000, 'percentcontained': 49, 'uniquefireidentifier': '2017-OKNEU-170102',
                                                      'firediscoverydatetime': 1486984500000, 'complexparentirwinid': None, 'pooresponsibleunit': 'OKNEU', 'incidentname': 'Spike Road',
                                                      'iscomplex': 'false', 'irwinmodifiedon': 1487067267000, 'mapsymbol': '1', 'datecurrent': 1487235965000, 'pooownerunit': None,
                                                      'owneragency': None, 'fireyear': None, 'localincidentidentifier': None, 'incidenttypecategory': None}})
-                wildfires.store_fire_point(db, fire)
+                wildfires.store_fire_point(db, fire_dict)
                 db.execute('INSERT INTO users (phone_number, zip_codes, email_address) VALUES (%s, %s, %s)',
                            ('+15105551212', ['95065'], 'user1@example.com'))
                 db.execute('INSERT INTO users (phone_number, zip_codes, email_address) VALUES (%s, %s, %s)',
@@ -36,7 +36,7 @@ class NotifyTests (unittest.TestCase):
              unittest.mock.patch('CDTADPQ.data.notify.get_users_to_notify') as get_users_to_notify, \
              unittest.mock.patch('CDTADPQ.data.notify.send_notification') as send_notification, \
              unittest.mock.patch('CDTADPQ.data.notify.log_user_notification') as log_user_notification:
-            get_current_fires.return_value = [wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)]
+            get_current_fires.return_value = [wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, 1, '123', 'fire', 'True', 'now', 'people', 15)]
             get_users_to_notify.return_value = [users.User(1, '+15105551212', ['94107'], 'me@example.com', ['fire'])]
             notify.main()
         self.assertEqual(len(get_current_fires.mock_calls), 1)
@@ -108,6 +108,22 @@ class NotifyTests (unittest.TestCase):
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor() as db:
                 user = users.User(1, '+15105551212', ['94107'], 'me@example.com', ['fire'])
-                fire = wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, '123', 'fire', 'True', 'now', 'people', 15)
-                notification_succeeded = notify.log_user_notification(db, user, fire)
-                self.assertTrue(notification_succeeded)
+                fire = wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, 1, '123', 'fire', 'True', 'now', 'people', 15)
+                logging_succeeded = notify.log_user_notification(db, user, fire)
+                self.assertTrue(logging_succeeded)
+
+    def test_log_notification_for_admin_records(self):
+        '''
+        '''
+        # Log without an emergency (i.e. fire)
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor() as db:
+                logging_succeeded = notify.log_notification_for_admin_records(db, 'This is an arbitrary message', 3)
+                self.assertTrue(logging_succeeded)
+
+        # Log with an emergency
+        fire = wildfires.FirePoint({'type': 'Point', 'coordinates': [-122, 37]}, 1, '123', 'fire', 'True', 'now', 'people', 15)
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor() as db:
+                logging_succeeded = notify.log_notification_for_admin_records(db, 'This is an arbitrary message', 3, fire.id, 'fire')
+                self.assertTrue(logging_succeeded)
